@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Jularis</string>
+    <string name="login">Login</string>
+    <string name="logo_app">Logo App</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="forget_password">Forget Password ?</string>
+    <string name="reset_here">Reset Here</string>
+</resources>
