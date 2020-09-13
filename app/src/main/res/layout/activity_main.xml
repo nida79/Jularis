@@ -1,142 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
-    tools:context=".MainActivity">
+    tools:context=".ui.activity.home.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/sf_ui"
-        android:text="@string/login"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/_25ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029999971" />
+    <FrameLayout
+        android:layout_above="@id/animatedBottomBar"
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <ImageView
-        android:id="@+id/imageView_Login"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:contentDescription="@string/logo_app"
-        android:src="@drawable/jularis"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_1"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="wrap_content"
-        android:hint="@string/username"
-        android:textColorHint="@color/colorPrimary"
-        app:boxStrokeColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_Login">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tie_username_login"
-            android:layout_width="match_parent"
-            android:inputType="text"
-            android:layout_height="50dp"
-            android:fontFamily="@font/dosis"
-            android:textColor="#9B9B9D" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="@string/password"
-        android:textColorHint="@color/colorPrimary"
-        app:boxStrokeColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_1"
-        app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tie_pswd_login"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:fontFamily="@font/dosis"
-            android:inputType="textPassword"
-            android:textColor="#9B9B9D" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/raleway"
-        android:text="Forget Password ?"
-        android:textColor="@color/abu"
-        android:textSize="@dimen/_10ssp"
-        app:layout_constraintEnd_toStartOf="@+id/txt_rest"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
-    <TextView
-        android:id="@+id/txt_rest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/raleway"
-        android:text=" Reset Here"
-        android:textColor="@color/orange"
-        android:textSize="@dimen/_10ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.86"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_36sdp"
-        android:background="@drawable/rounded_btn"
-        android:fontFamily="@font/dosis_extrabold"
-        android:text="@string/login"
-        android:textColor="#FFF"
-        android:textSize="@dimen/_13ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.13999999" />
-
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_36sdp"
-        android:background="@drawable/rounded_btn"
-        android:fontFamily="@font/dosis_extrabold"
-        android:text="@string/register"
-        android:textColor="#FFF"
-        android:textSize="@dimen/_13ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        app:layout_constraintVertical_bias="0.120000005" />
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/animatedBottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:cnb_orientationMode="horizontal"
+        android:padding="8dp"
+        app:cnb_addBottomInset="true"
+        app:cnb_textColor="@color/hitam"
+        app:cnb_addLeftInset="true"
+        app:cnb_addRightInset="true"
+        android:elevation="16dp"
+        app:cnb_menuResource="@menu/bottom_nav_menu"
+        android:background="@color/putih"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

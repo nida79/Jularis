@@ -11,4 +11,8 @@
         <item name="boxStrokeColor">@color/colorPrimary</item>
         <item name="boxStrokeWidth">2dp</item>
     </style>
+    <style name="CounterStyle" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/hijau</item>
+        <!--other parameters that you want to change -->
+    </style>
 </resources>

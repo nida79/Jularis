@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/beranda"
+        app:cnb_iconColor="@color/colorPrimary" />
+
+    <item
+        android:id="@+id/navigation_trans"
+        android:icon="@drawable/ic_transfer_1"
+        android:title="@string/transaksi"
+        app:cnb_iconColor="@color/biru" />
+
+    <item
+        android:id="@+id/navigation_cart"
+        android:icon="@drawable/ic_shopping_cart_24px"
+        android:title="@string/keranjang"
+        app:cnb_iconColor="@color/pink" />
+
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/ic_outline_settings"
+        android:title="@string/pengaturan"
+        app:cnb_iconColor="@color/hitam" />
+
+</menu>
