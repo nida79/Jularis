@@ -24,5 +24,6 @@
     <string name="pengaturan">Pengaturan</string>
     <string name="transaksi">Transaksi</string>
     <string name="forget_password">Forget Password ?</string>
-    <string name="reset_here">Reset Here</string>
+    <string name="reset_here"> Reset Here</string>
+    <string name="username_email">Username / Email</string>
 </resources>

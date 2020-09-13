@@ -3,10 +3,12 @@ package com.ekr.jularis.data.login
 import com.google.gson.annotations.SerializedName
 
 data class DataLogin(
-    @SerializedName("username") val username: String?,
-    @SerializedName("password") val password: String?,
-    @SerializedName("nama_pegawai") val nama_pegawai: String?,
-    @SerializedName("jk") val jk: String?,
-    @SerializedName("alamat") val alamat: String?,
-    @SerializedName("is_aktif") val is_aktif: String?
+    @SerializedName("username") val username: String,
+    @SerializedName("email") val email: String,
+    @SerializedName("full_name") val full_name: String,
+    @SerializedName("no_telp") val no_telp: String,
+    @SerializedName("address") val address: String,
+    @SerializedName("token") val token : String,
+    @SerializedName("photo") val photo : String,
+    @SerializedName("role") val role: String
 )

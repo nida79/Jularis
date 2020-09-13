@@ -23,10 +23,10 @@ class MainActivity : AppCompatActivity() {
             ).commit()
         }
         animatedBottomBar.setItemSelected(R.id.navigation_home)
-        fragmentchanged()
+        fragmentChanged()
     }
 
-    private fun fragmentchanged() {
+    private fun fragmentChanged() {
 
         animatedBottomBar.setOnItemSelectedListener { id ->
             var selectedFragment: Fragment? = null
