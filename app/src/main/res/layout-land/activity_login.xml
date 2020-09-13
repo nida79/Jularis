@@ -16,16 +16,15 @@
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_30ssp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.574"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_230sdp"
         android:contentDescription="@string/logo_app"
         android:src="@drawable/jularis"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,8 +39,8 @@
         android:layout_width="@dimen/_250sdp"
         android:layout_height="wrap_content"
         android:hint="@string/username"
-        android:textColorHint="@color/colorPrimary"
-        app:boxStrokeColor="@color/colorPrimary"
+        android:textColorHint="@color/abu"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -51,10 +50,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_username_login"
             android:layout_width="match_parent"
+            android:drawableStart="@drawable/ic_baseline_person"
+            android:drawablePadding="8dp"
             android:layout_height="50dp"
             android:fontFamily="@font/dosis"
             android:inputType="text"
-            android:textColor="#9B9B9D" />
+            android:textColor="@color/hitam" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,8 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/password"
-        android:textColorHint="@color/colorPrimary"
-        app:boxStrokeColor="@color/colorPrimary"
+        android:textColorHint="@color/abu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/til_1"
@@ -75,10 +75,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_pswd_login"
             android:layout_width="match_parent"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="8dp"
             android:layout_height="50dp"
             android:fontFamily="@font/dosis"
             android:inputType="textPassword"
-            android:textColor="#9B9B9D" />
+            android:textColor="@color/hitam" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,7 +119,7 @@
         android:background="@drawable/rounded_btn"
         android:fontFamily="@font/dosis_extrabold"
         android:text="@string/login"
-        android:textColor="#FFF"
+        android:textColor="@color/putih"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,7 +134,7 @@
         android:background="@drawable/rounded_btn"
         android:fontFamily="@font/dosis_extrabold"
         android:text="@string/signup"
-        android:textColor="#FFF"
+        android:textColor="@color/putih"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

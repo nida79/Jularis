@@ -12,18 +12,18 @@
         android:id="@+id/navigation_trans"
         android:icon="@drawable/ic_transfer_1"
         android:title="@string/transaksi"
-        app:cnb_iconColor="@color/biru" />
+        app:cnb_iconColor="@color/colorPrimary" />
 
     <item
         android:id="@+id/navigation_cart"
         android:icon="@drawable/ic_shopping_cart_24px"
         android:title="@string/keranjang"
-        app:cnb_iconColor="@color/pink" />
+        app:cnb_iconColor="@color/colorPrimary" />
 
     <item
         android:id="@+id/navigation_setting"
         android:icon="@drawable/ic_outline_settings"
         android:title="@string/pengaturan"
-        app:cnb_iconColor="@color/hitam" />
+        app:cnb_iconColor="@color/colorPrimary" />
 
 </menu>

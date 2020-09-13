@@ -5,8 +5,6 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="signup">Sign Up</string>
-    <string name="forget_password">Forget Password ?</string>
-    <string name="reset_here">Reset Here</string>
     <string name="nama_lengkap">Nama Lengkap</string>
     <string name="email_address">Email Address</string>
     <string name="alamat_lengkap">Alamat Lengkap</string>
@@ -25,4 +23,6 @@
     <string name="beranda">Beranda</string>
     <string name="pengaturan">Pengaturan</string>
     <string name="transaksi">Transaksi</string>
+    <string name="forget_password">Forget Password ?</string>
+    <string name="reset_here">Reset Here</string>
 </resources>
