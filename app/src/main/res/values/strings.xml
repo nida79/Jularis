@@ -26,4 +26,6 @@
     <string name="forget_password">Forget Password ?</string>
     <string name="reset_here"> Reset Here</string>
     <string name="username_email">Username / Email</string>
+    <string name="sample_rp">Rp.10.000</string>
+    <string name="sample_tittle">Product Title</string>
 </resources>

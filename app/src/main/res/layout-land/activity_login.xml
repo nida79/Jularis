@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#FFF"
     android:layout_height="match_parent"
+    android:background="#FFF"
     tools:context=".ui.activity.login.LoginActivity">
 
     <TextView
@@ -49,9 +49,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_username_login"
             android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:drawableStart="@drawable/ic_baseline_person"
             android:drawablePadding="8dp"
-            android:layout_height="50dp"
             android:fontFamily="@font/dosis"
             android:inputType="text"
             android:textColor="@color/hitam" />
@@ -74,9 +74,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_pswd_login"
             android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="8dp"
-            android:layout_height="50dp"
             android:fontFamily="@font/dosis"
             android:inputType="textPassword"
             android:textColor="@color/hitam" />
@@ -117,6 +117,7 @@
         android:layout_height="@dimen/_36sdp"
         android:background="@drawable/rounded_btn"
         android:fontFamily="@font/dosis_extrabold"
+        android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/login"
         android:textColor="@color/putih"
         android:textSize="@dimen/_13ssp"
@@ -132,6 +133,7 @@
         android:layout_height="@dimen/_36sdp"
         android:background="@drawable/rounded_btn"
         android:fontFamily="@font/dosis_extrabold"
+        android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/signup"
         android:textColor="@color/putih"
         android:textSize="@dimen/_13ssp"

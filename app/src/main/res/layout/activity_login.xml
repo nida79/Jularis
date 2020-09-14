@@ -113,6 +113,7 @@
     <Button
         android:id="@+id/btn_login"
         android:layout_width="@dimen/_250sdp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_height="@dimen/_36sdp"
         android:background="@drawable/rounded_btn"
         android:fontFamily="@font/dosis_extrabold"
@@ -128,6 +129,7 @@
     <Button
         android:id="@+id/btn_login_to_register"
         android:layout_width="@dimen/_250sdp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_height="@dimen/_36sdp"
         android:background="@drawable/rounded_btn"
         android:fontFamily="@font/dosis_extrabold"

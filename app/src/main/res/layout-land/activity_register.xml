@@ -175,6 +175,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:foreground="?android:attr/selectableItemBackground"
             android:id="@+id/btn_regis_submit"
             android:layout_width="@dimen/_270sdp"
             android:layout_height="@dimen/_36sdp"

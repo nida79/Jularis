@@ -25,17 +25,18 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.Presenter {
                     view.onLoading(false)
                     if (response.isSuccessful) {
                         val responseLogin: ResponseLogin? = response.body()
-                        view.showMessage(responseLogin!!.message)
-                        if (responseLogin.status) {
+                        if (responseLogin!!.status) {
+                            view.showMessage(responseLogin.message)
                             view.onResult(responseLogin)
                         }
-
+                    } else {
+                        view.showMessage(response.message().toString())
                     }
+
                 }
 
                 override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
                     view.onLoading(false)
-                    view.showMessage(t.toString())
                 }
 
             })

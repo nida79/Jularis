@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ekr.jularis.R
 import com.ekr.jularis.ui.fragment.CartFragment
-import com.ekr.jularis.ui.fragment.HomeFragment
+import com.ekr.jularis.ui.fragment.home.HomeFragment
 import com.ekr.jularis.ui.fragment.SettingFragment
 import com.ekr.jularis.ui.fragment.TransactionFragment
 import kotlinx.android.synthetic.main.activity_main.*

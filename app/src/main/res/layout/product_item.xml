@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/_150sdp"
+    android:layout_height="@dimen/_220sdp"
+    android:layout_margin="2dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_card_product"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:adjustViewBounds="true"
+            android:background="#2d2d2d"
+            android:contentDescription="@string/logo_app"
+            android:scaleType="fitXY"
+            android:src="@drawable/test" />
+
+        <TextView
+            android:id="@+id/tv_card_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/raleway"
+            android:text="@string/sample_tittle"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_card_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/dosis_extrabold"
+            android:text="@string/sample_rp"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_12ssp" />
+
+        <Button
+            android:elevation="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/dosis_extrabold"
+            android:text="Beli"
+            android:textColor="@color/putih"
+            android:textSize="@dimen/_12ssp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

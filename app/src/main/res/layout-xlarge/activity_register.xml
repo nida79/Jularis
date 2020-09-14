@@ -171,6 +171,7 @@
       android:id="@+id/btn_regis_submit"
       android:layout_width="@dimen/_250sdp"
       android:layout_height="@dimen/_30sdp"
+      android:foreground="?android:attr/selectableItemBackground"
       android:background="@drawable/rounded_btn"
       android:fontFamily="@font/dosis_extrabold"
       android:text="@string/signup"

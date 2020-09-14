@@ -32,6 +32,8 @@ class RegisterPresnter(val view: RegisterContract.View) : RegisterContract.Prese
                         view.showMessage(globalResponse!!.message)
                         if (globalResponse.status){
                             view.onResult(globalResponse)
+                        }else{
+                            view.showMessage(response.message().toString())
                         }
                     }
                 }

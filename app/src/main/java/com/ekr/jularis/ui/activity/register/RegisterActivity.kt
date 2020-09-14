@@ -59,11 +59,11 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
                 }
                 else -> {
                     registerPresnter.doRegister(
-                        tie_regis_username.text.toString(),
-                        tie_regis_email.text.toString(),
-                        tie_regis_pswd.text.toString(),
+                        tie_regis_username.text.toString().trim(),
+                        tie_regis_email.text.toString().trim(),
+                        tie_regis_pswd.text.toString().trim(),
                         tie_regis_nama.text.toString(),
-                        tie_regis_nohp.text.toString(),
+                        tie_regis_nohp.text.toString().trim(),
                         tie_regis_alamat.text.toString()
                     )
                 }
@@ -78,11 +78,15 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
             true -> {
                 spin_kit_register.visibility = View.VISIBLE
                 btn_regis_submit.visibility = View.GONE
+                tv_regis_to_login.visibility = View.GONE
+                tv_regis_to_login2.visibility = View.GONE
 
             }
             false -> {
                 spin_kit_register.visibility = View.GONE
                 btn_regis_submit.visibility = View.VISIBLE
+                tv_regis_to_login.visibility = View.VISIBLE
+                tv_regis_to_login2.visibility = View.VISIBLE
 
             }
         }
