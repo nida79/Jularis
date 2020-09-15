@@ -13,32 +13,33 @@ class RegisterPresnter(val view: RegisterContract.View) : RegisterContract.Prese
     }
 
     override fun doRegister(
-        username:String,
+        username: String,
         email: String,
         password: String,
         full_name: String,
         no_telp: String,
-        address: String)
-    {
+        address: String
+    ) {
         view.onLoading(true)
-        ApiService.endpoint.signUp(username,email, password, no_telp, full_name, address)
+        ApiService.endpoint.signUp(username, email, password, no_telp, full_name, address)
             .enqueue(object : Callback<GlobalResponse> {
                 override fun onResponse(
                     call: Call<GlobalResponse>,
-                    response: Response<GlobalResponse>) {
+                    response: Response<GlobalResponse>
+                ) {
                     view.onLoading(false)
-                    if (response.isSuccessful){
-                       val globalResponse : GlobalResponse?= response.body()
+                    if (response.isSuccessful) {
+                        val globalResponse: GlobalResponse? = response.body()
                         view.showMessage(globalResponse!!.message)
-                        if (globalResponse.status){
+                        if (globalResponse.status) {
                             view.onResult(globalResponse)
-                        }else{
-                            view.showMessage(response.message().toString())
                         }
                     }
+                    view.showMessage(response.message().toString())
                 }
+
                 override fun onFailure(call: Call<GlobalResponse>, t: Throwable) {
-                   view.onLoading(false)
+                    view.onLoading(false)
                 }
 
             })

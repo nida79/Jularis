@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         setContentView(R.layout.activity_login)
         loginPresenter = LoginPresenter(this)
         sessionManager = SessionManager(this)
-        if (sessionManager.prefIsLogin){
+        if (sessionManager.prefIsLogin) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -52,14 +52,15 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
                     tie_pswd_login.error = "Password Tidak Boleh Kosong"
                     tie_pswd_login.requestFocus()
                 }
-                !Validator.validatePassword(tie_pswd_login.text.toString())->{
+                !Validator.validatePassword(tie_pswd_login.text.toString()) -> {
                     tie_pswd_login.error = "Input Password Minimal 8 Karakter"
                     tie_pswd_login.requestFocus()
                 }
                 else -> {
                     loginPresenter.doLogin(
                         tie_username_login.text.toString(),
-                        tie_pswd_login.text.toString())
+                        tie_pswd_login.text.toString()
+                    )
                 }
             }
         }
@@ -88,7 +89,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun showMessage(message: String) {
-       Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
 
     }
 

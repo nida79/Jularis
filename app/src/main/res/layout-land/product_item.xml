@@ -4,10 +4,10 @@
     android:layout_width="@dimen/_150sdp"
     android:layout_height="@dimen/_220sdp"
     android:background="@color/putih"
-    android:layout_margin="@dimen/_2sdp"
+    android:layout_margin="@dimen/_3sdp"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="10dp"
-    app:cardElevation="@dimen/_2sdp"
+    app:cardElevation="@dimen/_3sdp"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/raleway"
             android:text="@string/sample_tittle"
-            android:textColor="@color/text_color"
+            android:textColor="@color/primary_text"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_card_title"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/dosis_extrabold"
             android:text="@string/sample_rp"
             android:textColor="@color/primary_text"

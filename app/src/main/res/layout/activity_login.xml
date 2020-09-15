@@ -129,10 +129,10 @@
     <Button
         android:id="@+id/btn_login_to_register"
         android:layout_width="@dimen/_250sdp"
-        android:foreground="?android:attr/selectableItemBackground"
         android:layout_height="@dimen/_36sdp"
         android:background="@drawable/rounded_btn"
         android:fontFamily="@font/dosis_extrabold"
+        android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/signup"
         android:textColor="#FFF"
         android:textSize="@dimen/_13ssp"
@@ -140,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        app:layout_constraintVertical_bias="0.120000005" />
+        app:layout_constraintVertical_bias="0.17000002" />
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spin_kit_login"
@@ -153,7 +153,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_Login"
-        app:layout_constraintVertical_bias="0.62" />
+        app:layout_constraintVertical_bias="0.65999997" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

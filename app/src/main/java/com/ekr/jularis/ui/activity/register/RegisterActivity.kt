@@ -9,6 +9,7 @@ import com.ekr.jularis.R
 import com.ekr.jularis.data.GlobalResponse
 import com.ekr.jularis.ui.activity.login.LoginActivity
 import com.ekr.jularis.utils.Validator
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -98,6 +99,6 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun showMessage(message: String) {
-        Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
+        Toasty.success(applicationContext,message,Toasty.LENGTH_SHORT).show()
     }
 }
