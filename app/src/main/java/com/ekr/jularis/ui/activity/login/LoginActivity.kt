@@ -66,7 +66,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         }
     }
 
-
     override fun onLoading(loading: Boolean) {
         when (loading) {
             true -> {

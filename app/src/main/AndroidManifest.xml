@@ -15,16 +15,18 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.activity.home.MainActivity"/>
-
-        <activity android:name=".ui.activity.reset.ResetPasswordActivity" />
-        <activity android:name=".ui.activity.register.RegisterActivity" />
-        <activity android:name=".ui.activity.login.LoginActivity">
+        <activity android:name=".ui.activity.home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.activity.reset.ResetPasswordActivity" />
+        <activity android:name=".ui.activity.register.RegisterActivity" />
+        <activity android:name=".ui.activity.login.LoginActivity">
+
         </activity>
 
         <meta-data

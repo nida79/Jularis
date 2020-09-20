@@ -5,67 +5,75 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ekr.jularis.R
-import com.ekr.jularis.data.ExampleItem
-import com.ekr.jularis.utils.SessionManager
+import com.ekr.jularis.data.product.DataProduct
+import com.ekr.jularis.data.product.ResponseProduct
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.toolbar_home_user.*
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeFragment : Fragment() {
-
-    private lateinit var sessionManager: SessionManager
+class HomeFragment : Fragment(), HomeContract.View {
+    private lateinit var homePresenter: HomePresenter
+    private lateinit var homeAdapter: HomeAdapter
+    lateinit var grid_manager: GridLayoutManager
+    private var page: Int = 1
+    private var total_page: Int = 0
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val exampleList = generateDummyList(10)
-        sessionManager = SessionManager(requireActivity())
-        tvLocation.text = sessionManager.prefFullname
-        rcv_product_user.apply {
-            adapter = activity?.let { HomeAdapter(it, exampleList) }
-            layoutManager =
-                if (requireActivity().resources.configuration.orientation
-                    == Configuration.ORIENTATION_PORTRAIT) {
-                    GridLayoutManager(activity, 2)
-                }
-                else {
-                    GridLayoutManager(activity, 4)
-                }
-            setHasFixedSize(true)
-
-        }
+        homePresenter = HomePresenter(this)
+        homePresenter.getProduct(page)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    private fun generateDummyList(size: Int): List<ExampleItem> {
-        val list = ArrayList<ExampleItem>()
-        for (i in 0 until size) {
-            val drawable = when (i % 3) {
-                0 -> R.drawable.test
-                1 -> R.drawable.test
-                else -> R.drawable.test
-            }
-            val item = ExampleItem(drawable, "Item $i", "Rp.10.000")
-            list += item
+    override fun initListener() {
+        homeAdapter = HomeAdapter(requireContext(), arrayListOf())
+        grid_manager = if (requireActivity().resources.configuration.orientation
+            == Configuration.ORIENTATION_PORTRAIT
+        ) {
+            GridLayoutManager(activity, 2)
+        } else {
+            GridLayoutManager(activity, 4)
         }
-        return list
+        rcv_product_user.apply {
+            setHasFixedSize(true)
+            layoutManager = grid_manager
+            adapter = homeAdapter
+        }
+        swp_product_user.setOnRefreshListener {
+            page = 1
+            homePresenter.getProduct(page)
+        }
+    }
+
+    override fun onLoading(loading: Boolean) {
+        when (loading) {
+            true -> {
+                progress_bar_horizontal_home.visibility = View.VISIBLE
+                swp_product_user.isRefreshing = true
+            }
+            false -> {
+                swp_product_user.isRefreshing = false
+                progress_bar_horizontal_home.visibility = View.GONE
+            }
+        }
+    }
+
+    override fun onResultProduct(responseProduct: ResponseProduct) {
+        val dataProduct: List<DataProduct>? = responseProduct.data
+        total_page = responseProduct.last_page!!
+        dataProduct?.let { homeAdapter.setData(it) }
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
 }

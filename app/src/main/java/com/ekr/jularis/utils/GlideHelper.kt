@@ -10,7 +10,7 @@ import com.ekr.jularis.R
 class GlideHelper {
     companion object {
 
-        fun setImage(context: Context, urlImage: Int, imageView: ImageView){
+        fun setImage(context: Context, urlImage: String, imageView: ImageView){
             Glide .with(context)
                 .load(urlImage)
                 .centerCrop()

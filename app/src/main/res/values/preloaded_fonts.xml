@@ -4,8 +4,10 @@
 
         <item>@font/dosis</item>
         <item>@font/dosis_extrabold</item>
+        <item>@font/quattrocento_sans</item>
         <item>@font/raleway</item>
         <item>@font/raleway_light</item>
+        <item>@font/roboto</item>
         <item>@font/roboto_condensed_bold</item>
 
     </array>

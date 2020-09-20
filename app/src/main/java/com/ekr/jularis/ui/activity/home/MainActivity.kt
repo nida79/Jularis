@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //I added this if statement to keep the selected fragment when rotating the device
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().replace(
                 R.id.fragment_container,

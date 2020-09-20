@@ -50,8 +50,22 @@
             android:text="@string/sample_rp"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/_12ssp" />
+        <TextView
+            android:id="@+id/tv_item_sold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/btn_buy_home"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/quattrocento_sans"
+            android:text="Terjual(234)"
+            android:textColor="#7D7D7E"
+            android:textSize="@dimen/_11ssp" />
+
 
         <Button
+            android:id="@+id/btn_buy_home"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_25sdp"
@@ -61,7 +75,7 @@
             android:background="@drawable/rounded_btn"
             android:elevation="5dp"
             android:fontFamily="@font/dosis_extrabold"
-            android:text="Beli"
+            android:text="@string/beli"
             android:textColor="@color/putih"
             android:textSize="@dimen/_12ssp" />
 
