@@ -37,7 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/progress_bar_horizontal_home"
         app:shimmer_duration="1000">
-
         <include layout="@layout/product_place_holder" />
     </com.facebook.shimmer.ShimmerFrameLayout>
 

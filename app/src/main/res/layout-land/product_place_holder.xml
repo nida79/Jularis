@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_1"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_220sdp"
+        android:background="@color/putih"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/iv_card_product2"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:background="@color/shimmer_bg"
+                android:contentDescription="@string/logo_app"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintTop_toBottomOf="@id/iv_card_product2"
+                android:id="@+id/tv_card_title2"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/hitam"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_card_price2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home2"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/shimmer_bg"
+                android:fontFamily="@font/sf_ui"
+                android:text=""
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home2"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_sold"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home2"
+                android:id="@+id/tv_item_sold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home2"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/quattrocento_sans"
+                android:text="@string/logo_app"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_10ssp" />
+
+            <Button
+                android:id="@+id/btn_buy_home2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_shimer_btn"
+                android:elevation="5dp"
+                android:fontFamily="@font/dosis_extrabold"
+                android:text="@string/beli"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_card_title2"
+                app:layout_constraintVertical_bias="0.83" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_toEndOf="@id/cv_1"
+        android:id="@+id/cv_2"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_220sdp"
+        android:background="@color/putih"
+        android:layout_margin="@dimen/_2sdp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/iv_card_product3"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:background="@color/shimmer_bg"
+                android:contentDescription="@string/logo_app"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintTop_toBottomOf="@id/iv_card_product3"
+                android:id="@+id/tv_card_title3"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/hitam"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_card_price3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home3"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/shimmer_bg"
+                android:fontFamily="@font/sf_ui"
+                android:text=""
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home3"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_sold2"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home3"
+                android:id="@+id/tv_item_sold2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home3"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/quattrocento_sans"
+                android:text="@string/logo_app"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_10ssp" />
+
+            <Button
+                android:id="@+id/btn_buy_home3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_shimer_btn"
+                android:elevation="5dp"
+                android:fontFamily="@font/dosis_extrabold"
+                android:text="@string/beli"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_card_title3"
+                app:layout_constraintVertical_bias="0.83" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_toEndOf="@+id/cv_2"
+        android:id="@+id/cv_3"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_220sdp"
+        android:background="@color/putih"
+        android:layout_margin="@dimen/_2sdp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/iv_card_product4"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:background="@color/shimmer_bg"
+                android:contentDescription="@string/logo_app"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintTop_toBottomOf="@id/iv_card_product4"
+                android:id="@+id/tv_card_title4"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/hitam"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_card_price4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home4"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/shimmer_bg"
+                android:fontFamily="@font/sf_ui"
+                android:text=""
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home4"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_sold3"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home4"
+                android:id="@+id/tv_item_sold3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home4"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/quattrocento_sans"
+                android:text="@string/logo_app"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_10ssp" />
+
+            <Button
+                android:id="@+id/btn_buy_home4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_shimer_btn"
+                android:elevation="5dp"
+                android:fontFamily="@font/dosis_extrabold"
+                android:text="@string/beli"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_card_title4"
+                app:layout_constraintVertical_bias="0.83" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_4"
+        android:layout_toEndOf="@id/cv_3"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_220sdp"
+        android:background="@color/putih"
+        android:layout_margin="@dimen/_2sdp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/iv_card_product5"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:background="@color/shimmer_bg"
+                android:contentDescription="@string/logo_app"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintTop_toBottomOf="@id/iv_card_product5"
+                android:id="@+id/tv_card_title5"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/hitam"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_card_price5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home5"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/shimmer_bg"
+                android:fontFamily="@font/sf_ui"
+                android:text=""
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home5"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_sold4"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home5"
+                android:id="@+id/tv_item_sold4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home5"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/quattrocento_sans"
+                android:text="@string/logo_app"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_10ssp" />
+
+            <Button
+                android:id="@+id/btn_buy_home5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_shimer_btn"
+                android:elevation="5dp"
+                android:fontFamily="@font/dosis_extrabold"
+                android:text="@string/beli"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_card_title5"
+                app:layout_constraintVertical_bias="0.83" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_5"
+        android:layout_below="@id/cv_1"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_220sdp"
+        android:background="@color/putih"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/iv_card_product6"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:background="@color/shimmer_bg"
+                android:contentDescription="@string/logo_app"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintTop_toBottomOf="@id/iv_card_product6"
+                android:id="@+id/tv_card_title6"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/hitam"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_card_price6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home6"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/shimmer_bg"
+                android:fontFamily="@font/sf_ui"
+                android:text=""
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home6"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_sold5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home6"
+                android:id="@+id/tv_item_sold5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home6"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/quattrocento_sans"
+                android:text="@string/logo_app"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_10ssp" />
+
+            <Button
+                android:id="@+id/btn_buy_home6"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_shimer_btn"
+                android:elevation="5dp"
+                android:fontFamily="@font/dosis_extrabold"
+                android:text="@string/beli"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_card_title6"
+                app:layout_constraintVertical_bias="0.83" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_6"
+        android:layout_toEndOf="@id/cv_5"
+        android:layout_below="@id/cv_2"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_220sdp"
+        android:background="@color/putih"
+        android:layout_margin="@dimen/_2sdp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/iv_card_product7"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:background="@color/shimmer_bg"
+                android:contentDescription="@string/logo_app"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintTop_toBottomOf="@id/iv_card_product7"
+                android:id="@+id/tv_card_title7"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/hitam"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_card_price7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home7"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/shimmer_bg"
+                android:fontFamily="@font/sf_ui"
+                android:text=""
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home7"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_sold6"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home7"
+                android:id="@+id/tv_item_sold6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home7"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/quattrocento_sans"
+                android:text="@string/logo_app"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_10ssp" />
+
+            <Button
+                android:id="@+id/btn_buy_home7"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_shimer_btn"
+                android:elevation="5dp"
+                android:fontFamily="@font/dosis_extrabold"
+                android:text="@string/beli"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_card_title7"
+                app:layout_constraintVertical_bias="0.83" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_7"
+        android:layout_toEndOf="@id/cv_6"
+        android:layout_below="@id/cv_3"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_220sdp"
+        android:background="@color/putih"
+        android:layout_margin="@dimen/_2sdp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/iv_card_product8"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:background="@color/shimmer_bg"
+                android:contentDescription="@string/logo_app"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintTop_toBottomOf="@id/iv_card_product8"
+                android:id="@+id/tv_card_title8"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/hitam"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_card_price8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home8"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/shimmer_bg"
+                android:fontFamily="@font/sf_ui"
+                android:text=""
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home8"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_sold8"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home8"
+                android:id="@+id/tv_item_sold8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home8"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/quattrocento_sans"
+                android:text="@string/logo_app"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_10ssp" />
+
+            <Button
+                android:id="@+id/btn_buy_home8"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_shimer_btn"
+                android:elevation="5dp"
+                android:fontFamily="@font/dosis_extrabold"
+                android:text="@string/beli"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_card_title8"
+                app:layout_constraintVertical_bias="0.83" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_8"
+        android:layout_toEndOf="@id/cv_7"
+        android:layout_below="@id/cv_4"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_220sdp"
+        android:background="@color/putih"
+        android:layout_margin="@dimen/_2sdp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/iv_card_product9"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:background="@color/shimmer_bg"
+                android:contentDescription="@string/logo_app"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintTop_toBottomOf="@id/iv_card_product9"
+                android:id="@+id/tv_card_title9"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/hitam"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_card_price9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home9"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="9dp"
+                android:background="@color/shimmer_bg"
+                android:fontFamily="@font/sf_ui"
+                android:text=""
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home9"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_sold9"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:background="@color/shimmer_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_buy_home9"
+                android:id="@+id/tv_item_sold9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/btn_buy_home9"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/quattrocento_sans"
+                android:text="@string/logo_app"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_10ssp" />
+
+            <Button
+                android:id="@+id/btn_buy_home9"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_shimer_btn"
+                android:elevation="5dp"
+                android:fontFamily="@font/dosis_extrabold"
+                android:text="@string/beli"
+                android:textColor="@color/shimmer_bg"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_card_title9"
+                app:layout_constraintVertical_bias="0.83" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

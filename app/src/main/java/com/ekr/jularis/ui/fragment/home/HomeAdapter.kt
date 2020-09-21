@@ -29,9 +29,13 @@ class HomeAdapter(
 
     override fun getItemCount() = dataProduct.size
 
-    fun setData(newDataProduct: List<DataProduct>) {
+    fun setData(firstResult: List<DataProduct>) {
         dataProduct.clear()
-        dataProduct.addAll(newDataProduct)
+        dataProduct.addAll(firstResult)
+        notifyDataSetChanged()
+    }
+    fun setNextData(nextResult: List<DataProduct>) {
+        dataProduct.addAll(nextResult)
         notifyDataSetChanged()
     }
 

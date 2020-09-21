@@ -22,190 +22,105 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONObject
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeContract.View {
     private lateinit var homeAdapter: HomeAdapter
-    lateinit var grid_manager: GridLayoutManager
-    private val dataProduct = ArrayList<DataProduct>()
-    private val dataImage = ArrayList<ResponseImage>()
+    lateinit var gridManager: GridLayoutManager
+    private lateinit var homePresenter: HomePresenter
     private var isLoading: Boolean = false
     private var page: Int = 1
-    private var total_page: Int = 0
+    private var totalPage: Int = 0
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         AndroidNetworking.initialize(context)
-        initListener()
-        getProduct()
+        homePresenter = HomePresenter(this)
+        homePresenter.getProduct(page)
 
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-
-    private fun nextgetProduct() {
-        showLoading(true)
-        AndroidNetworking.get("http://103.55.36.171:8001/v1/product")
-            .addQueryParameter("page", page.toString())
-            .setPriority(Priority.HIGH)
-            .build()
-            .getAsJSONObject(object : JSONObjectRequestListener {
-                override fun onResponse(response: JSONObject?) {
-                    hideLoading()
-                    swp_product_user.isRefreshing = false
-                    total_page = response!!.getInt("last_page")
-                    val jsonArray = response.getJSONArray("data")
-                    for (i in 0 until jsonArray.length()) {
-                        val jsonObject = jsonArray.getJSONObject(i)
-                        val data =
-                            Gson().fromJson(jsonObject.toString(), DataProduct::class.java)
-                        dataProduct.addAll(listOf(data))
-                        val arrayImage = jsonObject.getJSONArray("product_picture")
-                        for (picture in 0 until arrayImage.length()) {
-                            val imageObject = arrayImage.getJSONObject(picture)
-                            val listImage =
-                                Gson().fromJson(imageObject.toString(), ResponseImage::class.java)
-                            dataImage.addAll(listOf(listImage))
-                        }
-                    }
-                    homeAdapter.notifyDataSetChanged()
-
-                }
-
-                override fun onError(anError: ANError?) {
-                    swp_product_user.isRefreshing = false
-                    showLoading(false)
-                    Toast.makeText(context, anError!!.errorBody.toString(), Toast.LENGTH_SHORT)
-                        .show()
-                }
-            })
-    }
-
-    private fun getProduct() {
-        onLoading(true)
-        AndroidNetworking.get("http://103.55.36.171:8001/v1/product")
-            .addQueryParameter("page", page.toString())
-            .setPriority(Priority.HIGH)
-            .build()
-            .getAsJSONObject(object : JSONObjectRequestListener {
-                override fun onResponse(response: JSONObject?) {
-                    dataImage.clear()
-                    dataProduct.clear()
-                    onLoading(false)
-                    swp_product_user.isRefreshing = false
-                    total_page = response!!.getInt("last_page")
-                    val jsonArray = response.getJSONArray("data")
-                    for (i in 0 until jsonArray.length()) {
-                        val jsonObject = jsonArray.getJSONObject(i)
-                        val data =
-                            Gson().fromJson(jsonObject.toString(), DataProduct::class.java)
-                        dataProduct.addAll(listOf(data))
-                        val arrayImage = jsonObject.getJSONArray("product_picture")
-                        for (picture in 0 until arrayImage.length()) {
-                            val imageObject = arrayImage.getJSONObject(picture)
-                            val listImage =
-                                Gson().fromJson(imageObject.toString(), ResponseImage::class.java)
-                            dataImage.addAll(listOf(listImage))
-                        }
-                    }
-                    homeAdapter.notifyDataSetChanged()
-
-                }
-
-                override fun onError(anError: ANError?) {
-                    onLoading(false)
-                    Toast.makeText(context, anError!!.errorBody.toString(), Toast.LENGTH_SHORT)
-                        .show()
-                }
-            })
-    }
-
-    private fun initListener() {
-        homeAdapter = HomeAdapter(requireContext(), dataProduct)
-        grid_manager = if (requireActivity().resources.configuration.orientation
+    override fun initListener() {
+        homeAdapter = HomeAdapter(requireContext(), arrayListOf())
+        gridManager = if (requireActivity().resources.configuration.orientation
             == Configuration.ORIENTATION_PORTRAIT
         ) {
             GridLayoutManager(activity, 2)
-        } else {
+        }
+        else {
             GridLayoutManager(activity, 4)
         }
         rcv_product_user.apply {
             setHasFixedSize(true)
-            layoutManager = grid_manager
+            layoutManager = gridManager
             adapter = homeAdapter
         }
         swp_product_user.setOnRefreshListener {
             page = 1
-            progress_bar_horizontal_home.visibility = View.GONE
-            getProduct()
+            homePresenter.getProduct(page)
         }
         rcv_product_user.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val countItem = grid_manager.itemCount
+                val countItem = gridManager.itemCount
                 val lastVisiblePosition =
-                    grid_manager.findLastCompletelyVisibleItemPosition()
+                    gridManager.findLastCompletelyVisibleItemPosition()
                 val isLastPosition = countItem.minus(1) == lastVisiblePosition
-                if (!isLoading && isLastPosition && page < total_page) {
-                    showLoading(true)
+                if (!isLoading && isLastPosition && page < totalPage) {
                     page = page.plus(1)
-                    nextgetProduct()
+                    homePresenter.getNextProduct(page)
                 }
             }
         })
     }
 
-    private fun showLoading(isRefresh: Boolean) {
-        isLoading = true
-        swp_product_user.isRefreshing = true
-        progress_bar_horizontal_home.visibility = View.VISIBLE
-        rcv_product_user.visibility.let {
-            if (isRefresh) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
-        }
-    }
-
-    fun onLoading(loading: Boolean) {
+    override fun onLoading(loading: Boolean) {
         when (loading) {
             true -> {
-                shimmer_container.showShimmer()
-                rcv_product_user.visibility = View.GONE
-                shimmer_container.visibility = View.VISIBLE
-                shimmer_container.shimmerLayoutManager = grid_manager
-                progress_bar_horizontal_home.visibility = View.GONE
                 swp_product_user.isRefreshing = true
+                shimmer_container.visibility = View.VISIBLE
+                shimmer_container.startShimmer()
+                rcv_product_user.visibility = View.GONE
             }
             false -> {
-                shimmer_container.hideShimmer()
-                rcv_product_user.visibility = View.VISIBLE
-                shimmer_container.visibility = View.GONE
                 swp_product_user.isRefreshing = false
+                shimmer_container.stopShimmer()
+                shimmer_container.visibility = View.GONE
+                rcv_product_user.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    override fun onNextLoading(nextLoading: Boolean) {
+        when (nextLoading) {
+            true -> {
+                isLoading = true
+                progress_bar_horizontal_home.visibility = View.VISIBLE
+            }
+            false -> {
+                isLoading = false
                 progress_bar_horizontal_home.visibility = View.GONE
             }
         }
     }
 
-    fun onResultProduct(responseProduct: ResponseProduct) {
-        val dataProduct: List<DataProduct>? = responseProduct.data
-        total_page = responseProduct.last_page!!
-        dataProduct?.let { homeAdapter.setData(it) }
+    override fun onResultProduct(responseProduct: ResponseProduct) {
+        val data: List<DataProduct>? = responseProduct.data
+        totalPage = responseProduct.last_page!!
+        data?.let { homeAdapter.setData(it) }
     }
 
-    fun showMessage(message: String) {
+    override fun onResultNextPage(responseProduct: ResponseProduct) {
+        val data: List<DataProduct>? = responseProduct.data
+        totalPage = responseProduct.last_page!!
+        data?.let { homeAdapter.setNextData(it) }
+    }
+    override fun showMessage(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun hideLoading() {
-        isLoading = false
-        progress_bar_horizontal_home.visibility = View.GONE
-        rcv_product_user.visibility = View.VISIBLE
     }
 }
