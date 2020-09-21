@@ -28,7 +28,6 @@ interface ApiEndpoint {
 
     @GET("product")
     fun getProduct(
-        @Query("page") page: Int,
-        @Query("limit") limit:Int = 4
+        @Query("page") page: Int
     ): Call<ResponseProduct>
 }

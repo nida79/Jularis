@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:elevation="@dimen/_2sdp"
+    android:background="@color/putih"
     android:layout_height="?actionBarSize">
 
     <RelativeLayout
@@ -15,14 +15,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
-            android:layout_marginStart="10dp"
+           android:layout_marginStart="@dimen/_5sdp"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView

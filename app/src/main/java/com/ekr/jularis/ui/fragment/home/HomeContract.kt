@@ -9,7 +9,8 @@ interface HomeContract {
 
     interface View {
         fun initListener()
-        fun onLoading(loading: Boolean)
+        fun onRefreshLoading(loading: Boolean)
+        fun onNextLoading(nextLoading:Boolean)
         fun onResultProduct(responseProduct: ResponseProduct)
         fun showMessage(message: String)
     }

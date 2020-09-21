@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/header_bar"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/_2sdp"
         android:fontFamily="@font/dosis_extrabold"
         android:text="@string/daftar_produk"
         android:textColor="@color/text_color"
@@ -30,18 +30,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header_bar"
         app:layout_constraintVertical_bias="0.01999998" />
-
+    <com.todkars.shimmer.ShimmerRecyclerView
+        android:id="@+id/shimmer_container"
+        android:layout_below="@id/progress_bar_horizontal_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:shimmer_recycler_duration="1000"
+        app:shimmer_recycler_layout="@layout/product_place_holder"
+        app:shimmer_recycler_item_count="10"/>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swp_product_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/home_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_title">
-
-
+        android:layout_below="@id/progress_bar_horizontal_home">
         <androidx.recyclerview.widget.RecyclerView
+            android:visibility="visible"
             android:id="@+id/rcv_product_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,13 +57,12 @@
         android:id="@+id/progress_bar_horizontal_home"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/header_bar"
+        android:layout_height="@dimen/_15sdp"
+        android:layout_below="@id/home_title"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="5dp"
         android:indeterminate="true"
         android:max="100" />
 

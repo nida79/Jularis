@@ -22,17 +22,17 @@ import retrofit2.Response
 class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
     init {
         view.initListener()
-        view.onLoading(false)
+        view.onRefreshLoading(false)
 
     }
     override fun getProduct(page: Int) {
-        view.onLoading(true)
+        view.onRefreshLoading(true)
         ApiService.endpoint.getProduct(page).enqueue(object : Callback<ResponseProduct> {
             override fun onResponse(
                 call: Call<ResponseProduct>,
                 response: Response<ResponseProduct>
             ) {
-                view.onLoading(false)
+                view.onRefreshLoading(false)
                 if (response.isSuccessful) {
                     val responseProduct: ResponseProduct? = response.body()
                     responseProduct?.let { view.onResultProduct(it) }
@@ -48,7 +48,7 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
             }
 
             override fun onFailure(call: Call<ResponseProduct>, t: Throwable) {
-                view.onLoading(false)
+                view.onRefreshLoading(false)
                 view.showMessage(t.message.toString())
             }
 
