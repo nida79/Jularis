@@ -13,5 +13,5 @@ data class DataProduct(
     @SerializedName("category") val category: String,
     @SerializedName("quantity") val quantity: Int,
     @SerializedName("ongkir") val ongkir: String,
-    @SerializedName("product_picture") val product_picture: List<ResponseImage>
+    @SerializedName("product_picture") val product_picture: List<DataImageProduct>
 ) : Parcelable

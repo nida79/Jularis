@@ -1,5 +1,5 @@
 package com.ekr.jularis.ui.fragment.home
-import com.ekr.jularis.data.product.ResponseProduct
+import com.ekr.jularis.data.response.ResponseProduct
 
 interface HomeContract {
     interface Presenter {

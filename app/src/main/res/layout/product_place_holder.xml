@@ -28,12 +28,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product2"
                 android:id="@+id/tv_card_title2"
                 android:layout_width="0dp"
@@ -59,7 +59,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -69,7 +69,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home2"
                 android:id="@+id/tv_item_sold"
@@ -81,7 +81,7 @@
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/quattrocento_sans"
                 android:text="@string/logo_app"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_10ssp" />
 
             <Button
@@ -91,11 +91,11 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_shimer_btn"
+                android:background="@drawable/rounded_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -131,12 +131,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product3"
                 android:id="@+id/tv_card_title3"
                 android:layout_width="0dp"
@@ -162,7 +162,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -172,7 +172,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home3"
                 android:id="@+id/tv_item_sold2"
@@ -184,7 +184,7 @@
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/quattrocento_sans"
                 android:text="@string/logo_app"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_10ssp" />
 
             <Button
@@ -194,11 +194,11 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_shimer_btn"
+                android:background="@drawable/rounded_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -234,12 +234,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product4"
                 android:id="@+id/tv_card_title4"
                 android:layout_width="0dp"
@@ -265,7 +265,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -275,7 +275,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home4"
                 android:id="@+id/tv_item_sold3"
@@ -287,7 +287,7 @@
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/quattrocento_sans"
                 android:text="@string/logo_app"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_10ssp" />
 
             <Button
@@ -297,11 +297,11 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_shimer_btn"
+                android:background="@drawable/rounded_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -338,12 +338,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product5"
                 android:id="@+id/tv_card_title5"
                 android:layout_width="0dp"
@@ -369,7 +369,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -379,7 +379,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home5"
                 android:id="@+id/tv_item_sold4"
@@ -391,7 +391,7 @@
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/quattrocento_sans"
                 android:text="@string/logo_app"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_10ssp" />
 
             <Button
@@ -401,11 +401,11 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_shimer_btn"
+                android:background="@drawable/rounded_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -441,12 +441,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product6"
                 android:id="@+id/tv_card_title6"
                 android:layout_width="0dp"
@@ -472,7 +472,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -482,7 +482,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home6"
                 android:id="@+id/tv_item_sold5"
@@ -494,7 +494,7 @@
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/quattrocento_sans"
                 android:text="@string/logo_app"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_10ssp" />
 
             <Button
@@ -504,11 +504,11 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_shimer_btn"
+                android:background="@drawable/rounded_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -545,12 +545,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product7"
                 android:id="@+id/tv_card_title7"
                 android:layout_width="0dp"
@@ -576,7 +576,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -586,7 +586,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/shimmer_bg"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home7"
                 android:id="@+id/tv_item_sold6"
@@ -598,7 +598,7 @@
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/quattrocento_sans"
                 android:text="@string/logo_app"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_10ssp" />
 
             <Button
@@ -608,11 +608,11 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_shimer_btn"
+                android:background="@drawable/rounded_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
-                android:textColor="@color/shimmer_bg"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

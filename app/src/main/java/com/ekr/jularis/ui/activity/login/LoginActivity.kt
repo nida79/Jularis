@@ -3,20 +3,16 @@ package com.ekr.jularis.ui.activity.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ekr.jularis.R
-import com.ekr.jularis.data.login.ResponseLogin
+import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.ui.activity.home.MainActivity
 import com.ekr.jularis.ui.activity.register.RegisterActivity
 import com.ekr.jularis.ui.activity.reset.ResetPasswordActivity
 import com.ekr.jularis.utils.SessionManager
 import com.ekr.jularis.utils.Validator
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_login.*
-import org.json.JSONException
-import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
     private lateinit var loginPresenter: LoginPresenter
@@ -27,7 +23,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         loginPresenter = LoginPresenter(this)
         sessionManager = SessionManager(this)
         if (sessionManager.prefIsLogin) {
-            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }
@@ -83,13 +78,16 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun onResult(responseLogin: ResponseLogin) {
         responseLogin.data?.let { loginPresenter.setPrefs(sessionManager, it) }
-        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
     override fun showMessage(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
 
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
 }

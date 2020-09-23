@@ -1,10 +1,8 @@
 package com.ekr.jularis.ui.activity.login
 
-import android.content.Context
 import com.ekr.jularis.data.login.DataLogin
-import com.ekr.jularis.data.login.ResponseLogin
+import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.utils.SessionManager
-import org.json.JSONObject
 
 interface LoginContract {
 

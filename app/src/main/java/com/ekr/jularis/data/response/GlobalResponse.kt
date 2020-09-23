@@ -1,4 +1,4 @@
-package com.ekr.jularis.data
+package com.ekr.jularis.data.response
 
 import com.google.gson.annotations.SerializedName
 

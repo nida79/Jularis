@@ -1,5 +1,6 @@
-package com.ekr.jularis.data.product
+package com.ekr.jularis.data.response
 
+import com.ekr.jularis.data.product.DataProduct
 import com.google.gson.annotations.SerializedName
 
 data class ResponseProduct(

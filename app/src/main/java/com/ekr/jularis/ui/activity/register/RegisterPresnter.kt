@@ -1,7 +1,8 @@
 package com.ekr.jularis.ui.activity.register
 
-import com.ekr.jularis.data.GlobalResponse
+import com.ekr.jularis.data.response.GlobalResponse
 import com.ekr.jularis.networking.ApiService
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,14 +29,22 @@ class RegisterPresnter(val view: RegisterContract.View) : RegisterContract.Prese
                     response: Response<GlobalResponse>
                 ) {
                     view.onLoading(false)
-                    if (response.isSuccessful) {
-                        val globalResponse: GlobalResponse? = response.body()
-                        view.showMessage(globalResponse!!.message)
-                        if (globalResponse.status) {
-                            view.onResult(globalResponse)
+                    when{
+                        response.isSuccessful->{
+                            val globalResponse: GlobalResponse? = response.body()
+                            if (globalResponse!!.status) {
+                                view.onResult(globalResponse)
+                                view.showMessage(globalResponse.message)
+                            }
+                        }
+                        response.code() !=200->{
+                            val globalResponse: GlobalResponse = Gson().fromJson(
+                                response.errorBody()!!.charStream(),
+                                GlobalResponse::class.java
+                            )
+                            view.showMessage(globalResponse.message)
                         }
                     }
-                    view.showMessage(response.message().toString())
                 }
 
                 override fun onFailure(call: Call<GlobalResponse>, t: Throwable) {

@@ -30,4 +30,10 @@
     <string name="sample_tittle">Product Title</string>
     <string name="daftar_produk">Daftar Produk</string>
     <string name="beli">Beli</string>
+    <string name="harga_produk">Harga produk :</string>
+    <string name="sisa_barang">Jumlah stok :</string>
+    <string name="deskripsi">Deskripsi :</string>
+    <string name="lanjutkan_pembayaran">Beli Sekarang</string>
+    <string name="simpan">Simpan</string>
+    <string name="mohon_tunggu">Mohon Tunggu</string>
 </resources>

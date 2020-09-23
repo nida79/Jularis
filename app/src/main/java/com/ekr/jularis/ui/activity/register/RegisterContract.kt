@@ -1,7 +1,6 @@
 package com.ekr.jularis.ui.activity.register
 
-import com.ekr.jularis.data.GlobalResponse
-import com.ekr.jularis.data.login.ResponseLogin
+import com.ekr.jularis.data.response.GlobalResponse
 
 interface RegisterContract {
 

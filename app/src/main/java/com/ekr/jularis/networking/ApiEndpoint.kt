@@ -1,8 +1,8 @@
 package com.ekr.jularis.networking
 
-import com.ekr.jularis.data.GlobalResponse
-import com.ekr.jularis.data.login.ResponseLogin
-import com.ekr.jularis.data.product.ResponseProduct
+import com.ekr.jularis.data.response.GlobalResponse
+import com.ekr.jularis.data.response.ResponseLogin
+import com.ekr.jularis.data.response.ResponseProduct
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -30,4 +30,12 @@ interface ApiEndpoint {
     fun getProduct(
         @Query("page") page: Int
     ): Call<ResponseProduct>
+
+    @FormUrlEncoded
+    @POST("checkout")
+    fun addCart(
+        @Header("Authorization") token: String,
+        @Field("product_id") product_id: String,
+        @Field("quantity") quantity: Int
+    ): Call<GlobalResponse>
 }

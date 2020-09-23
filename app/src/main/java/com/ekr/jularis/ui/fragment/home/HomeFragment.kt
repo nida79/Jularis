@@ -1,5 +1,6 @@
 package com.ekr.jularis.ui.fragment.home
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,16 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androidnetworking.AndroidNetworking
-import com.androidnetworking.common.Priority
-import com.androidnetworking.error.ANError
-import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.ekr.jularis.R
 import com.ekr.jularis.data.product.DataProduct
-import com.ekr.jularis.data.product.ResponseImage
-import com.ekr.jularis.data.product.ResponseProduct
-import com.google.gson.Gson
+import com.ekr.jularis.data.response.ResponseProduct
+import com.ekr.jularis.ui.activity.home.MainActivity
+import com.ekr.jularis.utils.SessionManager
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.json.JSONObject
 
 
 class HomeFragment : Fragment(), HomeContract.View {
@@ -29,8 +26,6 @@ class HomeFragment : Fragment(), HomeContract.View {
     private var isLoading: Boolean = false
     private var page: Int = 1
     private var totalPage: Int = 0
-
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         AndroidNetworking.initialize(context)
@@ -64,8 +59,7 @@ class HomeFragment : Fragment(), HomeContract.View {
             page = 1
             homePresenter.getProduct(page)
         }
-        rcv_product_user.addOnScrollListener(object :
-            RecyclerView.OnScrollListener() {
+        rcv_product_user.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val countItem = gridManager.itemCount
                 val lastVisiblePosition =

@@ -1,7 +1,7 @@
 package com.ekr.jularis.ui.fragment.home
 
-import com.ekr.jularis.data.GlobalResponse
-import com.ekr.jularis.data.product.ResponseProduct
+import com.ekr.jularis.data.response.GlobalResponse
+import com.ekr.jularis.data.response.ResponseProduct
 import com.ekr.jularis.networking.ApiService
 import com.google.gson.Gson
 import retrofit2.Call
