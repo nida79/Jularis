@@ -1,15 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swp_cart_user"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.CartFragment">
+    tools:context=".ui.fragment.cart.CartFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello Chart Fragment" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <LinearLayout
+            android:id="@+id/tv_checkout_header"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_centerHorizontal="true"
+            android:background="@color/putih"
+            android:elevation="@dimen/_4sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:padding="10dp"
+                android:text="@string/daftar_keranjang"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_20ssp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/template_empty_cart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_checkout_header"
+            android:background="@color/putih"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/img_empty_cart"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/logo_app"
+                android:src="@drawable/ic_box" />
+
+            <TextView
+                android:id="@+id/tv_empty_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_empty_cart"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/daftar_keranjang_kosong"
+                android:textAlignment="center"
+                android:textSize="@dimen/_13ssp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/template_filled_cart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_checkout_header">
+
+            <CheckBox
+                android:id="@+id/cb_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/pilih_semua"
+                android:textColor="@color/abu" />
+
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginEnd="@dimen/_13sdp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/hapus"
+                android:textColor="@color/abu"
+                android:textSize="@dimen/_12ssp"
+                app:drawableStartCompat="@drawable/ic_delete_deftault"
+                tools:ignore="RelativeOverlap" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_cart_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/pembatas_checkout"
+                android:layout_below="@id/cb_all"
+                app:shimmer_duration="1000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/checkout_place_holder" />
+
+                    <include layout="@layout/checkout_place_holder" />
+
+                    <include layout="@layout/checkout_place_holder" />
+
+                    <include layout="@layout/checkout_place_holder" />
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_daftar_keranjang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/pembatas_checkout"
+                android:layout_below="@id/cb_all"
+                tools:listitem="@layout/checkout_item" />
+
+            <View
+                android:id="@+id/pembatas_checkout"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_above="@+id/tv_patokan"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="#BDBDBD" />
+
+            <Button
+                android:id="@+id/btn_keranjang_buy"
+                android:layout_width="@dimen/_94sdp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/oval_btn"
+                android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+                android:drawablePadding="-10dp"
+                android:fontFamily="@font/dosis_extrabold"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingEnd="@dimen/_10sdp"
+                android:text="@string/lanjutkan"
+                android:textColor="@color/putih"
+                android:textSize="@dimen/_9ssp"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/tv_patokan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/total_keranjang"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/total_harga_barang"
+                android:textColor="@color/abu_soft"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/total_keranjang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/sf_ui"
+                android:textColor="@color/successColor"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                tools:ignore="RelativeOverlap"
+                tools:text="Rp.123.000.000" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

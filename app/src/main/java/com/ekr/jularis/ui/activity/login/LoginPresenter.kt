@@ -1,6 +1,6 @@
 package com.ekr.jularis.ui.activity.login
 
-import com.ekr.jularis.data.response.GlobalResponse
+import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.data.login.DataLogin
 import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.networking.ApiService
@@ -34,11 +34,11 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.Presenter {
                             }
                         }
                         response.code() !=200->{
-                            val globalResponse: GlobalResponse = Gson().fromJson(
+                            val responseGlobal: ResponseGlobal = Gson().fromJson(
                                 response.errorBody()!!.charStream(),
-                                GlobalResponse::class.java
+                                ResponseGlobal::class.java
                             )
-                            view.showMessage(globalResponse.message)
+                            view.showMessage(responseGlobal.message)
                         }
                     }
 

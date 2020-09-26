@@ -1,43 +1,44 @@
 package com.ekr.jularis.ui.fragment.home
 
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.androidnetworking.AndroidNetworking
-import com.ekr.jularis.R
 import com.ekr.jularis.data.product.DataProduct
 import com.ekr.jularis.data.response.ResponseProduct
-import com.ekr.jularis.ui.activity.home.MainActivity
-import com.ekr.jularis.utils.SessionManager
+import com.ekr.jularis.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : Fragment(), HomeContract.View {
+    private lateinit var _binding: FragmentHomeBinding
     private lateinit var homeAdapter: HomeAdapter
-    lateinit var gridManager: GridLayoutManager
+    private lateinit var gridManager: GridLayoutManager
     private lateinit var homePresenter: HomePresenter
+    private lateinit var data: List<DataProduct>
     private var isLoading: Boolean = false
     private var page: Int = 1
     private var totalPage: Int = 0
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        AndroidNetworking.initialize(context)
         homePresenter = HomePresenter(this)
-        homePresenter.getProduct(page)
-
+        homePresenter.getProduct(page, null, null, null)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentHomeBinding.inflate(layoutInflater)
+        return _binding.root
     }
 
     override fun initListener() {
@@ -46,20 +47,40 @@ class HomeFragment : Fragment(), HomeContract.View {
             == Configuration.ORIENTATION_PORTRAIT
         ) {
             GridLayoutManager(activity, 2)
-        }
-        else {
+        } else {
             GridLayoutManager(activity, 4)
         }
-        rcv_product_user.apply {
+        _binding.rcvProductUser.apply {
             setHasFixedSize(true)
             layoutManager = gridManager
             adapter = homeAdapter
         }
-        swp_product_user.setOnRefreshListener {
+        _binding.swpProductUser.setOnRefreshListener {
             page = 1
-            homePresenter.getProduct(page)
+            homePresenter.getProduct(page, null, null, null)
         }
-        rcv_product_user.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        _binding.searchHome.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null || query != "") {
+                    homePresenter.getProduct(null, query, null, null)
+                } else {
+                    homePresenter.getNextProduct(1)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null || newText != "") {
+                    homePresenter.getProduct(null, newText, null, null)
+                } else {
+                    homePresenter.getNextProduct(page)
+                }
+
+                return false
+            }
+
+        })
+        _binding.rcvProductUser.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val countItem = gridManager.itemCount
                 val lastVisiblePosition =
@@ -76,16 +97,16 @@ class HomeFragment : Fragment(), HomeContract.View {
     override fun onLoading(loading: Boolean) {
         when (loading) {
             true -> {
-                swp_product_user.isRefreshing = true
-                shimmer_container.visibility = View.VISIBLE
-                shimmer_container.startShimmer()
-                rcv_product_user.visibility = View.GONE
+                _binding.swpProductUser.isRefreshing = true
+                _binding.shimmerContainer.visibility = View.VISIBLE
+                _binding.shimmerContainer.startShimmer()
+                _binding.rcvProductUser.visibility = View.GONE
             }
             false -> {
-                swp_product_user.isRefreshing = false
-                shimmer_container.stopShimmer()
-                shimmer_container.visibility = View.GONE
-                rcv_product_user.visibility = View.VISIBLE
+                _binding.swpProductUser.isRefreshing = false
+                _binding.shimmerContainer.stopShimmer()
+                _binding.shimmerContainer.visibility = View.GONE
+                _binding.rcvProductUser.visibility = View.VISIBLE
             }
         }
     }
@@ -94,27 +115,29 @@ class HomeFragment : Fragment(), HomeContract.View {
         when (nextLoading) {
             true -> {
                 isLoading = true
-                progress_bar_horizontal_home.visibility = View.VISIBLE
+                _binding.progressBarHorizontalHome.visibility = View.VISIBLE
             }
             false -> {
                 isLoading = false
-                progress_bar_horizontal_home.visibility = View.GONE
+                _binding.progressBarHorizontalHome.visibility = View.GONE
             }
         }
     }
 
     override fun onResultProduct(responseProduct: ResponseProduct) {
-        val data: List<DataProduct>? = responseProduct.data
+        data = responseProduct.data!!
         totalPage = responseProduct.last_page!!
-        data?.let { homeAdapter.setData(it) }
+        data.let { homeAdapter.setData(it) }
     }
 
     override fun onResultNextPage(responseProduct: ResponseProduct) {
-        val data: List<DataProduct>? = responseProduct.data
+        data = responseProduct.data!!
         totalPage = responseProduct.last_page!!
-        data?.let { homeAdapter.setNextData(it) }
+        data.let { homeAdapter.setNextData(it) }
     }
+
     override fun showMessage(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
+
 }

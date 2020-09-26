@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ekr.jularis.R
-import com.ekr.jularis.ui.fragment.CartFragment
+import com.ekr.jularis.ui.fragment.cart.CartFragment
 import com.ekr.jularis.ui.fragment.home.HomeFragment
 import com.ekr.jularis.ui.fragment.SettingFragment
 import com.ekr.jularis.ui.fragment.TransactionFragment
+import com.ekr.jularis.utils.SessionManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -38,10 +39,17 @@ class MainActivity : AppCompatActivity() {
             selectedFragment?.let {
                 supportFragmentManager.beginTransaction().replace(
                     R.id.fragment_container,
-                    it
+                    it,
                 ).commit()
+
             }
             return@setOnItemSelectedListener
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+        finish()
     }
 }

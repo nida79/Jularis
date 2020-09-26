@@ -2,7 +2,7 @@ package com.ekr.jularis.ui.activity.detail
 
 import android.content.Context
 import android.content.Intent
-import com.ekr.jularis.data.response.GlobalResponse
+import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.networking.ApiService
 import com.ekr.jularis.ui.activity.CheckoutActivity
 import com.google.gson.Gson
@@ -19,29 +19,29 @@ class DetailPresenter(val view: DetailContract.View) : DetailContract.Presenter 
     override fun doAddCart(token: String, product_id: String, quantity: Int) {
         view.onLoading(true)
         ApiService.endpoint.addCart(token, product_id, quantity)
-            .enqueue(object : Callback<GlobalResponse> {
+            .enqueue(object : Callback<ResponseGlobal> {
                 override fun onResponse(
-                    call: Call<GlobalResponse>,
-                    response: Response<GlobalResponse>
+                    call: Call<ResponseGlobal>,
+                    responseGlobal: Response<ResponseGlobal>
                 ) {
                     view.onLoading(false)
-                    if (response.code() != 200) {
-                        val globalResponse: GlobalResponse = Gson().fromJson(
-                            response.errorBody()!!.charStream(),
-                            GlobalResponse::class.java
+                    if (responseGlobal.code() != 200) {
+                        val result: ResponseGlobal = Gson().fromJson(
+                            responseGlobal.errorBody()!!.charStream(),
+                            ResponseGlobal::class.java
                         )
-                        view.showMessage(globalResponse.message)
+                        view.showMessage(result.message)
 
                     } else {
-                        if (response.isSuccessful) {
-                            val globalResponse: GlobalResponse? = response.body()
-                            view.showMessage(globalResponse!!.message)
+                        if (responseGlobal.isSuccessful) {
+                            val result: ResponseGlobal? = responseGlobal.body()
+                            view.showMessage(result!!.message)
 
                         }
                     }
                 }
 
-                override fun onFailure(call: Call<GlobalResponse>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.onLoading(false)
                     view.showMessage(t.message.toString())
                 }
@@ -52,23 +52,23 @@ class DetailPresenter(val view: DetailContract.View) : DetailContract.Presenter 
     override fun doBuy(context: Context, token: String, product_id: String, quantity: Int) {
         view.onLoading(true)
         ApiService.endpoint.addCart(token, product_id, quantity)
-            .enqueue(object : Callback<GlobalResponse> {
+            .enqueue(object : Callback<ResponseGlobal> {
                 override fun onResponse(
-                    call: Call<GlobalResponse>,
-                    response: Response<GlobalResponse>
+                    call: Call<ResponseGlobal>,
+                    responseGlobal: Response<ResponseGlobal>
                 ) {
                     view.onLoading(false)
                     when {
-                        response.code() != 200 -> {
-                            val globalResponse: GlobalResponse = Gson().fromJson(
-                                response.errorBody()!!.charStream(),
-                                GlobalResponse::class.java
+                        responseGlobal.code() != 200 -> {
+                            val result: ResponseGlobal = Gson().fromJson(
+                                responseGlobal.errorBody()!!.charStream(),
+                                ResponseGlobal::class.java
                             )
-                            view.showMessage(globalResponse.message)
+                            view.showMessage(result.message)
                         }
-                        response.isSuccessful -> {
-                            val globalResponse: GlobalResponse = response.body()!!
-                            if (globalResponse.status) {
+                        responseGlobal.isSuccessful -> {
+                            val result: ResponseGlobal = responseGlobal.body()!!
+                            if (result.status) {
                                 val intent = Intent(context, CheckoutActivity::class.java)
                                 context.startActivity(intent)
                             }
@@ -77,7 +77,7 @@ class DetailPresenter(val view: DetailContract.View) : DetailContract.Presenter 
 
                 }
 
-                override fun onFailure(call: Call<GlobalResponse>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.onLoading(false)
                     view.showMessage(t.message.toString())
                 }

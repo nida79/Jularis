@@ -1,6 +1,7 @@
 package com.ekr.jularis.ui.fragment.home
 
-import com.ekr.jularis.data.response.GlobalResponse
+import com.ekr.jularis.data.response.ResponseGlobal
+import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.data.response.ResponseProduct
 import com.ekr.jularis.networking.ApiService
 import com.google.gson.Gson
@@ -16,24 +17,25 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
         view.onNextLoading(false)
 
     }
-    override fun getProduct(page: Int) {
+    override fun getProduct(page: Int?, seachKey: String?, start_price: String?, end_price: String?) {
         view.onLoading(true)
-        ApiService.endpoint.getProduct(page).enqueue(object : Callback<ResponseProduct> {
+        ApiService.endpoint.getProduct(page,seachKey,start_price,end_price).enqueue(object : Callback<ResponseProduct> {
             override fun onResponse(
                 call: Call<ResponseProduct>,
                 response: Response<ResponseProduct>
             ) {
                 view.onLoading(false)
-                if (response.isSuccessful) {
-                    val responseProduct: ResponseProduct? = response.body()
-                    responseProduct?.let { view.onResultProduct(it) }
-                } else {
-                    if (response.code() != 200) {
-                        val globalResponse: GlobalResponse = Gson().fromJson(
+                when{
+                    response.isSuccessful->{
+                        val responseProduct: ResponseProduct? = response.body()
+                        responseProduct?.let { view.onResultProduct(it) }
+                    }
+                    response.code() !=200->{
+                        val responseGlobal: ResponseGlobal = Gson().fromJson(
                             response.errorBody()!!.charStream(),
-                            GlobalResponse::class.java
+                            ResponseGlobal::class.java
                         )
-                        view.showMessage(globalResponse.message)
+                        view.showMessage(responseGlobal.message)
                     }
                 }
             }
@@ -48,7 +50,7 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
 
     override fun getNextProduct(page: Int) {
         view.onNextLoading(true)
-        ApiService.endpoint.getProduct(page).enqueue(object : Callback<ResponseProduct> {
+        ApiService.endpoint.getProduct(page,null,null,null).enqueue(object : Callback<ResponseProduct> {
             override fun onResponse(
                 call: Call<ResponseProduct>,
                 response: Response<ResponseProduct>
@@ -59,11 +61,11 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
                     responseProduct?.let { view.onResultNextPage(it) }
                 } else {
                     if (response.code() != 200) {
-                        val globalResponse: GlobalResponse = Gson().fromJson(
+                        val responseGlobal: ResponseGlobal = Gson().fromJson(
                             response.errorBody()!!.charStream(),
-                            GlobalResponse::class.java
+                            ResponseGlobal::class.java
                         )
-                        view.showMessage(globalResponse.message)
+                        view.showMessage(responseGlobal.message)
                     }
                 }
             }

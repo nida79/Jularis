@@ -28,12 +28,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product2"
                 android:id="@+id/tv_card_title2"
                 android:layout_width="0dp"
@@ -59,7 +59,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -69,7 +69,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home2"
                 android:id="@+id/tv_item_sold"
@@ -91,7 +91,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_btn"
+                android:background="@drawable/oval_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
@@ -131,12 +131,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product3"
                 android:id="@+id/tv_card_title3"
                 android:layout_width="0dp"
@@ -162,7 +162,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -172,7 +172,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home3"
                 android:id="@+id/tv_item_sold2"
@@ -194,7 +194,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_btn"
+                android:background="@drawable/oval_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
@@ -234,12 +234,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product4"
                 android:id="@+id/tv_card_title4"
                 android:layout_width="0dp"
@@ -265,7 +265,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -275,7 +275,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home4"
                 android:id="@+id/tv_item_sold3"
@@ -297,7 +297,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_btn"
+                android:background="@drawable/oval_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
@@ -338,12 +338,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product5"
                 android:id="@+id/tv_card_title5"
                 android:layout_width="0dp"
@@ -369,7 +369,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -379,7 +379,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home5"
                 android:id="@+id/tv_item_sold4"
@@ -401,7 +401,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_btn"
+                android:background="@drawable/oval_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
@@ -441,12 +441,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product6"
                 android:id="@+id/tv_card_title6"
                 android:layout_width="0dp"
@@ -472,7 +472,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -482,7 +482,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home6"
                 android:id="@+id/tv_item_sold5"
@@ -504,7 +504,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_btn"
+                android:background="@drawable/oval_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"
@@ -545,12 +545,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:contentDescription="@string/logo_app"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintTop_toBottomOf="@id/iv_card_product7"
                 android:id="@+id/tv_card_title7"
                 android:layout_width="0dp"
@@ -576,7 +576,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 android:fontFamily="@font/sf_ui"
                 android:text=""
                 android:textColor="@color/text_color"
@@ -586,7 +586,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:background="@color/colorPrimary"
+                android:background="@drawable/oval_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/btn_buy_home7"
                 android:id="@+id/tv_item_sold6"
@@ -608,7 +608,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/rounded_btn"
+                android:background="@drawable/oval_btn"
                 android:elevation="5dp"
                 android:fontFamily="@font/dosis_extrabold"
                 android:text="@string/beli"

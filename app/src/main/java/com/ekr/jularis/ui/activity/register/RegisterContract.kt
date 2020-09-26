@@ -1,6 +1,6 @@
 package com.ekr.jularis.ui.activity.register
 
-import com.ekr.jularis.data.response.GlobalResponse
+import com.ekr.jularis.data.response.ResponseGlobal
 
 interface RegisterContract {
 
@@ -18,7 +18,7 @@ interface RegisterContract {
     interface View {
         fun initListener()
         fun onLoading(loading: Boolean)
-        fun onResult(globalResponse: GlobalResponse)
+        fun onResult(responseGlobal: ResponseGlobal)
         fun showMessage(message: String)
     }
 }

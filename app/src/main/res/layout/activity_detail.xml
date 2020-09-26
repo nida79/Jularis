@@ -150,23 +150,24 @@
 
     <Button
         android:id="@+id/btn_detail_buy"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:textSize="@dimen/_13ssp"
-        android:layout_gravity="end"
         android:layout_width="@dimen/_160sdp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/oval_btn"
         android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
         android:drawablePadding="-35dp"
         android:fontFamily="@font/dosis_extrabold"
+        android:foreground="?android:attr/selectableItemBackground"
         android:paddingEnd="@dimen/_10sdp"
         android:text="@string/lanjutkan_pembayaran"
         android:textColor="@color/putih"
+        android:textSize="@dimen/_13ssp"
         tools:ignore="RtlSymmetry" />
+
     <Button
         android:id="@+id/btn_detail_addcart"
         android:foreground="?android:attr/selectableItemBackground"

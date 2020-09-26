@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.home.MainActivity">
 
-    <FrameLayout
+    <androidx.fragment.app.FragmentContainerView
         android:layout_above="@id/animatedBottomBar"
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

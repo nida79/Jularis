@@ -1,6 +1,6 @@
 package com.ekr.jularis.ui.activity.register
 
-import com.ekr.jularis.data.response.GlobalResponse
+import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.networking.ApiService
 import com.google.gson.Gson
 import retrofit2.Call
@@ -22,32 +22,32 @@ class RegisterPresnter(val view: RegisterContract.View) : RegisterContract.Prese
         address: String
     ) {
         view.onLoading(true)
-        ApiService.endpoint.signUp(username, email, password, no_telp, full_name, address)
-            .enqueue(object : Callback<GlobalResponse> {
+        ApiService.endpoint.signUp(username, email, password, full_name, no_telp, address)
+            .enqueue(object : Callback<ResponseGlobal> {
                 override fun onResponse(
-                    call: Call<GlobalResponse>,
-                    response: Response<GlobalResponse>
+                    call: Call<ResponseGlobal>,
+                    responseGlobal: Response<ResponseGlobal>
                 ) {
                     view.onLoading(false)
-                    when{
-                        response.isSuccessful->{
-                            val globalResponse: GlobalResponse? = response.body()
-                            if (globalResponse!!.status) {
-                                view.onResult(globalResponse)
-                                view.showMessage(globalResponse.message)
+                    when {
+                        responseGlobal.isSuccessful -> {
+                            val result: ResponseGlobal? = responseGlobal.body()
+                            if (result!!.status) {
+                                view.onResult(result)
+                                view.showMessage(result.message)
                             }
                         }
-                        response.code() !=200->{
-                            val globalResponse: GlobalResponse = Gson().fromJson(
-                                response.errorBody()!!.charStream(),
-                                GlobalResponse::class.java
+                        responseGlobal.code() != 200 -> {
+                            val result: ResponseGlobal = Gson().fromJson(
+                                responseGlobal.errorBody()!!.charStream(),
+                                ResponseGlobal::class.java
                             )
-                            view.showMessage(globalResponse.message)
+                            view.showMessage(result.message)
                         }
                     }
                 }
 
-                override fun onFailure(call: Call<GlobalResponse>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.onLoading(false)
                 }
 

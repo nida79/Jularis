@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp">
+
+    <CheckBox
+        android:gravity="center"
+        android:id="@+id/select_product_keranjang"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cv_item_keranjang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="@color/putih"
+        android:id="@+id/cv_item_keranjang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        android:elevation="4dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/select_product_keranjang"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.infinityandroid.roundedimageview.RoundedImageView
+                android:id="@+id/img_item_keranjang"
+                android:layout_width="@dimen/_80sdp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_margin="@dimen/_4sdp"
+                android:background="@drawable/oval_btn"
+                app:corner_radius="10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:background="@drawable/oval_btn"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:ellipsize="end"
+                android:id="@+id/tv_title_phd"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toTopOf="@id/tv_phd_price"
+                app:layout_constraintEnd_toStartOf="@+id/tv_quantity_item_keranjang"
+                app:layout_constraintStart_toEndOf="@+id/img_item_keranjang"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.13999999"
+                />
+
+            <TextView
+                android:id="@+id/tv_phd_price"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="@drawable/oval_btn"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_17ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_quantity_item_keranjang"
+                app:layout_constraintHorizontal_bias="0.01"
+                app:layout_constraintStart_toEndOf="@+id/img_item_keranjang"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_phd" />
+
+            <TextView
+                android:background="@drawable/oval_btn"
+                android:layout_margin="@dimen/_8sdp"
+                android:id="@+id/tv_quantity_item_keranjang"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dosis_extrabold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_18ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.92"
+                app:layout_constraintStart_toEndOf="@id/tv_title_phd"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

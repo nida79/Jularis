@@ -2,10 +2,16 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
 
+        <item>@font/arizonia</item>
+        <item>@font/averia_serif_libre_light</item>
+        <item>@font/bigshot_one</item>
         <item>@font/dosis</item>
         <item>@font/dosis_extrabold</item>
+        <item>@font/montserrat</item>
+        <item>@font/montserrat_bold</item>
         <item>@font/quattrocento_sans</item>
         <item>@font/raleway</item>
+        <item>@font/raleway_bold</item>
         <item>@font/raleway_light</item>
         <item>@font/roboto</item>
         <item>@font/roboto_condensed_bold</item>

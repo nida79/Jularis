@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.ekr.jularis.R
-import com.ekr.jularis.data.response.GlobalResponse
+import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.ui.activity.login.LoginActivity
 import com.ekr.jularis.utils.Validator
 import es.dmoral.toasty.Toasty
@@ -92,7 +92,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         }
     }
 
-    override fun onResult(globalResponse: GlobalResponse) {
+    override fun onResult(responseGlobal: ResponseGlobal) {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
