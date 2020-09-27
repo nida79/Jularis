@@ -1,8 +1,6 @@
 package com.ekr.jularis.ui.fragment.home
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,24 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.R
 import com.ekr.jularis.data.product.DataImageProduct
 import com.ekr.jularis.data.product.DataProduct
-import com.ekr.jularis.ui.activity.CheckoutActivity
-import com.ekr.jularis.ui.activity.detail.DetailActivity
-import com.ekr.jularis.ui.activity.login.LoginActivity
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.MoneyHelper
-import com.ekr.jularis.utils.SessionManager
 import kotlinx.android.synthetic.main.product_item.view.*
 
-class HomeAdapter(private val context: Context, private var dataProduct: ArrayList<DataProduct>) :
+class HomeAdapter(private var dataProduct: ArrayList<DataProduct>) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     private lateinit var mListener: OnItemClickListener
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
-        fun onButtonClick(position: Int)
+        fun onItemClick(position: Int,data: DataProduct)
+        fun onButtonClick(position: Int,data: DataProduct)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
+        notifyDataSetChanged()
         mListener = listener
     }
 
@@ -57,9 +52,8 @@ class HomeAdapter(private val context: Context, private var dataProduct: ArrayLi
         notifyDataSetChanged()
     }
 
-    class ViewHolder(itemView: View, private val listener: OnItemClickListener) : RecyclerView.ViewHolder(
-        itemView
-    ) {
+    class ViewHolder(itemView: View, private val listener: OnItemClickListener)
+        : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
         fun bind(data: DataProduct, productPicture: List<DataImageProduct>) {
             with(itemView) {
@@ -70,18 +64,16 @@ class HomeAdapter(private val context: Context, private var dataProduct: ArrayLi
                 GlideHelper.setImage(context, productPicture[0].picture, iv_card_product)
                 btn_buy_home.setOnClickListener {
                     if (position != RecyclerView.NO_POSITION) {
-                        listener.onButtonClick(position)
+                        listener.onButtonClick(position,data)
                     }
                 }
                 setOnClickListener {
                     if (position != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(position)
+                        listener.onItemClick(position,data)
                     }
 
                 }
             }
         }
     }
-
-
 }

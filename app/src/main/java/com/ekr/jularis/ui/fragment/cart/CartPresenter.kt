@@ -13,6 +13,7 @@ import retrofit2.Response
 class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
     init {
         view.initListener()
+        view.actionCheckbox()
         view.onLoading(false)
     }
 
@@ -43,5 +44,15 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
 
         })
     }
+    override fun doCalculatePlus(int: Int) {
+        var hasil = int
+        hasil++
+        view.resultCounter(hasil)
+    }
 
+    override fun doCalculateMinus(int: Int) {
+        var hasil = int
+        hasil--
+        view.resultCounter(hasil)
+    }
 }

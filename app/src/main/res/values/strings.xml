@@ -34,7 +34,6 @@
     <string name="sisa_barang">Jumlah stok :</string>
     <string name="deskripsi">Deskripsi :</string>
     <string name="lanjutkan_pembayaran">Beli Sekarang</string>
-    <string name="simpan">Simpan</string>
     <string name="mohon_tunggu">Mohon Tunggu</string>
     <string name="daftar_keranjang">Daftar Keranjang</string>
     <string name="total_harga_barang">Total Harga Barang</string>
@@ -43,4 +42,8 @@
     <string name="pilih_semua">Pilih Semua</string>
     <string name="hapus">Hapus</string>
     <string name="daftar_keranjang_kosong">Daftar Keranjang Kosong</string>
+    <string name="masukkan_jumlah_barang">Masukkan Jumlah Barang</string>
+    <string name="close_btn">close_btn</string>
+    <string name="simpan">Simpan</string>
+    <string name="_1">1</string>
 </resources>

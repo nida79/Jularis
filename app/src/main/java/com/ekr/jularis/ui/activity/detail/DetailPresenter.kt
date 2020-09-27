@@ -14,6 +14,7 @@ class DetailPresenter(val view: DetailContract.View) : DetailContract.Presenter 
     init {
         view.initListener()
         view.onLoading(false)
+        view.actionButton()
     }
 
     override fun doAddCart(token: String, product_id: String, quantity: Int) {
@@ -85,4 +86,15 @@ class DetailPresenter(val view: DetailContract.View) : DetailContract.Presenter 
             })
     }
 
+    override fun doCalculatePlus(int: Int) {
+         var hasil = int
+         hasil++
+         view.resultCounter(hasil)
+    }
+
+    override fun doCalculateMinus(int: Int) {
+        var hasil = int
+        hasil--
+        view.resultCounter(hasil)
+    }
 }

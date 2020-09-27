@@ -1,9 +1,11 @@
 package com.ekr.jularis.ui.fragment.home
 
+import android.content.Context
+import android.content.Intent
 import com.ekr.jularis.data.response.ResponseGlobal
-import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.data.response.ResponseProduct
 import com.ekr.jularis.networking.ApiService
+import com.ekr.jularis.ui.activity.CheckoutActivity
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,6 +17,7 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
         view.initListener()
         view.onLoading(false)
         view.onNextLoading(false)
+        view.actionAdapterClick()
 
     }
     override fun getProduct(page: Int?, seachKey: String?, start_price: String?, end_price: String?) {
@@ -76,6 +79,54 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
             }
 
         })
+    }
+
+    override fun doBuy(context: Context, token: String, product_id: String, quantity: Int) {
+        view.onNextLoading(true)
+        ApiService.endpoint.addCart(token, product_id, quantity)
+            .enqueue(object : Callback<ResponseGlobal> {
+                override fun onResponse(
+                    call: Call<ResponseGlobal>,
+                    responseGlobal: Response<ResponseGlobal>
+                ) {
+                    view.onNextLoading(false)
+                    when {
+                        responseGlobal.code() != 200 -> {
+                            val result: ResponseGlobal = Gson().fromJson(
+                                responseGlobal.errorBody()!!.charStream(),
+                                ResponseGlobal::class.java
+                            )
+                            view.showMessage(result.message)
+                        }
+                        responseGlobal.isSuccessful -> {
+                            val result: ResponseGlobal = responseGlobal.body()!!
+                            if (result.status) {
+                                val intent = Intent(context, CheckoutActivity::class.java)
+                                context.startActivity(intent)
+                            }
+                        }
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
+                    view.onNextLoading(false)
+                    view.showMessage(t.message.toString())
+                }
+
+            })
+    }
+
+    override fun doCalculatePlus(int: Int) {
+        var hasil = int
+        hasil++
+        view.resultCounter(hasil)
+    }
+
+    override fun doCalculateMinus(int: Int) {
+        var hasil = int
+        hasil--
+        view.resultCounter(hasil)
     }
 
 }

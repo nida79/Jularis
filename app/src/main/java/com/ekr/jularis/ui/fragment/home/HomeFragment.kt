@@ -1,16 +1,21 @@
 package com.ekr.jularis.ui.fragment.home
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ekr.jularis.R
 import com.ekr.jularis.data.product.DataProduct
 import com.ekr.jularis.data.response.ResponseProduct
 import com.ekr.jularis.databinding.FragmentHomeBinding
@@ -18,6 +23,9 @@ import com.ekr.jularis.ui.activity.CheckoutActivity
 import com.ekr.jularis.ui.activity.detail.DetailActivity
 import com.ekr.jularis.ui.activity.login.LoginActivity
 import com.ekr.jularis.utils.SessionManager
+import kotlinx.android.synthetic.main.pop_up_detail.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment(), HomeContract.View {
@@ -28,30 +36,35 @@ class HomeFragment : Fragment(), HomeContract.View {
     private lateinit var data: List<DataProduct>
     private var isLoading: Boolean = false
     private var page: Int = 1
+    private lateinit var dialog: Dialog
     private var totalPage: Int = 0
-    private lateinit var sessionManager : SessionManager
-
+    private lateinit var sessionManager: SessionManager
+    private var qty = 1
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         homePresenter = HomePresenter(this)
         sessionManager = SessionManager(requireActivity())
+        dialog = Dialog(requireActivity())
+    }
+
+    override fun onStart() {
+        super.onStart()
         homePresenter.getProduct(page, null, null, null)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentHomeBinding.inflate(layoutInflater)
         return _binding.root
     }
 
     override fun initListener() {
-        homeAdapter = HomeAdapter(requireContext(), arrayListOf())
-
+        homeAdapter = HomeAdapter(arrayListOf())
         gridManager = if (requireActivity().resources.configuration.orientation
-            == Configuration.ORIENTATION_PORTRAIT
-        ) {
+            == Configuration.ORIENTATION_PORTRAIT) {
             GridLayoutManager(activity, 2)
         } else {
             GridLayoutManager(activity, 4)
@@ -69,8 +82,6 @@ class HomeFragment : Fragment(), HomeContract.View {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null || query != "") {
                     homePresenter.getProduct(null, query, null, null)
-                } else {
-                    homePresenter.getNextProduct(1)
                 }
                 return false
             }
@@ -78,10 +89,7 @@ class HomeFragment : Fragment(), HomeContract.View {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null || newText != "") {
                     homePresenter.getProduct(null, newText, null, null)
-                } else {
-                    homePresenter.getNextProduct(page)
                 }
-
                 return false
             }
 
@@ -99,24 +107,6 @@ class HomeFragment : Fragment(), HomeContract.View {
             }
         })
 
-        homeAdapter.setOnItemClickListener(object : HomeAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                val intent = Intent(requireContext(), DetailActivity::class.java)
-                intent.putExtra("data", data[position])
-                intent.putParcelableArrayListExtra("image",ArrayList(data[position].product_picture))
-                startActivity(intent)
-            }
-            override fun onButtonClick(position: Int) {
-                if (sessionManager.prefIsLogin) {
-                    val intent = Intent(requireActivity(), CheckoutActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    val intent = Intent(requireActivity(), LoginActivity::class.java)
-                    startActivity(intent)
-                }
-            }
-
-        })
     }
 
     override fun onLoading(loading: Boolean) {
@@ -163,6 +153,64 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun showMessage(message: String) {
         Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun resultCounter(int: Int) {
+        qty = int
+        dialog.pop_up_tv_result.text = qty.toString()
+        if (qty<=1){
+            dialog.pop_up_min.visibility = View.GONE
+        }else{
+            dialog.pop_up_min.visibility = View.VISIBLE
+        }
+    }
+
+    override fun actionAdapterClick() {
+        homeAdapter.setOnItemClickListener(object : HomeAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int, data: DataProduct) {
+                val intent = Intent(requireContext(), DetailActivity::class.java)
+                intent.putExtra("data", data)
+                intent.putParcelableArrayListExtra("image", ArrayList(data.product_picture))
+                startActivity(intent)
+            }
+
+            override fun onButtonClick(position: Int, data: DataProduct) {
+               if(sessionManager.prefIsLogin){
+                   dialog.setContentView(R.layout.pop_up_detail)
+                   dialog.setCanceledOnTouchOutside(false)
+                   Objects.requireNonNull(dialog.window)!!.setLayout(
+                       WindowManager.LayoutParams.WRAP_CONTENT, WindowManager
+                           .LayoutParams.WRAP_CONTENT
+                   )
+                   dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                   dialog.window!!.attributes.windowAnimations = android.R.style.Animation_Dialog
+                   dialog.setCancelable(true)
+                   dialog.show()
+                   dialog.pop_up_pls.setOnClickListener {
+                       homePresenter.doCalculatePlus(qty)
+                   }
+                   dialog.pop_up_min.setOnClickListener {
+                       homePresenter.doCalculateMinus(qty)
+                   }
+                   dialog.pop_up_cancel_detail.setOnClickListener {
+                       dialog.dismiss()
+                   }
+                   dialog.pop_up_submit.setOnClickListener {
+                       homePresenter.doBuy(
+                           requireActivity(),
+                           sessionManager.prefToken,
+                           data.product_id,
+                           qty
+                       )
+                       dialog.dismiss()
+                   }
+               }else{
+                   val intent = Intent(requireActivity(), LoginActivity::class.java)
+                   startActivity(intent)
+               }
+            }
+
+        })
     }
 
 }

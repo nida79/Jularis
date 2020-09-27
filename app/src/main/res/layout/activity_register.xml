@@ -40,7 +40,7 @@
         android:drawableStart="@drawable/ic_baseline_person"
         android:drawablePadding="8dp"
         android:layout_height="50dp"
-        android:fontFamily="@font/dosis"
+        android:fontFamily="@font/dosis_extrabold"
         android:inputType="text"
         android:textColor="@color/hitam" />
 
@@ -64,7 +64,7 @@
         android:layout_height="50dp"
         android:drawablePadding="8dp"
         android:drawableStart="@drawable/ic_baseline_person"
-        android:fontFamily="@font/dosis"
+        android:fontFamily="@font/dosis_extrabold"
         android:inputType="text"
         android:textColor="@color/hitam" />
 
@@ -88,7 +88,7 @@
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="8dp"
         android:layout_height="50dp"
-        android:fontFamily="@font/dosis"
+        android:fontFamily="@font/dosis_extrabold"
         android:inputType="textEmailAddress"
         android:textColor="@color/hitam" />
 
@@ -111,7 +111,7 @@
         android:layout_height="50dp"
         android:drawableStart="@drawable/ic_baseline_pin"
         android:drawablePadding="8dp"
-        android:fontFamily="@font/dosis"
+        android:fontFamily="@font/dosis_extrabold"
         android:inputType="text"
         android:textColor="@color/hitam" />
 
@@ -137,7 +137,7 @@
         android:drawableStart="@drawable/ic_phone"
         android:drawablePadding="8dp"
         android:maxLength="13"
-        android:fontFamily="@font/dosis"
+        android:fontFamily="@font/dosis_extrabold"
         android:inputType="number"
         android:textColor="@color/hitam" />
 
@@ -159,7 +159,7 @@
         android:id="@+id/tie_regis_pswd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:fontFamily="@font/dosis"
+        android:fontFamily="@font/dosis_extrabold"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="8dp"
         android:inputType="textPassword"
@@ -191,7 +191,7 @@
       android:fontFamily="@font/raleway"
       android:text="@string/already_have_an_account"
       android:textColor="@color/abu"
-      android:textSize="@dimen/_10ssp"
+      android:textSize="@dimen/_11ssp"
       app:layout_constraintEnd_toStartOf="@+id/tv_regis_to_login"
       app:layout_constraintTop_toBottomOf="@+id/btn_regis_submit" />
 
@@ -215,7 +215,7 @@
       android:fontFamily="@font/raleway"
       android:text="@string/login"
       android:textColor="@color/orange"
-      android:textSize="@dimen/_10ssp"
+      android:textSize="@dimen/_11ssp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.71"
       app:layout_constraintStart_toStartOf="parent"

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/pop_up_cancel_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/close_btn"
+        android:src="@drawable/ic_cancel"
+        app:layout_constraintBottom_toTopOf="@+id/pop_up_wadah_detail"
+        app:layout_constraintEnd_toStartOf="@+id/pop_up_wadah_detail"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toEndOf="@+id/pop_up_wadah_detail" />
+
+    <RelativeLayout
+        android:id="@+id/pop_up_wadah_detail"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_below="@id/pop_up_cancel_detail"
+        android:layout_centerHorizontal="true"
+        android:layout_toStartOf="@+id/pop_up_cancel_detail"
+        android:background="@drawable/oval_search"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42000002">
+
+        <TextView
+            android:layout_above="@+id/pop_up_tv_result"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/masukkan_jumlah_barang"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_13ssp" />
+
+        <ImageView
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/pop_up_tv_result"
+            android:id="@+id/pop_up_min"
+            android:elevation="@dimen/_5sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/logo_app"
+            android:src="@drawable/ic_remove_circle_24px" />
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:id="@+id/pop_up_tv_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/logo_app"
+            android:fontFamily="@font/montserrat_bold"
+            android:textAlignment="center"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_18ssp"
+            android:text="@string/_1" />
+
+        <ImageView
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/pop_up_tv_result"
+            android:id="@+id/pop_up_pls"
+            android:elevation="@dimen/_15sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/logo_app"
+            android:src="@drawable/ic_add_circle_24px" />
+        <Button
+            android:id="@+id/pop_up_submit"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/putih"
+            android:text="@string/simpan"
+            android:background="@drawable/oval_btn"
+            android:fontFamily="@font/dosis_extrabold"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="40dp"/>
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
