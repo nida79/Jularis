@@ -45,14 +45,15 @@
                 android:layout_height="@dimen/_150sdp"
                 android:layout_centerInParent="true"
                 android:contentDescription="@string/logo_app"
-                android:src="@drawable/ic_box" />
+                android:src="@drawable/ic_empty_cart" />
 
             <TextView
                 android:id="@+id/tv_empty_cart"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/img_empty_cart"
                 android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/daftar_keranjang_kosong"
                 android:textAlignment="center"

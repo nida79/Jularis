@@ -17,22 +17,31 @@ import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.MoneyHelper
 import com.ekr.jularis.utils.SessionManager
 import kotlinx.android.synthetic.main.product_item.view.*
-import kotlin.collections.ArrayList
 
-class HomeAdapter(
-    private val context: Context,
-    private var dataProduct: ArrayList<DataProduct>
-) :
+class HomeAdapter(private val context: Context, private var dataProduct: ArrayList<DataProduct>) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+    private lateinit var mListener: OnItemClickListener
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.product_item, parent, false)
-    )
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+        fun onButtonClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        mListener = listener
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder{
+        val view : View = LayoutInflater.from(parent.context).inflate(
+            R.layout.product_item,
+            parent,
+            false
+        )
+        return ViewHolder(view, mListener)
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(dataProduct[position], dataProduct[position].product_picture)
-
-
     }
 
     override fun getItemCount() = dataProduct.size
@@ -42,35 +51,33 @@ class HomeAdapter(
         dataProduct.addAll(firstResult)
         notifyDataSetChanged()
     }
+
     fun setNextData(nextResult: List<DataProduct>) {
         dataProduct.addAll(nextResult)
         notifyDataSetChanged()
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private lateinit var sessionManager: SessionManager
+    class ViewHolder(itemView: View, private val listener: OnItemClickListener) : RecyclerView.ViewHolder(
+        itemView
+    ) {
         @SuppressLint("SetTextI18n")
         fun bind(data: DataProduct, productPicture: List<DataImageProduct>) {
             with(itemView) {
-                sessionManager = SessionManager(context)
+                val position = adapterPosition
                 tv_card_title.text = data.name
-                MoneyHelper.setRupiah(tv_card_price,data.price)
+                MoneyHelper.setRupiah(tv_card_price, data.price)
                 tv_item_sold.text = "Stok (" + data.quantity.toString() + ")"
                 GlideHelper.setImage(context, productPicture[0].picture, iv_card_product)
                 btn_buy_home.setOnClickListener {
-                   if (sessionManager.prefIsLogin){
-                       val intent = Intent(context,CheckoutActivity::class.java)
-                       context.startActivity(intent)
-                   }else{
-                       val intent = Intent(context,LoginActivity::class.java)
-                       context.startActivity(intent)
-                   }
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onButtonClick(position)
+                    }
                 }
                 setOnClickListener {
-                    val intent = Intent(context,DetailActivity::class.java)
-                    intent.putParcelableArrayListExtra("image", ArrayList(productPicture))
-                    intent.putExtra("data",data)
-                    context.startActivity(intent)
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(position)
+                    }
+
                 }
             }
         }

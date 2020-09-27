@@ -93,7 +93,6 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun onResult(responseGlobal: ResponseGlobal) {
-        startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 

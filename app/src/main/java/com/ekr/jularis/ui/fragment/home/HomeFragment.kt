@@ -1,5 +1,6 @@
 package com.ekr.jularis.ui.fragment.home
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.data.product.DataProduct
 import com.ekr.jularis.data.response.ResponseProduct
 import com.ekr.jularis.databinding.FragmentHomeBinding
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.ekr.jularis.ui.activity.CheckoutActivity
+import com.ekr.jularis.ui.activity.detail.DetailActivity
+import com.ekr.jularis.ui.activity.login.LoginActivity
+import com.ekr.jularis.utils.SessionManager
 
 
 class HomeFragment : Fragment(), HomeContract.View {
@@ -25,24 +29,26 @@ class HomeFragment : Fragment(), HomeContract.View {
     private var isLoading: Boolean = false
     private var page: Int = 1
     private var totalPage: Int = 0
+    private lateinit var sessionManager : SessionManager
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         homePresenter = HomePresenter(this)
+        sessionManager = SessionManager(requireActivity())
         homePresenter.getProduct(page, null, null, null)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View? {
         _binding = FragmentHomeBinding.inflate(layoutInflater)
         return _binding.root
     }
 
     override fun initListener() {
         homeAdapter = HomeAdapter(requireContext(), arrayListOf())
+
         gridManager = if (requireActivity().resources.configuration.orientation
             == Configuration.ORIENTATION_PORTRAIT
         ) {
@@ -92,6 +98,25 @@ class HomeFragment : Fragment(), HomeContract.View {
                 }
             }
         })
+
+        homeAdapter.setOnItemClickListener(object : HomeAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                val intent = Intent(requireContext(), DetailActivity::class.java)
+                intent.putExtra("data", data[position])
+                intent.putParcelableArrayListExtra("image",ArrayList(data[position].product_picture))
+                startActivity(intent)
+            }
+            override fun onButtonClick(position: Int) {
+                if (sessionManager.prefIsLogin) {
+                    val intent = Intent(requireActivity(), CheckoutActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    val intent = Intent(requireActivity(), LoginActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+
+        })
     }
 
     override fun onLoading(loading: Boolean) {
@@ -137,7 +162,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showMessage(message: String) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
 }
