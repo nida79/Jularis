@@ -1,9 +1,11 @@
 package com.ekr.jularis.networking
 
+import com.ekr.jularis.data.postcheckout.DataPOST
 import com.ekr.jularis.data.response.ResponseCart
 import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.data.response.ResponseProduct
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -50,5 +52,19 @@ interface ApiEndpoint {
     @Headers("Accept: application/json")
     @GET("checkout")
     fun getCartlist(
-        @Header("Authorization") token: String): Call<ResponseCart>
+        @Header("Authorization") token: String
+    ): Call<ResponseCart>
+
+    @Headers("Accept: application/json")
+    @POST("checkout/calculation")
+    fun doCalculation(
+        @Header("Authorization") token: String,
+        @Body data: DataPOST
+    ): Call<ResponseGlobal>
+
+    @Headers("Accept: application/json")
+    @DELETE("checkout-delete-bulk")
+    fun deleteItemCart(
+        @Header("Authorization") token: String
+    ): Call<ResponseGlobal>
 }

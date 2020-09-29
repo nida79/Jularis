@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekr.jularis.R
@@ -14,7 +14,6 @@ import com.ekr.jularis.data.cart.Checkout
 import com.ekr.jularis.data.response.ResponseCart
 import com.ekr.jularis.databinding.FragmentCartBinding
 import com.ekr.jularis.utils.MoneyHelper
-
 import com.ekr.jularis.utils.SessionManager
 import es.dmoral.toasty.Toasty
 
@@ -45,9 +44,8 @@ class CartFragment : Fragment(), CartContract.View {
         cartPresenter.getCartlist(sessionManager.prefToken)
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     override fun initListener() {
-        cartAdapter = CartAdapter(requireContext(), arrayListOf())
+        cartAdapter = CartAdapter(requireContext(), arrayListOf(),false)
         binding.rcvDaftarKeranjang.apply {
             adapter = cartAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -58,51 +56,45 @@ class CartFragment : Fragment(), CartContract.View {
             binding.templateEmptyCart.visibility = View.GONE
             cartPresenter.getCartlist(sessionManager.prefToken)
         }
-        cartAdapter.setOnItemClickListener(object :CartAdapter.OnItemClickListener{
+        cartAdapter.setOnItemClickListener(object : CartAdapter.OnItemClickListener {
             override fun onButtonPlusClick(checkout: Checkout) {
-                cartPresenter.doCalculatePlus(checkout.quantity)
+                cartPresenter.doCalculatePlus(
+                    sessionManager.prefToken,
+                    checkout.checked,
+                    checkout.productId,
+                    checkout.quantity
+                )
             }
 
-            override fun onButtonMinusClick(position: Int, checkout: Checkout) {
-                TODO("Not yet implemented")
+            override fun onButtonMinusClick(checkout: Checkout) {
+                cartPresenter.doCalculateMinus(
+                    sessionManager.prefToken,
+                    checkout.checked,
+                    checkout.productId,
+                    checkout.quantity
+                )
             }
 
-            override fun onCheckBoxClick(position: Int, checkout: Checkout,cekLis:Boolean) {
-                setupDelete(cekLis)
+            override fun onCheckBoxClick(checkout: Checkout) {
+                cartPresenter.doCheckBoxClicked(
+                    sessionManager.prefToken,
+                    checkout.checked,
+                    checkout.productId,
+                    checkout.quantity
+                )
             }
 
         })
-
-    }
-
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private fun setupDelete(cekLis: Boolean) {
-        when(cekLis){
-            true -> {
-                binding.tvDelete.isEnabled = true
-                binding.tvDelete.setTextColor(Color.parseColor("#E91E63"))
-                binding.tvDelete.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    resources.getDrawable(
-                        R.drawable.ic_delete_red
-                    ), null, null, null
-                )
-            }
-            false ->{
-                binding.tvDelete.isEnabled = false
-                binding.tvDelete.setTextColor(Color.parseColor("#7D7D7E"))
-                binding.tvDelete.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    resources.getDrawable(
-                        R.drawable.ic_delete_deftault
-                    ), null, null, null
-                )
-            }
+        binding.tvDelete.setOnClickListener {
+            cartPresenter.doDeleteItem(sessionManager.prefToken)
         }
+
     }
 
-    override fun showMessage(message: String) {
-            binding.tvEmptyCart.text = message
-            binding.templateFilledCart.visibility = View.GONE
-            binding.templateEmptyCart.visibility = View.VISIBLE
+    override fun showEmptyCart(message: String) {
+        binding.tvEmptyCart.text = message
+        binding.templateFilledCart.visibility = View.GONE
+        binding.templateEmptyCart.visibility = View.VISIBLE
     }
 
     override fun onLoading(boolean: Boolean) {
@@ -122,29 +114,63 @@ class CartFragment : Fragment(), CartContract.View {
         }
     }
 
-    override fun onResult(responseCart: ResponseCart) {
-        checkout = responseCart.checkout!!
-        checkout.let { cartAdapter.setData(checkout) }
-        responseCart.total_amount?.let { MoneyHelper.setRupiah(binding.totalKeranjang, it) }
+    override fun showToast(message: String) {
+        Toasty.info(requireActivity(), message, Toasty.LENGTH_SHORT).show()
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    override fun actionCheckbox() {
-        binding.cbAll.setOnCheckedChangeListener { _, b ->
-            setupDelete(b)
-            if (!b){
-                binding.cbAll.setTextColor(Color.parseColor("#7D7D7E"))
-            }else{
-                binding.cbAll.setTextColor(Color.parseColor("#67C2CB"))
-            }
-
-
-
+    override fun loadingHorizontal(boolean: Boolean) {
+        when (boolean) {
+            true -> binding.progressBarHorizontalCart.visibility = View.VISIBLE
+            false -> binding.progressBarHorizontalCart.visibility = View.GONE
         }
     }
 
-    override fun resultCounter(int: Int) {
-      cartPresenter.getCartlist(sessionManager.prefToken)
+    @SuppressLint("UseCompatLoadingForDrawables")
+    fun actionCheckAll() {
+        binding.cbAll.setOnCheckedChangeListener { _, b ->
+            if (!b) {
+                binding.cbAll.setTextColor(Color.parseColor("#7D7D7E"))
+            } else {
+                binding.cbAll.setTextColor(Color.parseColor("#67C2CB"))
+            }
+        }
     }
 
+    override fun resultUpdate(message: String) {
+        cartPresenter.getCartUpdate(sessionManager.prefToken)
+    }
+
+    override fun onResult(responseCart: ResponseCart) {
+        checkout = responseCart.checkout!!
+        checkout.let { cartAdapter.setData(checkout) }
+        val uang = responseCart.total_amount
+        if (uang == 0) {
+            binding.btnKeranjangBuy.visibility = View.GONE
+            binding.tvDelete.isEnabled = false
+            binding.tvDelete.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.abu_soft
+                )
+            )
+            binding.tvDelete.setCompoundDrawablesWithIntrinsicBounds(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_delete_deftault
+                ), null, null, null
+            )
+
+        } else {
+            binding.btnKeranjangBuy.visibility = View.VISIBLE
+            binding.tvDelete.isEnabled = true
+            binding.tvDelete.setTextColor(ContextCompat.getColor(requireContext(), R.color.pink))
+            binding.tvDelete.setCompoundDrawablesWithIntrinsicBounds(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_delete_red
+                ), null, null, null
+            )
+        }
+        responseCart.total_amount?.let { MoneyHelper.setRupiah(binding.totalKeranjang, it) }
+    }
 }

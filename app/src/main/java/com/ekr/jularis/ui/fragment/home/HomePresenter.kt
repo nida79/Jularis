@@ -91,7 +91,7 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
                 ) {
                     view.onNextLoading(false)
                     when {
-                        responseGlobal.code() != 200 -> {
+                        responseGlobal.code() !=200 -> {
                             val result: ResponseGlobal = Gson().fromJson(
                                 responseGlobal.errorBody()!!.charStream(),
                                 ResponseGlobal::class.java

@@ -5,16 +5,20 @@ import com.ekr.jularis.data.response.ResponseCart
 interface CartContract {
     interface Presenter {
         fun getCartlist(token: String)
-        fun doCalculatePlus(int: Int)
-        fun doCalculateMinus(int: Int)
+        fun getCartUpdate(token: String)
+        fun doCalculatePlus(token:String,checked:String,productId:String,qty: Int)
+        fun doCalculateMinus(token:String,checked:String,productId:String,qty: Int)
+        fun doCheckBoxClicked(token:String,checked:String,productId:String,qty: Int)
+        fun doDeleteItem(token: String)
     }
 
     interface View {
         fun initListener()
-        fun showMessage(message: String)
+        fun showEmptyCart(message: String)
         fun onLoading(boolean: Boolean)
+        fun showToast(message: String)
+        fun loadingHorizontal(boolean: Boolean)
         fun onResult(responseCart: ResponseCart)
-        fun actionCheckbox()
-        fun resultCounter(int: Int)
+        fun resultUpdate(message: String)
     }
 }

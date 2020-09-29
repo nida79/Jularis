@@ -4,25 +4,22 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.R
 import com.ekr.jularis.data.cart.Checkout
 import com.ekr.jularis.data.cart.Product
-import com.ekr.jularis.data.product.DataProduct
-import com.ekr.jularis.ui.fragment.home.HomeAdapter
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.MoneyHelper
 import kotlinx.android.synthetic.main.checkout_item.view.*
 
-class CartAdapter(val context: Context, private var checkout: ArrayList<Checkout>) :
+class CartAdapter(val context: Context, private var checkout: ArrayList<Checkout>,var boolean: Boolean) :
     RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     private lateinit var mListener: OnItemClickListener
 
     interface OnItemClickListener {
         fun onButtonPlusClick(checkout: Checkout)
-        fun onButtonMinusClick(position: Int, checkout: Checkout)
-        fun onCheckBoxClick(position: Int, checkout: Checkout,cekLis : Boolean)
+        fun onButtonMinusClick( checkout: Checkout)
+        fun onCheckBoxClick(checkout: Checkout)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -47,18 +44,18 @@ class CartAdapter(val context: Context, private var checkout: ArrayList<Checkout
         holder.bind(
             checkout[position],
             checkout[position].picture.picture,
-            checkout[position].product
+            checkout[position].product,
+            boolean
         )
 
     }
-
     override fun getItemCount(): Int = checkout.size
 
     class ViewHolder(itemView: View, private val listener: OnItemClickListener) :
         RecyclerView.ViewHolder(itemView) {
-        fun bind(checkout: Checkout, picture: String, product: Product) {
+        fun bind(checkout: Checkout, picture: String, product: Product, boolean: Boolean) {
             val position = adapterPosition
-            var cekLis : Boolean = false
+            var cekLis=boolean
             val centang = checkout.checked
             with(itemView) {
                 GlideHelper.setImage(context, picture, img_item_keranjang)
@@ -102,7 +99,7 @@ class CartAdapter(val context: Context, private var checkout: ArrayList<Checkout
 
                             }
                         }
-                        listener.onCheckBoxClick(position,checkout,cekLis)
+                        listener.onCheckBoxClick(checkout)
                     }
 
                 }
@@ -113,7 +110,7 @@ class CartAdapter(val context: Context, private var checkout: ArrayList<Checkout
                 }
                 checkout_minus_item.setOnClickListener {
                     if (position != RecyclerView.NO_POSITION) {
-                        listener.onButtonMinusClick(position,checkout)
+                        listener.onButtonMinusClick(checkout)
                     }
                 }
             }
