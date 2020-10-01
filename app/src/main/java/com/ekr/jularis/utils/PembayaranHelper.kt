@@ -1,8 +1,7 @@
 package com.ekr.jularis.utils
 
-import android.util.Log
-import com.ekr.jularis.data.postcheckout.Data
-import com.ekr.jularis.data.postcheckout.DataPOST
+import com.ekr.jularis.data.cart.postcheckout.Data
+import com.ekr.jularis.data.cart.postcheckout.DataPOST
 
 class PembayaranHelper {
     companion object{

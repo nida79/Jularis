@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/putih"
-    tools:context=".ui.activity.login.LoginActivity">
+    tools:context=".ui.login.LoginActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -24,8 +24,8 @@
 
     <ImageView
         android:id="@+id/imageView_Login"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_230sdp"
         android:contentDescription="@string/logo_app"
         android:src="@drawable/jularis"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:inputType="text"
             android:layout_height="55dp"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/dosis_semibold"
             android:textColor="@color/hitam" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -77,7 +77,7 @@
             android:drawablePadding="8dp"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/dosis_semibold"
             android:inputType="textPassword"
             android:textColor="@color/hitam" />
 
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="2dp"
-        android:fontFamily="@font/raleway"
+        android:fontFamily="@font/dosis_semibold"
         android:text="@string/forget_password"
         android:textColor="@color/abu"
         android:textSize="@dimen/_11ssp"
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/raleway"
+        android:fontFamily="@font/dosis_semibold"
         android:text="@string/reset_here"
         android:textColor="@color/orange"
         android:textSize="@dimen/_11ssp"

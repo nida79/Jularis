@@ -3,13 +3,325 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.SettingFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.setting.SettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_centerInParent="true"
+   <LinearLayout
+       android:id="@+id/setting_header"
+       android:background="@color/putih"
+       android:elevation="@dimen/_4sdp"
+       android:layout_width="match_parent"
+       android:layout_height="?actionBarSize"
+       android:orientation="vertical">
+       <TextView
+           android:textColor="@color/text_color"
+           android:fontFamily="@font/dosis_extrabold"
+           android:gravity="center"
+           android:textSize="@dimen/_17ssp"
+           android:textAlignment="center"
+           android:layout_gravity="center"
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:text="@string/pengaturan" />
+   </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/setting_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+            <de.hdodenhof.circleimageview.CircleImageView
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/colorPrimary"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="@dimen/_5sdp"
+                android:padding="@dimen/_4sdp"
+                android:id="@+id/img_profile_setting"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:src="@drawable/img_no_image"/>
+            <TextView
+                android:id="@+id/tv_name_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                tools:text="Erick Prastya"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/dosis_bold"
+                android:layout_toEndOf="@+id/img_profile_setting"
+                tools:ignore="RelativeOverlap" />
+            <TextView
+                android:id="@+id/idbiasa"
+                android:layout_below="@+id/tv_name_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abu"
+                android:text="@string/edit_data_pribadi_anda"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:fontFamily="@font/dosis"
+                android:layout_toEndOf="@+id/img_profile_setting"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_7sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+               android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:contentDescription="@string/todo" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:background="@color/abu_soft"
+                android:layout_below="@+id/idbiasa" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:id="@+id/img_cp_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_remove_red_eye_24"
+                android:contentDescription="@string/todo" />
+            <TextView
+                android:layout_marginStart="@dimen/_15sdp"
+                android:id="@+id/tv_cp_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="@string/ganti_password"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/dosis_semibold"
+                android:layout_toEndOf="@+id/img_cp_setting"
+                tools:ignore="RelativeOverlap" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_7sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:contentDescription="@string/todo" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:background="@color/abu_soft"
+                android:layout_below="@id/tv_cp_setting"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:id="@+id/img_pp_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_policy_24"
+                android:contentDescription="@string/todo" />
+            <TextView
+                android:layout_marginStart="@dimen/_15sdp"
+                android:id="@+id/tv_pp_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="@string/privacy_policy"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/dosis_semibold"
+                android:layout_toEndOf="@+id/img_pp_setting"
+                tools:ignore="RelativeOverlap" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_7sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:contentDescription="@string/todo" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:background="@color/abu_soft"
+                android:layout_below="@id/tv_pp_setting"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+            <de.hdodenhof.circleimageview.CircleImageView
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/abu"
+                android:layout_centerVertical="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:id="@+id/img_ab_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_priority_high_24"
+                android:contentDescription="@string/todo" />
+            <TextView
+                android:layout_marginStart="@dimen/_15sdp"
+                android:id="@+id/tv_ab_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="@string/about_us"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/dosis_semibold"
+                android:layout_toEndOf="@+id/img_ab_setting"
+                tools:ignore="RelativeOverlap" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_7sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:contentDescription="@string/todo" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:background="@color/abu_soft"
+                android:layout_below="@id/tv_ab_setting"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:id="@+id/img_hs_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_help_outline_24"
+                android:contentDescription="@string/todo" />
+            <TextView
+                android:layout_marginStart="@dimen/_15sdp"
+                android:id="@+id/tv_hs_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="@string/help_and_support"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/dosis_semibold"
+                android:layout_toEndOf="@+id/img_hs_setting"
+                tools:ignore="RelativeOverlap" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_7sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:contentDescription="@string/todo" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:background="@color/abu_soft"
+                android:layout_below="@id/tv_hs_setting"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/spin_kit_logout"
+        style="@style/SpinKitView.Large.ThreeBounce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Setting Fragment" />
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/colorPrimary" />
+    <RelativeLayout
+        android:id="@+id/btn_logout"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:id="@+id/img_lo_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logout"
+            android:contentDescription="@string/todo"
+            app:tint="@color/pink" />
+        <TextView
+            android:layout_marginStart="@dimen/_15sdp"
+            android:id="@+id/tv_lo_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/pink"
+            android:textSize="@dimen/_12ssp"
+            android:text="@string/logout"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:fontFamily="@font/dosis_bold"
+            android:layout_toEndOf="@+id/img_lo_setting"
+            tools:ignore="RelativeOverlap" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:contentDescription="@string/todo"
+            app:tint="@color/pink" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:background="@color/abu_soft"
+            android:layout_below="@id/tv_lo_setting"/>
+    </RelativeLayout>
 
 </RelativeLayout>

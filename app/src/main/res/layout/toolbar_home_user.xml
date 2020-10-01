@@ -13,16 +13,17 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:src="@drawable/jularis" />
+
     <TextView
-        android:layout_centerInParent="true"
         android:id="@+id/tv_name_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_condensed_bold"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/dosis_bold"
         android:padding="10dp"
         android:text="@string/daftar_produk"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_20ssp" />
+        android:textSize="@dimen/_17ssp" />
 
     <ImageView
         android:visibility="invisible"

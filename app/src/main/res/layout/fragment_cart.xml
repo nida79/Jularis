@@ -5,7 +5,7 @@
     android:id="@+id/swp_cart_user"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.cart.CartFragment">
+    tools:context=".ui.cart.CartFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,14 +21,14 @@
             android:orientation="vertical">
 
             <TextView
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:fontFamily="@font/roboto_condensed_bold"
-                android:padding="10dp"
+                android:fontFamily="@font/dosis_bold"
                 android:text="@string/daftar_keranjang"
                 android:textColor="@color/text_color"
-                android:textSize="@dimen/_20ssp" />
+                android:textSize="@dimen/_17ssp" />
         </LinearLayout>
         <ProgressBar
             android:visibility="gone"
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/pembatas_checkout"
                 android:layout_below="@id/cb_all"
-                tools:listitem="@layout/checkout_item" />
+                tools:listitem="@layout/item_checkout" />
 
             <View
                 android:id="@+id/pembatas_checkout"

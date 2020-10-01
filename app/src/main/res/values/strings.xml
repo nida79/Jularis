@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Jularis</string>
-    <string name="login">Sign In</string>
+    <string name="login"> Sign In</string>
     <string name="logo_app">Logo App</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -46,4 +46,24 @@
     <string name="close_btn">close_btn</string>
     <string name="simpan">Simpan</string>
     <string name="_1">1</string>
+    <string name="pembayaran">Pembayaran</string>
+    <string name="produk">Produk</string>
+    <string name="pilihan_pembayaran">Pilihan Pembayaran</string>
+    <string name="bayar_ditempat">Bayar Ditempat</string>
+    <string name="transfer_bank">Transfer Bank</string>
+    <string name="input_alamat">Input Alamat</string>
+    <string name="tambahkan_catatan">Tambahkan Catatan</string>
+    <string name="tambahkan_catatan_untuk_penjual">Tambahkan catatan untuk penjual</string>
+    <string name="rincian_pembayaran">Rincian Pembayaran</string>
+    <string name="jumlah_produk">Jumlah Produk</string>
+    <string name="total_harga">Total Harga</string>
+    <string name="ongkos_kirim">Ongkos Kirim</string>
+    <string name="total_pembayaran">Total Pembayaran</string>
+    <string name="todo">TODO</string>
+    <string name="edit_data_pribadi_anda">Edit Data Pribadi Anda</string>
+    <string name="ganti_password">Ganti Password</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="about_us">About Us</string>
+    <string name="help_and_support">Help and support</string>
+    <string name="logout">Logout</string>
 </resources>
