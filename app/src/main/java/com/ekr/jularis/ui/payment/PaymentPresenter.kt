@@ -19,6 +19,7 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
 
     init {
         view.initListener()
+        view.radioSelected()
         view.onLoading(false)
         view.loadingFoto(false)
     }
@@ -50,7 +51,7 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
 
                 override fun onFailure(call: Call<ResponseGetDataPayment>, t: Throwable) {
                     view.onLoading(false)
-                    Log.e("ERORR", "onFailure: ${t.message}",)
+                    Log.e("ERORR", "onFailure: ${t.message}")
                     view.showMessage(t.message.toString())
                 }
 
@@ -74,10 +75,8 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
                     view.loadingFoto(false)
                     when {
                         response.isSuccessful -> {
-                            val result: ResponsePhotopayment? = response.body()
-                            if (result!!.status) {
-                                view.onResultUploadPhoto(result.data.transaction_photo_id)
-                            }
+                            val result: String = response.body()!!.data.transaction_photo_id
+                                view.onResultUploadPhoto(result)
                         }
                         response.code() != 200 -> {
                             val result: ResponseGlobal = Gson().fromJson(
@@ -98,8 +97,38 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
             })
     }
 
-    override fun postDataPayment(datapostPayment: DatapostPayment) {
-        TODO("Not yet implemented")
+    override fun postDataPayment(token: String, datapostPayment: DatapostPayment) {
+        view.loadingFoto(true)
+        ApiService.endpoint.doPayment(token, datapostPayment)
+            .enqueue(object : Callback<ResponseGlobal> {
+                override fun onResponse(
+                    call: Call<ResponseGlobal>,
+                    response: Response<ResponseGlobal>
+                ) {
+                    view.loadingFoto(false)
+                    when {
+                        response.isSuccessful -> {
+                            val result: ResponseGlobal? = response.body()
+                            if (result!!.status) {
+                                view.showMessage(result.message)
+                                view.resultPayment(result.status)
+                            }
+                        }
+                        response.code() != 200 -> {
+                            val result: ResponseGlobal = Gson().fromJson(
+                                response.errorBody()!!.charStream(),
+                                ResponseGlobal::class.java
+                            )
+                            view.showMessage(result.message)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
+                    view.loadingFoto(false)
+                    view.showMessage(t.message.toString())
+                }
+            })
     }
 
 }

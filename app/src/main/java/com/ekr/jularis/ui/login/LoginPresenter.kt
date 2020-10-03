@@ -54,6 +54,7 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.Presenter {
 
     override fun setPrefs(sessionManager: SessionManager, dataLogin: DataLogin) {
         sessionManager.prefIsLogin = true
+        sessionManager.prefAlamat = dataLogin.address
         sessionManager.prefFullname = dataLogin.full_name
         sessionManager.prefUsername = dataLogin.username
         sessionManager.prefEmail = dataLogin.email

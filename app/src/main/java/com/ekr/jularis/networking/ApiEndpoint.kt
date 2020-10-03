@@ -1,6 +1,7 @@
 package com.ekr.jularis.networking
 
 import com.ekr.jularis.data.cart.postcheckout.DataPOST
+import com.ekr.jularis.data.payment.DatapostPayment
 import com.ekr.jularis.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -104,8 +105,24 @@ interface ApiEndpoint {
     fun uploadPhotopayment(
         @Header("Authorization") token: String,
         @Part photo: MultipartBody.Part
-    ):Call<ResponsePhotopayment>
+    ): Call<ResponsePhotopayment>
 
+    @FormUrlEncoded
     @POST("logout")
-    fun logoutAccount( @Header("Authorization") token: String):Call<ResponseGlobal>
+    fun logoutAccount(@Header("Authorization") token: String,
+    @Field("logout") bebas:String): Call<ResponseGlobal>
+
+    @FormUrlEncoded
+    @POST("checkout/all")
+    fun checkAll(
+        @Header("Authorization") token: String,
+        @Field("checked") checked: Int
+    ): Call<ResponseGlobal>
+
+    @Headers("Accept: application/json")
+    @POST("transaction")
+    fun doPayment(
+        @Header("Authorization") token: String,
+        @Body datapostPayment: DatapostPayment
+    ): Call<ResponseGlobal>
 }

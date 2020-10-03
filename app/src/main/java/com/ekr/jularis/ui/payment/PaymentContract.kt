@@ -8,7 +8,7 @@ interface PaymentContract {
     interface Presenter {
         fun getDataPayment(token:String,product_id:String)
         fun uploadFoto(token: String,photo: File)
-        fun postDataPayment(datapostPayment: DatapostPayment)
+        fun postDataPayment(token: String,datapostPayment: DatapostPayment)
     }
 
     interface View {
@@ -18,6 +18,7 @@ interface PaymentContract {
         fun loadingFoto(loadingFoto:Boolean)
         fun onResultDataPayment(responseGetDataPayment: ResponseGetDataPayment)
         fun onResultUploadPhoto(photo_payment:String)
+        fun resultPayment(sukses:Boolean)
         fun showMessage(message:String)
 
     }

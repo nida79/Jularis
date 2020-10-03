@@ -21,12 +21,12 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
         ApiService.endpoint.getCartlist(token).enqueue(object : Callback<ResponseCart> {
             override fun onResponse(call: Call<ResponseCart>, response: Response<ResponseCart>) {
                 view.onLoading(false)
-                when{
-                    response.isSuccessful->{
-                        val responseCart : ResponseCart = response.body()!!
+                when {
+                    response.isSuccessful -> {
+                        val responseCart: ResponseCart = response.body()!!
                         responseCart.let { view.onResult(it) }
                     }
-                    response.code() !=200->{
+                    response.code() != 200 -> {
                         val responseGlobal: ResponseGlobal = Gson().fromJson(
                             response.errorBody()!!.charStream(),
                             ResponseGlobal::class.java
@@ -45,24 +45,25 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
 
         })
     }
+
     override fun getCartUpdate(token: String) {
-       view.loadingHorizontal(true)
+        view.loadingHorizontal(true)
         ApiService.endpoint.getCartlist(token).enqueue(object : Callback<ResponseCart> {
             override fun onResponse(call: Call<ResponseCart>, response: Response<ResponseCart>) {
                 view.loadingHorizontal(false)
-                when{
-                    response.isSuccessful->{
-                        val responseCart : ResponseCart = response.body()!!
+                when {
+                    response.isSuccessful -> {
+                        val responseCart: ResponseCart = response.body()!!
                         responseCart.let { view.onResult(it) }
                     }
-                    response.code() !=200->{
+                    response.code() != 200 -> {
                         val responseGlobal: ResponseGlobal = Gson().fromJson(
                             response.errorBody()!!.charStream(),
                             ResponseGlobal::class.java
                         )
-                        if (responseGlobal.message == "Keranjang kosong"){
+                        if (responseGlobal.message == "Keranjang kosong") {
                             view.showEmptyCart(responseGlobal.message)
-                        }else{
+                        } else {
                             view.showToast(responseGlobal.message)
                         }
 
@@ -79,80 +80,117 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
         })
     }
 
-    override fun doCalculatePlus(token: String, checked: String, productId: String,qty: Int) {
+    override fun doCalculatePlus(token: String, checked: String, productId: String, qty: Int) {
         view.loadingHorizontal(true)
-        val datapost = PembayaranHelper.addCart(checked,productId,qty)
-        ApiService.endpoint.doCalculation(token,datapost).enqueue(object : Callback<ResponseGlobal>{
-            override fun onResponse(
-                call: Call<ResponseGlobal>,
-                response: Response<ResponseGlobal>
-            ) {
-                view.loadingHorizontal(false)
-                when {
-                    response.isSuccessful -> {
-                        val result: ResponseGlobal? = response.body()
-                        if (result!!.status) {
-                            view.resultUpdate(result.message)
+        val datapost = PembayaranHelper.addCart(checked, productId, qty)
+        ApiService.endpoint.doCalculation(token, datapost)
+            .enqueue(object : Callback<ResponseGlobal> {
+                override fun onResponse(
+                    call: Call<ResponseGlobal>,
+                    response: Response<ResponseGlobal>
+                ) {
+                    view.loadingHorizontal(false)
+                    when {
+                        response.isSuccessful -> {
+                            val result: ResponseGlobal? = response.body()
+                            if (result!!.status) {
+                                view.resultUpdate(result.message)
+                            }
+                        }
+                        response.code() != 200 -> {
+                            val result: ResponseGlobal = Gson().fromJson(
+                                response.errorBody()!!.charStream(),
+                                ResponseGlobal::class.java
+                            )
+                            view.showToast(result.message)
+
                         }
                     }
-                    response.code() != 200 -> {
-                        val result: ResponseGlobal = Gson().fromJson(
-                            response.errorBody()!!.charStream(),
-                            ResponseGlobal::class.java
-                        )
-                        view.showToast(result.message)
-
-                    }
                 }
-            }
 
-            override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
-                view.loadingHorizontal(false)
-                view.showToast(t.message.toString())
+                override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
+                    view.loadingHorizontal(false)
+                    view.showToast(t.message.toString())
 
-            }
+                }
 
-        })
+            })
     }
 
     override fun doCalculateMinus(token: String, checked: String, productId: String, qty: Int) {
         view.loadingHorizontal(true)
-        val datapost = PembayaranHelper.minusCart(checked,productId,qty)
-        ApiService.endpoint.doCalculation(token,datapost).enqueue(object : Callback<ResponseGlobal>{
-            override fun onResponse(
-                call: Call<ResponseGlobal>,
-                response: Response<ResponseGlobal>
-            ) {
-                view.loadingHorizontal(false)
-                when {
-                    response.isSuccessful -> {
-                        val result: ResponseGlobal? = response.body()
-                        if (result!!.status) {
-                            view.resultUpdate(result.message)
+        val datapost = PembayaranHelper.minusCart(checked, productId, qty)
+        ApiService.endpoint.doCalculation(token, datapost)
+            .enqueue(object : Callback<ResponseGlobal> {
+                override fun onResponse(
+                    call: Call<ResponseGlobal>,
+                    response: Response<ResponseGlobal>
+                ) {
+                    view.loadingHorizontal(false)
+                    when {
+                        response.isSuccessful -> {
+                            val result: ResponseGlobal? = response.body()
+                            if (result!!.status) {
+                                view.resultUpdate(result.message)
+                            }
+                        }
+                        response.code() != 200 -> {
+                            val result: ResponseGlobal = Gson().fromJson(
+                                response.errorBody()!!.charStream(),
+                                ResponseGlobal::class.java
+                            )
+                            view.showToast(result.message)
                         }
                     }
-                    response.code() != 200 -> {
-                        val result: ResponseGlobal = Gson().fromJson(
-                            response.errorBody()!!.charStream(),
-                            ResponseGlobal::class.java
-                        )
-                        view.showToast(result.message)
-                    }
                 }
-            }
 
-            override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
-                view.loadingHorizontal(false)
-                view.showToast(t.message.toString())
-            }
+                override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
+                    view.loadingHorizontal(false)
+                    view.showToast(t.message.toString())
+                }
 
-        })
+            })
     }
 
     override fun doCheckBoxClicked(token: String, checked: String, productId: String, qty: Int) {
         view.loadingHorizontal(true)
-        val datapost = PembayaranHelper.statisCart(checked,productId,qty)
-        ApiService.endpoint.doCalculation(token,datapost).enqueue(object : Callback<ResponseGlobal>{
+        val datapost = PembayaranHelper.statisCart(checked, productId, qty)
+        ApiService.endpoint.doCalculation(token, datapost)
+            .enqueue(object : Callback<ResponseGlobal> {
+                override fun onResponse(
+                    call: Call<ResponseGlobal>,
+                    response: Response<ResponseGlobal>
+                ) {
+                    view.loadingHorizontal(false)
+                    when {
+                        response.isSuccessful -> {
+                            val result: ResponseGlobal? = response.body()
+                            if (result!!.status) {
+
+                                view.resultUpdate(result.message)
+                            }
+                        }
+                        response.code() != 200 -> {
+                            val result: ResponseGlobal = Gson().fromJson(
+                                response.errorBody()!!.charStream(),
+                                ResponseGlobal::class.java
+                            )
+                            view.showToast(result.message)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
+                    view.loadingHorizontal(false)
+                    view.showToast(t.message.toString())
+                }
+
+            })
+    }
+
+    override fun doCheckAll(token: String, checked: Int) {
+        view.loadingHorizontal(true)
+        ApiService.endpoint.checkAll(token, checked).enqueue(object : Callback<ResponseGlobal> {
             override fun onResponse(
                 call: Call<ResponseGlobal>,
                 response: Response<ResponseGlobal>
@@ -180,13 +218,12 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
                 view.loadingHorizontal(false)
                 view.showToast(t.message.toString())
             }
-
         })
     }
 
     override fun doDeleteItem(token: String) {
         view.loadingHorizontal(true)
-        ApiService.endpoint.deleteItemCart(token).enqueue(object : Callback<ResponseGlobal>{
+        ApiService.endpoint.deleteItemCart(token).enqueue(object : Callback<ResponseGlobal> {
             override fun onResponse(
                 call: Call<ResponseGlobal>,
                 response: Response<ResponseGlobal>

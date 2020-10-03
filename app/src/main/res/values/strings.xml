@@ -34,7 +34,7 @@
     <string name="sisa_barang">Jumlah stok :</string>
     <string name="deskripsi">Deskripsi :</string>
     <string name="lanjutkan_pembayaran">Beli Sekarang</string>
-    <string name="mohon_tunggu">Mohon Tunggu</string>
+    <string name="mohon_tunggu">Mohon Tunggu...</string>
     <string name="daftar_keranjang">Daftar Keranjang</string>
     <string name="total_harga_barang">Total Harga Barang</string>
     <string name="lanjutkan">Lanjutkan</string>
@@ -66,4 +66,7 @@
     <string name="about_us">About Us</string>
     <string name="help_and_support">Help and support</string>
     <string name="logout">Logout</string>
+    <string name="jumlah_barang">Jumlah Barang</string>
+    <string name="no_rekening_pembayaran_bca_290329032_nupload_bukti_transfer">No Rekening Pembayaran :          BCA - 290329032\nUpload Bukti Transfer :</string>
+
 </resources>

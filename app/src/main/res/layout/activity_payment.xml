@@ -17,14 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/ic_baseline_arrow_back_24"
-            android:contentDescription="@string/todo" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -112,43 +104,30 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
                         android:ellipsize="end"
                         android:fontFamily="@font/dosis_semibold"
                         android:maxLines="2"
                         android:textColor="@color/text_color"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintBottom_toTopOf="@+id/tv_price_payment"
-                        app:layout_constraintEnd_toStartOf="@+id/tv_qty_payment"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/img_item_payment"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="Paket sembako lengkap  " />
 
                     <TextView
                         android:id="@+id/tv_price_payment"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:fontFamily="@font/montserrat_bold"
                         android:textColor="@color/text_color"
                         android:textSize="@dimen/_11ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tv_qty_payment"
                         app:layout_constraintStart_toEndOf="@+id/img_item_payment"
                         app:layout_constraintTop_toBottomOf="@+id/tv_title_payment"
                         tools:text="Rp12.000" />
 
-                    <TextView
-                        android:id="@+id/tv_qty_payment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:fontFamily="@font/roboto_condensed_bold"
-                        android:textSize="@dimen/_15ssp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="12" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
@@ -178,6 +157,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView4">
 
                 <RadioButton
+                    android:checked="true"
                     android:id="@+id/bayar_ditempat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -197,33 +177,58 @@
                     android:textSize="@dimen/_12ssp" />
             </RadioGroup>
 
-            <com.infinityandroid.roundedimageview.RoundedImageView
-                android:visibility="gone"
-                android:id="@+id/upload_foto_payment"
-                android:layout_width="@dimen/_100sdp"
-                android:scaleType="fitXY"
-                android:layout_height="@dimen/_90sdp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/ic_add_image"
-                app:corner_radius="8"
-                app:layout_constraintBottom_toTopOf="@+id/edt_alamat_payment"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/radioGroup"
-                app:layout_constraintTop_toBottomOf="@+id/cv_payment" />
+         <LinearLayout
+             android:elevation="@dimen/_5sdp"
+             android:layout_marginStart="@dimen/_10sdp"
+             android:layout_marginEnd="@dimen/_10sdp"
+             android:visibility="gone"
+             android:id="@+id/lltrans"
+             android:padding="@dimen/_10sdp"
+             app:layout_constraintStart_toStartOf="parent"
+             android:background="@drawable/rounded_popup"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             app:layout_constraintTop_toBottomOf="@id/radioGroup"
+             android:orientation="vertical">
+             <TextView
+                 android:textSize="@dimen/_11ssp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="@color/text_color"
+                 android:fontFamily="@font/dosis_bold"
+                 android:text="@string/no_rekening_pembayaran_bca_290329032_nupload_bukti_transfer"/>
+             <com.infinityandroid.roundedimageview.RoundedImageView
+                  android:layout_marginTop="@dimen/_10sdp"
+                 android:id="@+id/upload_foto_payment"
+                 android:layout_gravity="center"
+                 android:layout_width="@dimen/_90sdp"
+                 android:layout_height="@dimen/_90sdp"
+                 android:adjustViewBounds="true"
+                 android:background="@drawable/ic_add_image"
+                 android:scaleType="fitXY"
+                 android:visibility="visible"
+                 app:corner_radius="8"
+                 app:layout_constraintBottom_toTopOf="@+id/edt_alamat_payment"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toEndOf="@id/radioGroup"
+                 app:layout_constraintTop_toBottomOf="@+id/cv_payment"
+                 app:layout_constraintVertical_bias="0.16000003" />
+         </LinearLayout>
 
             <TextView
+                android:layout_marginTop="@dimen/_9sdp"
+                app:layout_constraintTop_toBottomOf="@id/lltrans"
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/dosis_semibold"
                 android:text="@string/alamat_lengkap"
                 android:textColor="@color/abu"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                tools:layout_editor_absoluteY="269dp" />
 
             <EditText
                 android:id="@+id/edt_alamat_payment"

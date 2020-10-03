@@ -23,6 +23,7 @@ class CartFragment : Fragment(), CartContract.View {
     private lateinit var sessionManager: SessionManager
     private lateinit var checkout: List<Checkout>
     private lateinit var binding: FragmentCartBinding
+    private  var checked:Int = 0
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -88,6 +89,7 @@ class CartFragment : Fragment(), CartContract.View {
         binding.tvDelete.setOnClickListener {
             cartPresenter.doDeleteItem(sessionManager.prefToken)
         }
+        actionCheckAll()
 
     }
 
@@ -129,8 +131,11 @@ class CartFragment : Fragment(), CartContract.View {
     fun actionCheckAll() {
         binding.cbAll.setOnCheckedChangeListener { _, b ->
             if (!b) {
+                cartPresenter.doCheckAll(sessionManager.prefToken,checked)
                 binding.cbAll.setTextColor(Color.parseColor("#7D7D7E"))
+
             } else {
+                cartPresenter.doCheckAll(sessionManager.prefToken,checked)
                 binding.cbAll.setTextColor(Color.parseColor("#67C2CB"))
             }
         }
@@ -145,6 +150,7 @@ class CartFragment : Fragment(), CartContract.View {
         checkout.let { cartAdapter.setData(checkout) }
         val uang = responseCart.total_amount
         if (uang == 0) {
+            checked = 1
             binding.btnKeranjangBuy.visibility = View.GONE
             binding.tvDelete.isEnabled = false
             binding.tvDelete.setTextColor(
@@ -161,6 +167,7 @@ class CartFragment : Fragment(), CartContract.View {
             )
 
         } else {
+            checked = 0
             binding.btnKeranjangBuy.visibility = View.VISIBLE
             binding.tvDelete.isEnabled = true
             binding.tvDelete.setTextColor(ContextCompat.getColor(requireContext(), R.color.pink))

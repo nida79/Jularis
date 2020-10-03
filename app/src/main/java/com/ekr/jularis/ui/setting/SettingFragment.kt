@@ -12,6 +12,7 @@ import com.ekr.jularis.ui.login.LoginActivity
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.SessionManager
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 
@@ -22,7 +23,12 @@ class SettingFragment : Fragment(), SettingContract.View {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         settingPresenter = SettingPresenter(this)
-        sessionManager = SessionManager(requireContext())
+        sessionManager = SessionManager(requireActivity())
+        tv_name_setting.text = sessionManager.prefFullname
+        if (!sessionManager.prefIsLogin){
+            btn_logout.visibility = View.GONE
+        }
+        GlideHelper.setImage(requireContext(),sessionManager.prefFoto,img_profile_setting)
     }
 
     override fun onCreateView(
@@ -34,7 +40,9 @@ class SettingFragment : Fragment(), SettingContract.View {
     }
 
     override fun initListener() {
-        tv_name_setting.text = sessionManager.prefFullname
+        btn_logout.setOnClickListener {
+            settingPresenter.doLogout(sessionManager.prefToken)
+        }
 //        GlideHelper.setImage(requireContext(),sessionManager.prefFoto,img_profile_setting)
     }
 
@@ -55,6 +63,7 @@ class SettingFragment : Fragment(), SettingContract.View {
         if (status) {
             sessionManager.logOut()
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            requireActivity().finish()
         }
     }
 

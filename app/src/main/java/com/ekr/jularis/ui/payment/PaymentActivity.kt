@@ -1,20 +1,28 @@
 package com.ekr.jularis.ui.payment
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.ekr.jularis.R
+import com.ekr.jularis.data.payment.DataPayment
+import com.ekr.jularis.data.payment.DatapostPayment
 import com.ekr.jularis.data.response.ResponseGetDataPayment
 import com.ekr.jularis.utils.GlideHelper
+import com.ekr.jularis.utils.LoadingDialog
 import com.ekr.jularis.utils.MoneyHelper
 import com.ekr.jularis.utils.SessionManager
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -25,39 +33,60 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_payment.*
+import kotlinx.android.synthetic.main.fragment_setting.*
 import java.io.File
 
 class PaymentActivity : AppCompatActivity(), PaymentContract.View {
-    private lateinit var tipeBayar: String
+    private var checkedAmount = 0
+    private var transactionAmount = 0
+    private var ongkir = 0
+    private var count = 0
+    private lateinit var dialog: Dialog
+    private var tipeBayar = "Bayar Ditempat"
     private lateinit var sessionManager: SessionManager
     private lateinit var paymentPresenter: PaymentPresenter
     private lateinit var product_id: String
-    private lateinit var photo_id: String
-    private var alamat = ""
+    private var photo_id: String? = null
+    private lateinit var dataPayment: DataPayment
+    private lateinit var datapostPayment: DatapostPayment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
+        dialog = LoadingDialog.globalLoading(this)
         paymentPresenter = PaymentPresenter(this)
         sessionManager = SessionManager(this)
         product_id = intent.getStringExtra("pd_id").toString()
-        paymentPresenter.getDataPayment(sessionManager.prefToken, product_id)
         edt_alamat_payment.setText(sessionManager.prefAlamat)
-
+        paymentPresenter.getDataPayment(sessionManager.prefToken, product_id)
     }
 
     override fun initListener() {
-
-
+        btn_submit_payment.setOnClickListener {
+            datapostPayment = DatapostPayment(
+                listOf(dataPayment),
+                edt_alamat_payment.text.toString(),
+                count,
+                edt_catata_payment.text.toString(),
+                checkedAmount,
+                tipeBayar,
+                ongkir,
+                transactionAmount,
+                photo_id
+            )
+            paymentPresenter.postDataPayment(sessionManager.prefToken, datapostPayment)
+        }
         radioGroup.setOnCheckedChangeListener { _, _ ->
             radioSelected()
         }
         uploadPhoto()
+
     }
 
     override fun radioSelected() {
         if (bayar_transfer.isChecked) {
+            btn_submit_payment.visibility = View.GONE
             tipeBayar = bayar_transfer.text.toString()
-            upload_foto_payment.visibility = View.VISIBLE
+            lltrans.visibility = View.VISIBLE
             bayar_transfer.setTextColor(
                 ContextCompat.getColor(
                     applicationContext,
@@ -70,10 +99,11 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
                     R.color.abu_soft
                 )
             )
-            btn_submit_payment.visibility = View.VISIBLE
+
         }
         if (bayar_ditempat.isChecked) {
-            upload_foto_payment.visibility = View.GONE
+            lltrans.visibility = View.GONE
+            btn_submit_payment.visibility = View.VISIBLE
             tipeBayar = bayar_ditempat.text.toString()
             bayar_ditempat.setTextColor(
                 ContextCompat.getColor(
@@ -87,41 +117,63 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
                     R.color.abu_soft
                 )
             )
-            btn_submit_payment.visibility = View.VISIBLE
         }
     }
 
+
     override fun onLoading(loading: Boolean) {
         when (loading) {
-            true -> progress_bar_horizontal_payment.visibility = View.VISIBLE
-            false -> progress_bar_horizontal_payment.visibility = View.GONE
+            true -> {
+                dialog.show()
+            }
+            false -> {
+                dialog.dismiss()
+            }
         }
     }
 
     override fun loadingFoto(loadingFoto: Boolean) {
         when (loadingFoto) {
-            true -> progress_bar_horizontal_payment.visibility = View.VISIBLE
-            false -> progress_bar_horizontal_payment.visibility = View.GONE
+            true -> {
+                dialog.show()
+                progress_bar_horizontal_payment.visibility = View.VISIBLE
+            }
+            false -> {
+                dialog.dismiss()
+                progress_bar_horizontal_payment.visibility = View.GONE
+            }
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onResultDataPayment(responseGetDataPayment: ResponseGetDataPayment) {
+        dataPayment = DataPayment(product_id, responseGetDataPayment.data[0].quantity)
+        transactionAmount = responseGetDataPayment.transactionAmount
+        ongkir = responseGetDataPayment.ongkir
+        count = responseGetDataPayment.count
+        checkedAmount = responseGetDataPayment.checkedAmount
         GlideHelper.setImage(
             applicationContext,
             responseGetDataPayment.data[0].picturePayment.picture, img_item_payment
         )
         tv_title_payment.text = responseGetDataPayment.data[0].productPayment.name
-        tv_qty_payment.text = responseGetDataPayment.data[0].quantity.toString()
         MoneyHelper.setRupiah(tv_price_payment, responseGetDataPayment.data[0].productPayment.price)
-        MoneyHelper.setRupiah(tv_total_price_payment, responseGetDataPayment.checkedAmount)
-        tv_total_qty_payment.text = responseGetDataPayment.count.toString()
-        MoneyHelper.setRupiah(tv_ongkir_payment, responseGetDataPayment.ongkir)
-        MoneyHelper.setRupiah(tv_total_payment, responseGetDataPayment.transactionAmount)
+        MoneyHelper.setRupiah(tv_total_price_payment, checkedAmount)
+        tv_total_qty_payment.text = responseGetDataPayment.data[0].quantity.toString()
+        MoneyHelper.setRupiah(tv_ongkir_payment, ongkir)
+        MoneyHelper.setRupiah(tv_total_payment, transactionAmount)
 
     }
 
     override fun onResultUploadPhoto(photo_payment: String) {
         photo_id = photo_payment
+        btn_submit_payment.visibility = View.VISIBLE
+    }
+
+    override fun resultPayment(sukses: Boolean) {
+        if (sukses) {
+            finish()
+        }
     }
 
     override fun showMessage(message: String) {

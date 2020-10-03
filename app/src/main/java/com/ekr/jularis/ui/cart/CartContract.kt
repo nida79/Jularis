@@ -9,6 +9,7 @@ interface CartContract {
         fun doCalculatePlus(token:String,checked:String,productId:String,qty: Int)
         fun doCalculateMinus(token:String,checked:String,productId:String,qty: Int)
         fun doCheckBoxClicked(token:String,checked:String,productId:String,qty: Int)
+        fun doCheckAll(token: String,checked:Int)
         fun doDeleteItem(token: String)
     }
 

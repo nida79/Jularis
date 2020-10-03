@@ -14,7 +14,7 @@ class SettingPresenter (val view: SettingContract.View):SettingContract.Presente
     }
     override fun doLogout(token: String) {
         view.loadingLogout(true)
-        ApiService.endpoint.logoutAccount(token)
+        ApiService.endpoint.logoutAccount(token,"BEBAS")
             .enqueue(object : Callback<ResponseGlobal>{
                 override fun onResponse(
                     call: Call<ResponseGlobal>,
