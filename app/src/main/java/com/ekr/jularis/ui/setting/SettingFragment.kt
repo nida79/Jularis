@@ -27,8 +27,13 @@ class SettingFragment : Fragment(), SettingContract.View {
         tv_name_setting.text = sessionManager.prefFullname
         if (!sessionManager.prefIsLogin){
             btn_logout.visibility = View.GONE
+            setting_wadah_profile.visibility = View.GONE
+            setting_wadah_cp.visibility = View.GONE
+            setting_btn_login.visibility = View.VISIBLE
+        }else{
+            GlideHelper.setImage(requireContext(),sessionManager.prefFoto,img_profile_setting)
         }
-        GlideHelper.setImage(requireContext(),sessionManager.prefFoto,img_profile_setting)
+
     }
 
     override fun onCreateView(
@@ -40,10 +45,12 @@ class SettingFragment : Fragment(), SettingContract.View {
     }
 
     override fun initListener() {
+        setting_btn_login.setOnClickListener {
+            startActivity(Intent(requireActivity(),LoginActivity::class.java))
+        }
         btn_logout.setOnClickListener {
             settingPresenter.doLogout(sessionManager.prefToken)
         }
-//        GlideHelper.setImage(requireContext(),sessionManager.prefFoto,img_profile_setting)
     }
 
     override fun loadingLogout(loading: Boolean) {
@@ -61,8 +68,11 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     override fun resultLogout(status: Boolean) {
         if (status) {
+            val intent = Intent(requireActivity(),LoginActivity::class.java)
+            intent.putExtra("logout","logout")
+            startActivity(intent)
             sessionManager.logOut()
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            requireActivity().finishAffinity()
             requireActivity().finish()
         }
     }

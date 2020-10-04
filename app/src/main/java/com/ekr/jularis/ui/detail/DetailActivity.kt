@@ -39,6 +39,9 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     override fun initListener() {
         val terImage = intent.extras!!.getParcelableArrayList<DataImageProduct>("image")
         dataProduct = intent.extras!!.getParcelable("data")!!
+        btn_detail_back.setOnClickListener {
+            finish()
+        }
         detailAdapter =
             terImage?.let { DetailAdapter(this, it, dataProduct) }!!
         img_slider.setSliderAdapter(detailAdapter)
@@ -64,12 +67,14 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
             true -> {
                 spin_kit_detail.visibility = View.VISIBLE
                 btn_detail_addcart.visibility = View.GONE
+                btn_detail_back.visibility = View.GONE
                 btn_detail_buy.visibility = View.GONE
             }
             false -> {
                 spin_kit_detail.visibility = View.GONE
                 btn_detail_addcart.visibility = View.VISIBLE
                 btn_detail_buy.visibility = View.VISIBLE
+                btn_detail_back.visibility = View.VISIBLE
             }
         }
     }
@@ -124,7 +129,9 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
             if (sessionManager.prefIsLogin) {
                 detailPresenter.doAddCart(sessionManager.prefToken, dataProduct.product_id, 1)
             } else {
-                startActivity(Intent(this, LoginActivity::class.java))
+                val intent = Intent(this,LoginActivity::class.java)
+                intent.putExtra("logout","detail")
+                startActivity(intent)
             }
 
         }

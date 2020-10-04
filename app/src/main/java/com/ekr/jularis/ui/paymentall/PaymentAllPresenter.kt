@@ -1,7 +1,11 @@
-package com.ekr.jularis.ui.payment
+package com.ekr.jularis.ui.paymentall
 
 import android.util.Log
+import com.ekr.jularis.data.payment.DataGetPayment
+import com.ekr.jularis.data.payment.DataPayment
 import com.ekr.jularis.data.payment.DatapostPayment
+import com.ekr.jularis.data.payment.DatapostPayment2
+import com.ekr.jularis.data.response.ResponseCart
 import com.ekr.jularis.data.response.ResponseGetDataPayment
 import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.data.response.ResponsePhotopayment
@@ -15,8 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Presenter {
-
+class PaymentAllPresenter(val view: PaymentAllContract.View) : PaymentAllContract.Presenter {
     init {
         view.initListener()
         view.radioSelected()
@@ -24,9 +27,9 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
         view.loadingFoto(false)
     }
 
-    override fun getDataPayment(token: String, product_id: String) {
+    override fun getDataPayment(token: String) {
         view.onLoading(true)
-        ApiService.endpoint.getdataPaymentOne(token, product_id)
+        ApiService.endpoint.getdataPaymentAll(token)
             .enqueue(object : Callback<ResponseGetDataPayment> {
                 override fun onResponse(
                     call: Call<ResponseGetDataPayment>,
@@ -36,7 +39,7 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
                     when {
                         response.isSuccessful -> {
                             val result: ResponseGetDataPayment? = response.body()
-                            result?.let { view.onResultDataPayment(it) }
+                            result?.let { view.onResultDataPayment(it, result.data) }
                         }
                         response.code() != 200 -> {
                             val responseGlobal: ResponseGlobal = Gson().fromJson(
@@ -48,14 +51,11 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
                     }
                 }
 
-
                 override fun onFailure(call: Call<ResponseGetDataPayment>, t: Throwable) {
                     view.onLoading(false)
                     view.showMessage(t.message.toString())
                 }
-
             })
-
     }
 
     override fun uploadFoto(token: String, photo: File) {
@@ -75,7 +75,7 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
                     when {
                         response.isSuccessful -> {
                             val result: String = response.body()!!.data.transaction_photo_id
-                                view.onResultUploadPhoto(result)
+                            view.onResultUploadPhoto(result)
                         }
                         response.code() != 200 -> {
                             val result: ResponseGlobal = Gson().fromJson(
@@ -96,9 +96,9 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
             })
     }
 
-    override fun postDataPayment(token: String, datapostPayment: DatapostPayment) {
+    override fun postDataPayment(token: String, datapostPayment: DatapostPayment2) {
         view.loadingFoto(true)
-        ApiService.endpoint.doPayment(token, datapostPayment)
+        ApiService.endpoint.doPaymentAll(token, datapostPayment)
             .enqueue(object : Callback<ResponseGlobal> {
                 override fun onResponse(
                     call: Call<ResponseGlobal>,

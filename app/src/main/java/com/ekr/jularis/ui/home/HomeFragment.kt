@@ -61,9 +61,14 @@ class HomeFragment : Fragment(), HomeContract.View {
         return _binding.root
     }
 
+    override fun onPause() {
+        super.onPause()
+        page = 1
+    }
+
     override fun onResume() {
         super.onResume()
-        page.minus(1)
+        page= 1
         homePresenter.getProduct(page, null, null, null)
     }
 

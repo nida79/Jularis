@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swp_paymnt_all"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.paymentall.PaymentActivityAll">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/tv_checkout_header_all"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/putih"
+            android:elevation="@dimen/_4sdp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:fontFamily="@font/dosis_bold"
+                android:gravity="center"
+                android:text="@string/pembayaran"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_17ssp" />
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_checkout_header_all"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar_horizontal_payment_all"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_15sdp"
+                    android:indeterminate="true"
+                    android:max="100"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView2_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="@string/produk"
+                    android:textColor="@color/abu"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/progress_bar_horizontal_payment_all" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_container_paymentall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2_all"
+                    app:shimmer_duration="1000">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/place_holder_payment" />
+                        <include layout="@layout/place_holder_payment" />
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_payment"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    tools:listitem="@layout/item_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2_all" />
+
+                <TextView
+                    android:id="@+id/textView4_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="@string/pilihan_pembayaran"
+                    android:textColor="@color/abu"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rcv_payment"
+                    tools:layout_editor_absoluteY="147dp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4_all">
+
+                    <RadioButton
+                        android:id="@+id/bayar_ditempat_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/bayar_ditempat"
+                        android:textColor="@color/abu"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <RadioButton
+                        android:id="@+id/bayar_transfer_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/transfer_bank"
+                        android:textColor="@color/abu"
+                        android:textSize="@dimen/_12ssp" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/lltrans_all"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rounded_popup"
+                    android:elevation="@dimen/_5sdp"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/radioGroup_all">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dosis_bold"
+                        android:text="@string/no_rekening_pembayaran_bca_290329032_nupload_bukti_transfer"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/_11ssp" />
+
+                    <com.infinityandroid.roundedimageview.RoundedImageView
+                        android:id="@+id/upload_foto_payment_all"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/ic_add_image"
+                        android:scaleType="fitXY"
+                        android:visibility="visible"
+                        app:corner_radius="8"
+                        app:layout_constraintBottom_toTopOf="@+id/edt_alamat_payment_all"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/radioGroup_all"
+                        app:layout_constraintTop_toBottomOf="@+id/cv_payment_all"
+                        app:layout_constraintVertical_bias="0.16000003" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView5_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_9sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="@string/alamat_lengkap"
+                    android:textColor="@color/abu"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lltrans_all"
+                    tools:layout_editor_absoluteY="269dp" />
+
+                <EditText
+                    android:id="@+id/edt_alamat_payment_all"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/rounded_popup"
+                    android:elevation="@dimen/_5sdp"
+                    android:gravity="top"
+                    android:hint="@string/input_alamat"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:textColor="@color/hitam"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5_all"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/textView6_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="@string/tambahkan_catatan"
+                    android:textColor="@color/abu"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_alamat_payment_all" />
+
+                <EditText
+                    android:id="@+id/edt_catata_payment_all"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/rounded_popup"
+                    android:elevation="@dimen/_5sdp"
+                    android:gravity="top"
+                    android:hint="@string/tambahkan_catatan_untuk_penjual"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:textColor="@color/hitam"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6_all"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/textView7_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="@string/rincian_pembayaran"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/_15ssp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_catata_payment_all" />
+
+                <TextView
+                    android:id="@+id/textView8_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="@string/jumlah_produk"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_total_qty_payment_all"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7_all" />
+
+                <TextView
+                    android:id="@+id/tv_total_qty_payment_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/hitam"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView8_all"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7_all"
+                    tools:text="15 Bungkus" />
+
+                <TextView
+                    android:id="@+id/textView9_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="@string/total_harga"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_total_qty_payment_all"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8_all" />
+
+                <TextView
+                    android:id="@+id/tv_total_price_payment_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView9_all"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8_all"
+                    tools:text="Rp100.000" />
+
+                <TextView
+                    android:id="@+id/textView10_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="@string/ongkos_kirim"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_ongkir_payment_all"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9_all" />
+
+                <TextView
+                    android:id="@+id/tv_ongkir_payment_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/pink"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView10_all"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9_all"
+                    tools:text="Rp100.000" />
+
+                <View
+                    android:id="@+id/view_bound_all"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@color/abu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ongkir_payment_all" />
+
+                <TextView
+                    android:id="@+id/tv_11_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:fontFamily="@font/dosis_bold"
+                    android:text="@string/total_pembayaran"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/_15ssp"
+                    app:layout_constraintBottom_toTopOf="@id/btn_submit_payment_all"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_total_payment_all"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_bound_all" />
+
+                <TextView
+                    android:id="@+id/tv_total_payment_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/hijau"
+                    android:textSize="@dimen/_15ssp"
+                    app:layout_constraintBottom_toTopOf="@id/btn_submit_payment_all"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_11_all"
+                    app:layout_constraintTop_toBottomOf="@id/view_bound_all"
+                    tools:text="Rp100.0000" />
+
+                <Button
+                    android:id="@+id/btn_submit_payment_all"
+                    android:layout_width="@dimen/_270sdp"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@drawable/oval_btn"
+                    android:fontFamily="@font/dosis_extrabold"
+                    android:text="@string/submit"
+                    android:textColor="@color/putih"
+                    android:textSize="@dimen/_15ssp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total_payment_all" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

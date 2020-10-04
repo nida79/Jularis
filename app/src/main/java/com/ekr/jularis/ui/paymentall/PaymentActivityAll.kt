@@ -1,29 +1,31 @@
-package com.ekr.jularis.ui.payment
+package com.ekr.jularis.ui.paymentall
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekr.jularis.R
+import com.ekr.jularis.data.payment.DataGetPayment
 import com.ekr.jularis.data.payment.DataPayment
 import com.ekr.jularis.data.payment.DatapostPayment
+import com.ekr.jularis.data.payment.DatapostPayment2
 import com.ekr.jularis.data.response.ResponseGetDataPayment
-import com.ekr.jularis.utils.GlideHelper
+import com.ekr.jularis.ui.MainActivity
 import com.ekr.jularis.utils.LoadingDialog
 import com.ekr.jularis.utils.MoneyHelper
 import com.ekr.jularis.utils.SessionManager
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -32,67 +34,80 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_payment.*
+import kotlinx.android.synthetic.main.activity_payment_all.*
 import kotlinx.android.synthetic.main.bottom_sheet_dialog.*
 import java.io.File
 
-class PaymentActivity : AppCompatActivity(), PaymentContract.View {
+class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
+    private lateinit var paymentAllPresenter: PaymentAllPresenter
+    private lateinit var sessionManager: SessionManager
+    private lateinit var paymentAdapter: PaymentAdapter
     private var checkedAmount = 0
     private var transactionAmount = 0
     private var ongkir = 0
     private var count = 0
     private lateinit var dialog: Dialog
     private var tipeBayar = "Bayar Ditempat"
-    private lateinit var sessionManager: SessionManager
-    private lateinit var paymentPresenter: PaymentPresenter
-    private lateinit var product_id: String
     private var photo_id: String? = null
-    private lateinit var dataPayment: DataPayment
-    private lateinit var datapostPayment: DatapostPayment
+    private lateinit var data : List<DataGetPayment>
+    private lateinit var dataKirim : List<DataPayment>
+    private lateinit var datapostPayment: DatapostPayment2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_payment)
+        setContentView(R.layout.activity_payment_all)
         dialog = LoadingDialog.globalLoading(this)
-        paymentPresenter = PaymentPresenter(this)
+        paymentAllPresenter = PaymentAllPresenter(this)
         sessionManager = SessionManager(this)
-        product_id = intent.getStringExtra("pd_id").toString()
-        edt_alamat_payment.setText(sessionManager.prefAlamat)
-        paymentPresenter.getDataPayment(sessionManager.prefToken, product_id)
+        edt_alamat_payment_all.setText(sessionManager.prefAlamat)
+
     }
 
+    override fun onStart() {
+        super.onStart()
+        paymentAllPresenter.getDataPayment(sessionManager.prefToken)
+    }
     override fun initListener() {
-        btn_submit_payment.setOnClickListener {
-            datapostPayment = DatapostPayment(
-                listOf(dataPayment),
-                edt_alamat_payment.text.toString(),
+
+        paymentAdapter = PaymentAdapter(arrayListOf())
+        rcv_payment.apply {
+            layoutManager = LinearLayoutManager(this@PaymentActivityAll)
+            adapter = paymentAdapter
+            setHasFixedSize(true)
+        }
+        swp_paymnt_all.setOnRefreshListener {
+            swp_paymnt_all.isRefreshing= false
+            paymentAllPresenter.getDataPayment(sessionManager.prefToken)
+        }
+        radioGroup_all.setOnCheckedChangeListener { _, _ -> radioSelected() }
+        uploadPhoto()
+        btn_submit_payment_all.setOnClickListener {
+            datapostPayment = DatapostPayment2(
+                data,
+                edt_alamat_payment_all.text.toString(),
                 count,
-                edt_catata_payment.text.toString(),
+                edt_catata_payment_all.text.toString(),
                 checkedAmount,
                 tipeBayar,
                 ongkir,
                 transactionAmount,
                 photo_id
             )
-            paymentPresenter.postDataPayment(sessionManager.prefToken, datapostPayment)
+            paymentAllPresenter.postDataPayment(sessionManager.prefToken,datapostPayment)
         }
-        radioGroup.setOnCheckedChangeListener { _, _ ->
-            radioSelected()
-        }
-        uploadPhoto()
-
     }
 
     override fun radioSelected() {
-        if (bayar_transfer.isChecked) {
-            btn_submit_payment.visibility = View.GONE
-            tipeBayar = bayar_transfer.text.toString()
-            lltrans.visibility = View.VISIBLE
-            bayar_transfer.setTextColor(
+        if (bayar_transfer_all.isChecked) {
+            btn_submit_payment_all.visibility = View.GONE
+            tipeBayar = bayar_transfer_all.text.toString()
+            lltrans_all.visibility = View.VISIBLE
+            bayar_transfer_all.setTextColor(
                 ContextCompat.getColor(
                     applicationContext,
                     R.color.colorPrimary
                 )
             )
-            bayar_ditempat.setTextColor(
+            bayar_ditempat_all.setTextColor(
                 ContextCompat.getColor(
                     applicationContext,
                     R.color.abu_soft
@@ -100,17 +115,17 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
             )
 
         }
-        if (bayar_ditempat.isChecked) {
-            lltrans.visibility = View.GONE
-            btn_submit_payment.visibility = View.VISIBLE
-            tipeBayar = bayar_ditempat.text.toString()
-            bayar_ditempat.setTextColor(
+        if (bayar_ditempat_all.isChecked) {
+            lltrans_all.visibility = View.GONE
+            btn_submit_payment_all.visibility = View.VISIBLE
+            tipeBayar = bayar_ditempat_all.text.toString()
+            bayar_ditempat_all.setTextColor(
                 ContextCompat.getColor(
                     applicationContext,
                     R.color.colorPrimary
                 )
             )
-            bayar_transfer.setTextColor(
+            bayar_transfer_all.setTextColor(
                 ContextCompat.getColor(
                     applicationContext,
                     R.color.abu_soft
@@ -118,69 +133,63 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
             )
         }
     }
-
 
     override fun onLoading(loading: Boolean) {
         when (loading) {
             true -> {
-                dialog.show()
+                rcv_payment.visibility = View.INVISIBLE
+                shimmer_container_paymentall.visibility = View.VISIBLE
+                shimmer_container_paymentall.startShimmer()
+                progress_bar_horizontal_payment_all.visibility = View.VISIBLE
             }
             false -> {
-                dialog.dismiss()
+                rcv_payment .visibility = View.VISIBLE
+                shimmer_container_paymentall.visibility = View.GONE
+                shimmer_container_paymentall.stopShimmer()
+                progress_bar_horizontal_payment_all.visibility = View.GONE
             }
         }
     }
 
     override fun loadingFoto(loadingFoto: Boolean) {
         when (loadingFoto) {
-            true -> {
-                dialog.show()
-                progress_bar_horizontal_payment.visibility = View.VISIBLE
-            }
-            false -> {
-                dialog.dismiss()
-                progress_bar_horizontal_payment.visibility = View.GONE
-            }
+            true -> dialog.show()
+            false -> dialog.dismiss()
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun onResultDataPayment(responseGetDataPayment: ResponseGetDataPayment) {
-        dataPayment = DataPayment(product_id, responseGetDataPayment.data[0].quantity)
+    override fun onResultDataPayment(responseGetDataPayment: ResponseGetDataPayment,dataPayment: List<DataGetPayment>) {
+        paymentAdapter.setData(responseGetDataPayment.data)
+        data = dataPayment
         transactionAmount = responseGetDataPayment.transactionAmount
         ongkir = responseGetDataPayment.ongkir
         count = responseGetDataPayment.count
         checkedAmount = responseGetDataPayment.checkedAmount
-        GlideHelper.setImage(
-            applicationContext,
-            responseGetDataPayment.data[0].picturePayment.picture, img_item_payment
-        )
-        tv_title_payment.text = responseGetDataPayment.data[0].productPayment.name
-        MoneyHelper.setRupiah(tv_price_payment, responseGetDataPayment.data[0].productPayment.price)
-        MoneyHelper.setRupiah(tv_total_price_payment, checkedAmount)
-        tv_total_qty_payment.text = responseGetDataPayment.data[0].quantity.toString()
-        MoneyHelper.setRupiah(tv_ongkir_payment, ongkir)
-        MoneyHelper.setRupiah(tv_total_payment, transactionAmount)
-
+        MoneyHelper.setRupiah(tv_total_price_payment_all, checkedAmount)
+        MoneyHelper.setRupiah(tv_ongkir_payment_all, ongkir)
+        MoneyHelper.setRupiah(tv_total_payment_all, transactionAmount)
+        tv_total_qty_payment_all.text = count.toString()
     }
 
     override fun onResultUploadPhoto(photo_payment: String) {
         photo_id = photo_payment
-        btn_submit_payment.visibility = View.VISIBLE
+        btn_submit_payment_all.visibility = View.VISIBLE
     }
 
     override fun resultPayment(sukses: Boolean) {
-        if (sukses) {
+        if (sukses){
+           startActivity(Intent(this,MainActivity::class.java))
+            finishAffinity()
             finish()
         }
     }
 
     override fun showMessage(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+      Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
     }
 
     private fun uploadPhoto() {
-        upload_foto_payment.setOnClickListener {
+        upload_foto_payment_all.setOnClickListener {
             Dexter.withActivity(this)
                 .withPermissions(
                     Manifest.permission.CAMERA,
@@ -190,7 +199,7 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
                 .withListener(object : MultiplePermissionsListener {
                     override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                         if (report.areAllPermissionsGranted()) {
-                            ImagePicker.with(this@PaymentActivity)
+                            ImagePicker.with(this@PaymentActivityAll)
                                 .crop()
                                 .compress(1024)
                                 .maxResultSize(1080, 1080)
@@ -245,9 +254,9 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
         when (resultCode) {
             Activity.RESULT_OK -> {
                 val fileUri = data?.data
-                upload_foto_payment.setImageURI(fileUri)
+                upload_foto_payment_all.setImageURI(fileUri)
                 val file: File = ImagePicker.getFile(data)!!
-                paymentPresenter.uploadFoto(sessionManager.prefToken, file)
+                paymentAllPresenter.uploadFoto(sessionManager.prefToken, file)
 
             }
             ImagePicker.RESULT_ERROR -> {
@@ -268,6 +277,7 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.btn_sheet_ok.setOnClickListener {
+            bottomSheetDialog.dismiss()
             finish()
         }
     }

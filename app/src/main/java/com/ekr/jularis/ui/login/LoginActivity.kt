@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.Toast
 import com.ekr.jularis.R
 import com.ekr.jularis.data.response.ResponseLogin
+import com.ekr.jularis.ui.MainActivity
+import com.ekr.jularis.ui.detail.DetailActivity
 import com.ekr.jularis.ui.register.RegisterActivity
 import com.ekr.jularis.ui.reset.ResetPasswordActivity
 import com.ekr.jularis.utils.SessionManager
@@ -16,14 +18,14 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity(), LoginContract.View {
     private lateinit var loginPresenter: LoginPresenter
     private lateinit var sessionManager: SessionManager
+    private var terima: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         loginPresenter = LoginPresenter(this)
         sessionManager = SessionManager(this)
-        if (sessionManager.prefIsLogin) {
-            finish()
-        }
+        terima = intent.getStringExtra("logout").toString()
+
     }
 
     override fun initListener() {
@@ -77,7 +79,14 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun onResult(responseLogin: ResponseLogin) {
         responseLogin.data?.let { loginPresenter.setPrefs(sessionManager, it) }
-        finish()
+        if (terima.equals("logout")) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finishAffinity()
+            finish()
+        } else {
+            finish()
+        }
+
     }
 
     override fun showMessage(message: String) {

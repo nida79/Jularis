@@ -19,8 +19,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
+        <activity android:name=".ui.paymentall.PaymentActivityAll"></activity>
         <activity android:name=".ui.payment.PaymentActivity" />
-        <activity android:name="com.ekr.jularis.ui.detail.DetailActivity" />
+        <activity android:name=".ui.detail.DetailActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

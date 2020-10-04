@@ -1,0 +1,16 @@
+package com.ekr.jularis.data.payment
+
+
+import com.google.gson.annotations.SerializedName
+
+data class DatapostPayment2(
+    @SerializedName("data") val dataPayment: List<DataGetPayment>,
+    @SerializedName("address") val address: String,
+    @SerializedName("count") val count : Int,
+    @SerializedName("note") val note: String?,
+    @SerializedName("checked_amount") val checked_amount:Int,
+    @SerializedName("payment_method") val paymentMethod: String,
+    @SerializedName("ongkir") val ongkir: Int,
+    @SerializedName("transaction_amount") val transaction_amount : Int,
+    @SerializedName("transaction_photo_id") val transactionPhotoId: String?
+)

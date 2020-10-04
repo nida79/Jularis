@@ -32,7 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <RelativeLayout
+            android:id="@+id/setting_wadah_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:ignore="UselessParent">
@@ -86,6 +88,7 @@
                 android:layout_below="@+id/idbiasa" />
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/setting_wadah_cp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -263,7 +266,9 @@
                 android:background="@color/abu_soft"
                 android:layout_below="@id/tv_hs_setting"/>
         </RelativeLayout>
+
     </LinearLayout>
+
     <com.github.ybq.android.spinkit.SpinKitView
         android:layout_marginBottom="@dimen/_50sdp"
         android:layout_centerHorizontal="true"
@@ -274,36 +279,37 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:SpinKit_Color="@color/colorPrimary" />
+
     <RelativeLayout
-        android:id="@+id/btn_logout"
-        android:layout_marginBottom="@dimen/_50sdp"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:id="@+id/setting_btn_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="UselessParent">
+        android:layout_height="wrap_content">
         <ImageView
             android:layout_centerVertical="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_marginStart="@dimen/_15sdp"
-            android:id="@+id/img_lo_setting"
+            android:id="@+id/img_login_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_logout"
+            android:src="@drawable/ic_login"
             android:contentDescription="@string/todo"
-            app:tint="@color/pink" />
+            app:tint="@color/colorPrimary" />
         <TextView
             android:layout_marginStart="@dimen/_15sdp"
-            android:id="@+id/tv_lo_setting"
+            android:id="@+id/tv_login_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/pink"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/_12ssp"
-            android:text="@string/logout"
+            android:text="@string/login"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/_8sdp"
             android:fontFamily="@font/dosis_bold"
-            android:layout_toEndOf="@+id/img_lo_setting"
+            android:layout_toEndOf="@+id/img_login_setting"
             tools:ignore="RelativeOverlap" />
         <ImageView
             android:layout_width="wrap_content"
@@ -313,7 +319,7 @@
             android:layout_centerVertical="true"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             android:contentDescription="@string/todo"
-            app:tint="@color/pink" />
+            app:tint="@color/colorPrimary" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -321,7 +327,61 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:background="@color/abu_soft"
-            android:layout_below="@id/tv_lo_setting"/>
+            android:layout_below="@id/tv_login_setting"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_50sdp"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/img_lo_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_logout"
+            app:tint="@color/pink" />
+
+        <TextView
+            android:id="@+id/tv_lo_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_toEndOf="@+id/img_lo_setting"
+            android:fontFamily="@font/dosis_bold"
+            android:text="@string/logout"
+            android:textColor="@color/pink"
+            android:textSize="@dimen/_12ssp"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:tint="@color/pink" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tv_lo_setting"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:background="@color/abu_soft" />
     </RelativeLayout>
 
 </RelativeLayout>

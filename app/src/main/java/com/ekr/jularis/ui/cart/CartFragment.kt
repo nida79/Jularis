@@ -1,6 +1,7 @@
 package com.ekr.jularis.ui.cart
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.ekr.jularis.R
 import com.ekr.jularis.data.cart.Checkout
 import com.ekr.jularis.data.response.ResponseCart
 import com.ekr.jularis.databinding.FragmentCartBinding
+import com.ekr.jularis.ui.paymentall.PaymentActivityAll
 import com.ekr.jularis.utils.MoneyHelper
 import com.ekr.jularis.utils.SessionManager
 import es.dmoral.toasty.Toasty
@@ -88,6 +90,9 @@ class CartFragment : Fragment(), CartContract.View {
         })
         binding.tvDelete.setOnClickListener {
             cartPresenter.doDeleteItem(sessionManager.prefToken)
+        }
+        binding.btnKeranjangBuy.setOnClickListener {
+            startActivity(Intent(requireActivity(),PaymentActivityAll::class.java))
         }
         actionCheckAll()
 

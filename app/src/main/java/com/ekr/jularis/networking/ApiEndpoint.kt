@@ -2,6 +2,7 @@ package com.ekr.jularis.networking
 
 import com.ekr.jularis.data.cart.postcheckout.DataPOST
 import com.ekr.jularis.data.payment.DatapostPayment
+import com.ekr.jularis.data.payment.DatapostPayment2
 import com.ekr.jularis.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -75,7 +76,7 @@ interface ApiEndpoint {
 
     @Headers("Accept: application/json")
     @GET("transaction/process/bulk")
-    fun getdataPaymentAll(@Header("Authorization") token: String): Call<ResponseCart>
+    fun getdataPaymentAll(@Header("Authorization") token: String): Call<ResponseGetDataPayment>
 
     @Headers("Accept: application/json")
     @FormUrlEncoded
@@ -124,5 +125,12 @@ interface ApiEndpoint {
     fun doPayment(
         @Header("Authorization") token: String,
         @Body datapostPayment: DatapostPayment
+    ): Call<ResponseGlobal>
+
+    @Headers("Accept: application/json")
+    @POST("transaction")
+    fun doPaymentAll(
+        @Header("Authorization") token: String,
+        @Body datapostPayment: DatapostPayment2
     ): Call<ResponseGlobal>
 }

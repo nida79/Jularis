@@ -34,7 +34,7 @@
             android:layout_margin="10dp"
             android:fontFamily="@font/roboto"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/_17ssp"
+            android:textSize="@dimen/_15ssp"
             android:textStyle="bold"
             tools:text="Paket Beras Matap Sekali Bosqu" />
 
@@ -152,6 +152,7 @@
     <com.github.ybq.android.spinkit.SpinKitView
         android:layout_marginTop="@dimen/_30sdp"
         android:id="@+id/spin_kit_detail"
+        app:SpinKit_Color="@color/colorPrimary"
         style="@style/SpinKitView.Large.ThreeBounce"
         android:layout_width="@dimen/_120sdp"
         android:layout_height="wrap_content"
@@ -160,14 +161,14 @@
 
     <Button
         android:id="@+id/btn_detail_buy"
-        android:layout_width="@dimen/_160sdp"
+        android:layout_width="@dimen/_150sdp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="end"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/oval_btn"
+        android:background="@drawable/detil_buy"
         android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
         android:drawablePadding="-35dp"
         android:fontFamily="@font/dosis_extrabold"
@@ -179,14 +180,14 @@
         tools:ignore="RtlSymmetry" />
 
     <Button
+        android:layout_toStartOf="@+id/btn_detail_buy"
         android:id="@+id/btn_detail_addcart"
-        android:layout_width="@dimen/_100sdp"
+        android:layout_width="@dimen/_80sdp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="end"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/addcart_btn"
         android:drawableStart="@drawable/ic_baseline_add_shopping_cart_24"
         android:fontFamily="@font/dosis_extrabold"
@@ -195,5 +196,19 @@
         android:paddingEnd="@dimen/_10sdp"
         android:text="@string/simpan"
         android:textColor="@color/putih"
-        android:textSize="@dimen/_12ssp" />
+        android:textSize="@dimen/_11ssp" />
+    <Button
+        android:id="@+id/btn_detail_back"
+        android:elevation="@dimen/_10sdp"
+        android:fontFamily="@font/dosis_semibold"
+        android:paddingStart="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_back"
+        android:drawableStart="@drawable/ic_baseline_arrow_back_24"
+        tools:ignore="RtlSymmetry" />
 </RelativeLayout>
