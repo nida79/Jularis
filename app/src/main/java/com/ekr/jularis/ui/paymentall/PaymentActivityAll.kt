@@ -6,23 +6,20 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekr.jularis.R
 import com.ekr.jularis.data.payment.DataGetPayment
-import com.ekr.jularis.data.payment.DataPayment
-import com.ekr.jularis.data.payment.DatapostPayment
 import com.ekr.jularis.data.payment.DatapostPayment2
 import com.ekr.jularis.data.response.ResponseGetDataPayment
 import com.ekr.jularis.ui.MainActivity
-import com.ekr.jularis.utils.LoadingDialog
+import com.ekr.jularis.utils.DialogHelper
 import com.ekr.jularis.utils.MoneyHelper
 import com.ekr.jularis.utils.SessionManager
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -33,7 +30,6 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.activity_payment_all.*
 import kotlinx.android.synthetic.main.bottom_sheet_dialog.*
 import java.io.File
@@ -50,12 +46,11 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
     private var tipeBayar = "Bayar Ditempat"
     private var photo_id: String? = null
     private lateinit var data : List<DataGetPayment>
-    private lateinit var dataKirim : List<DataPayment>
     private lateinit var datapostPayment: DatapostPayment2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment_all)
-        dialog = LoadingDialog.globalLoading(this)
+        dialog = DialogHelper.globalLoading(this)
         paymentAllPresenter = PaymentAllPresenter(this)
         sessionManager = SessionManager(this)
         edt_alamat_payment_all.setText(sessionManager.prefAlamat)
@@ -137,15 +132,9 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
     override fun onLoading(loading: Boolean) {
         when (loading) {
             true -> {
-                rcv_payment.visibility = View.INVISIBLE
-                shimmer_container_paymentall.visibility = View.VISIBLE
-                shimmer_container_paymentall.startShimmer()
                 progress_bar_horizontal_payment_all.visibility = View.VISIBLE
             }
             false -> {
-                rcv_payment .visibility = View.VISIBLE
-                shimmer_container_paymentall.visibility = View.GONE
-                shimmer_container_paymentall.stopShimmer()
                 progress_bar_horizontal_payment_all.visibility = View.GONE
             }
         }

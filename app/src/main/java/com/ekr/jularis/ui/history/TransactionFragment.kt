@@ -1,4 +1,4 @@
-package com.ekr.jularis.ui
+package com.ekr.jularis.ui.history
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

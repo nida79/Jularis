@@ -46,4 +46,36 @@ class SettingPresenter (val view: SettingContract.View):SettingContract.Presente
             })
     }
 
+    override fun changePassword(token: String, old_password: String, new_password: String) {
+        ApiService.endpoint.doChangePassword(token,old_password, new_password).enqueue(object : Callback<ResponseGlobal>{
+            override fun onResponse(
+                call: Call<ResponseGlobal>,
+                response: Response<ResponseGlobal>
+            ) {
+
+                when {
+                    response.isSuccessful -> {
+                        val result: ResponseGlobal? = response.body()
+                        if (result!!.status) {
+
+                            view.resultChangePassword(result.status)
+                            view.showMessage(result.message)
+                        }
+                    }
+                    response.code() != 200 -> {
+                        val result: ResponseGlobal = Gson().fromJson(
+                            response.errorBody()!!.charStream(),
+                            ResponseGlobal::class.java
+                        )
+                        view.showMessage(result.message)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
+                view.showMessage(t.stackTraceToString())
+            }
+        })
+    }
+
 }

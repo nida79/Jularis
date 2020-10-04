@@ -8,7 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.WindowManager
 import com.ekr.jularis.R
 
-class LoadingDialog {
+class DialogHelper {
     companion object{
        fun globalLoading(activity: Activity): Dialog {
            val dialog = Dialog(activity)
@@ -26,6 +26,20 @@ class LoadingDialog {
         fun successDialog(activity: Activity): Dialog {
             val dialog = Dialog(activity)
             dialog.setContentView(R.layout.pop_loading)
+            dialog.setCanceledOnTouchOutside(true)
+            dialog.window!!.setLayout(
+                WindowManager.LayoutParams.WRAP_CONTENT, WindowManager
+                    .LayoutParams.WRAP_CONTENT
+            )
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window!!.attributes.windowAnimations = android.R.style.Animation_Dialog
+            dialog.setCancelable(true)
+            return dialog
+        }
+
+        fun changePasswordDialog(activity: Activity):Dialog{
+            val dialog = Dialog(activity)
+            dialog.setContentView(R.layout.change_password)
             dialog.setCanceledOnTouchOutside(false)
             dialog.window!!.setLayout(
                 WindowManager.LayoutParams.WRAP_CONTENT, WindowManager

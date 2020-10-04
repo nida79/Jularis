@@ -71,5 +71,8 @@
     <string name="keluar">Keluar</string>
     <string name="batal">Batal</string>
     <string name="anda_yakin_ingin_membatalkan_transaksi">Anda yakin ingin membatalkan transaksi ?</string>
+    <string name="change_password">Change Password</string>
+    <string name="password_baru">Password Baru</string>
+    <string name="password_lama">Password Lama</string>
 
 </resources>

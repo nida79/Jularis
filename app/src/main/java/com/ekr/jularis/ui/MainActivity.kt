@@ -1,11 +1,11 @@
 package com.ekr.jularis.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ekr.jularis.R
 import com.ekr.jularis.ui.cart.CartFragment
+import com.ekr.jularis.ui.history.TransactionFragment
 import com.ekr.jularis.ui.home.HomeFragment
 import com.ekr.jularis.ui.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_main.*

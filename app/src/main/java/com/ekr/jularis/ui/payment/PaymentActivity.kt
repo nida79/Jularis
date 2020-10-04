@@ -19,11 +19,10 @@ import com.ekr.jularis.data.payment.DataPayment
 import com.ekr.jularis.data.payment.DatapostPayment
 import com.ekr.jularis.data.response.ResponseGetDataPayment
 import com.ekr.jularis.utils.GlideHelper
-import com.ekr.jularis.utils.LoadingDialog
+import com.ekr.jularis.utils.DialogHelper
 import com.ekr.jularis.utils.MoneyHelper
 import com.ekr.jularis.utils.SessionManager
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -51,7 +50,7 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
-        dialog = LoadingDialog.globalLoading(this)
+        dialog = DialogHelper.globalLoading(this)
         paymentPresenter = PaymentPresenter(this)
         sessionManager = SessionManager(this)
         product_id = intent.getStringExtra("pd_id").toString()

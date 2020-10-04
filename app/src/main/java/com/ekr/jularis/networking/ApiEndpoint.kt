@@ -110,8 +110,10 @@ interface ApiEndpoint {
 
     @FormUrlEncoded
     @POST("logout")
-    fun logoutAccount(@Header("Authorization") token: String,
-    @Field("logout") bebas:String): Call<ResponseGlobal>
+    fun logoutAccount(
+        @Header("Authorization") token: String,
+        @Field("logout") bebas: String
+    ): Call<ResponseGlobal>
 
     @FormUrlEncoded
     @POST("checkout/all")
@@ -133,4 +135,12 @@ interface ApiEndpoint {
         @Header("Authorization") token: String,
         @Body datapostPayment: DatapostPayment2
     ): Call<ResponseGlobal>
+
+    @FormUrlEncoded
+    @POST("profile/change-password")
+    fun doChangePassword(
+        @Header("Authorization") token: String,
+        @Field("old_password") old_password: String,
+        @Field("new_password") new_password: String
+    ) : Call<ResponseGlobal>
 }
