@@ -1,14 +1,17 @@
 package com.ekr.jularis.ui.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.ekr.jularis.R
 import com.ekr.jularis.data.response.ResponseGlobal
+import com.ekr.jularis.ui.login.LoginActivity
 import com.ekr.jularis.utils.Validator
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
+import java.util.*
 
 class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     private lateinit var registerPresnter: RegisterPresnter
@@ -57,8 +60,8 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
                 }
                 else -> {
                     registerPresnter.doRegister(
-                        tie_regis_username.text.toString().trim(),
-                        tie_regis_email.text.toString().trim(),
+                        tie_regis_username.text.toString().toLowerCase(Locale.ROOT).trim(),
+                        tie_regis_email.text.toString().toLowerCase(Locale.ROOT).trim(),
                         tie_regis_pswd.text.toString().trim(),
                         tie_regis_nama.text.toString(),
                         tie_regis_nohp.text.toString().trim(),
@@ -91,7 +94,13 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun onResult(responseGlobal: ResponseGlobal) {
-        finish()
+      if (responseGlobal.status){
+          val intent  = Intent(this,LoginActivity::class.java)
+          intent.putExtra("logout","register")
+          startActivity(intent)
+          finishAffinity()
+          finish()
+      }
     }
 
     override fun showMessage(message: String) {

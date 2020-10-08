@@ -68,7 +68,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun onResume() {
         super.onResume()
-        page= 1
+        page.minus(1)
         homePresenter.getProduct(page, null, null, null)
     }
 
@@ -94,6 +94,9 @@ class HomeFragment : Fragment(), HomeContract.View {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null || query != "") {
                     homePresenter.getProduct(null, query, null, null)
+                }else{
+                    page = 1
+                    homePresenter.getProduct(page, null, null, null)
                 }
                 return false
             }
@@ -101,6 +104,9 @@ class HomeFragment : Fragment(), HomeContract.View {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null || newText != "") {
                     homePresenter.getProduct(null, newText, null, null)
+                }else{
+                    page = 1
+                    homePresenter.getProduct(page, null, null, null)
                 }
                 return false
             }
@@ -110,18 +116,14 @@ class HomeFragment : Fragment(), HomeContract.View {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy > 0) {
                     val countItem = gridManager.itemCount
-                    val lastVisiblePosition =
-                        gridManager.findLastCompletelyVisibleItemPosition()
+                    val lastVisiblePosition = gridManager.findLastCompletelyVisibleItemPosition()
                     if (lastVisiblePosition == countItem - 1) {
                         if (!isLoading && page < totalPage) {
                             page = page.plus(1)
                             homePresenter.getNextProduct(page)
                         }
                     }
-
                 }
-
-
             }
         })
 
@@ -232,7 +234,6 @@ class HomeFragment : Fragment(), HomeContract.View {
                     startActivity(intent)
                 }
             }
-
         })
     }
 

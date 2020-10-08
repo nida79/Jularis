@@ -74,5 +74,14 @@
     <string name="change_password">Change Password</string>
     <string name="password_baru">Password Baru</string>
     <string name="password_lama">Password Lama</string>
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="ambil_foto">Ambil Foto</string>
+    <string name="tidak">Tidak</string>
+    <string name="iya">Iya</string>
+    <string name="selesai">Selesai</string>
+    <string name="prosess">Prosess</string>
+    <string name="histori_transaksi">Histori Transaksi</string>
+    <string name="belum_ada_transaksi">Belum Ada Transaksi</string>
 
 </resources>

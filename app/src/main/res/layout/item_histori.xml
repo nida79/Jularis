@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_6sdp"
+    android:layout_marginEnd="@dimen/_6sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_2sdp"
+    app:cardBackgroundColor="@color/putih"
+    app:cardCornerRadius="@dimen/_6sdp"
+    app:cardElevation="@dimen/_8sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.infinityandroid.roundedimageview.RoundedImageView
+            android:id="@+id/img_item_histori"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_margin="@dimen/_4sdp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:corner_radius="10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_tgl_histori"
+
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textAlignment="viewEnd"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_title_histori"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2020-10-10" />
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/tv_title_histori"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:ellipsize="end"
+            android:fontFamily="@font/dosis_semibold"
+            android:maxLines="2"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@id/tv_tgl_histori"
+            app:layout_constraintStart_toEndOf="@+id/img_item_histori"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Barang Berkas asdasddasa" />
+
+        <TextView
+            android:id="@+id/tv_price_histori"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_invoice_histori"
+            app:layout_constraintStart_toEndOf="@+id/img_item_histori"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_histori"
+            app:layout_constraintVertical_bias="0.24000001"
+            tools:text="Rp12.000" />
+        <TextView
+            android:id="@+id/tv_invoice_histori"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_state_histori"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/dosis"
+            android:textColor="@color/abu_soft"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_item_histori"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price_histori"
+            tools:text="INV/asdasd/asdasd" />
+
+        <TextView
+            android:textAlignment="viewEnd"
+            android:id="@+id/tv_state_histori"
+            android:paddingEnd="@dimen/_7sdp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/abu_soft"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_invoice_histori"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price_histori"
+            tools:text="Menunggu Konfirmasi"
+            tools:ignore="RtlSymmetry" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

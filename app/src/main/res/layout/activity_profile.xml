@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".ui.profile.ProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_170sdp"
+        android:background="@drawable/oval_prifle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_por"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/sf_ui"
+            android:text="@string/profile"
+            android:textColor="@color/putih"
+            android:textSize="@dimen/_23ssp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_edit_profile"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_below="@id/tv_por"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/img_no_image"
+            app:civ_border_color="@color/putih"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/tv_name_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_83sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toEndOf="@id/img_edit_profile"
+            android:fontFamily="@font/dosis_bold"
+            android:textColor="@color/putih"
+            android:textSize="@dimen/_17ssp"
+            tools:text="Erick Prastya" />
+
+        <TextView
+            android:id="@+id/tv_email_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name_profile"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toEndOf="@id/img_edit_profile"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/putih"
+            android:textSize="@dimen/_14ssp"
+            tools:text="erickprastya79@gmail.com" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_usrname_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:drawablePadding="@dimen/_10sdp"
+        android:fontFamily="@font/dosis_semibold"
+        android:textColor="@color/abu"
+        android:textSize="@dimen/_17ssp"
+        app:drawableStartCompat="@drawable/ic_baseline_person"
+        app:drawableTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        tools:text="erick" />
+
+    <TextView
+        android:id="@+id/tv_address_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:drawablePadding="@dimen/_10sdp"
+        android:fontFamily="@font/dosis_semibold"
+        android:textColor="@color/abu"
+        android:textSize="@dimen/_17ssp"
+        app:drawableStartCompat="@drawable/ic_baseline_location_city_24"
+        app:drawableTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_usrname_profile"
+        tools:text="Jalan Pelita Indah 2 RT 08 No 56 i Pulogebang Cakung Jakarta Timur" />
+
+    <TextView
+        android:id="@+id/tv_nohp_profile"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:drawablePadding="@dimen/_10sdp"
+        android:fontFamily="@font/dosis_semibold"
+        android:textColor="@color/abu"
+        android:textSize="@dimen/_17ssp"
+        app:drawableStartCompat="@drawable/ic_baseline_call_24"
+        app:drawableTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_address_profile"
+        tools:text="087879503384" />
+
+    <Button
+        android:id="@+id/button_show_dialog"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/rounded_btn"
+        android:fontFamily="@font/dosis_bold"
+        android:text="@string/edit_profile"
+        android:textColor="@color/putih"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/rounded_back"
+        android:drawableStart="@drawable/ic_baseline_arrow_back_24"
+        android:elevation="@dimen/_10sdp"
+        android:paddingStart="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="RtlSymmetry" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

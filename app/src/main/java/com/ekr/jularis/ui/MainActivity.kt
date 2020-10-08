@@ -1,6 +1,8 @@
 package com.ekr.jularis.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ekr.jularis.R
@@ -8,13 +10,25 @@ import com.ekr.jularis.ui.cart.CartFragment
 import com.ekr.jularis.ui.history.TransactionFragment
 import com.ekr.jularis.ui.home.HomeFragment
 import com.ekr.jularis.ui.setting.SettingFragment
+import com.ekr.jularis.utils.SessionManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+    var exit: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val sessionManager = SessionManager(this)
+        if (sessionManager.prefIsLogin){
+            if (sessionManager.prefRole!="user"){
+                startActivity(Intent(this,MainActivity2::class.java))
+                finishAffinity()
+                finish()
+            }
+        }
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().replace(
                 R.id.fragment_container,
@@ -47,8 +61,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        finishAffinity()
-        finish()
+        if ((System.currentTimeMillis() - exit) > 2000) {
+            Toast.makeText(applicationContext, "Tekan Sekali Lagi Untuk Keluar", Toast.LENGTH_SHORT)
+                .show()
+            exit = System.currentTimeMillis()
+        } else {
+            finishAffinity()
+            finish()
+        }
     }
 }

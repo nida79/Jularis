@@ -1,39 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".ui.history.TransactionFragment">
+    tools:context=".ui.history.prosess.ProsesFragment">
 
-    <TextView
-        android:id="@+id/header_histori"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/putih"
-        android:elevation="@dimen/_4sdp"
-        android:fontFamily="@font/dosis_bold"
-        android:gravity="center"
-        android:text="@string/histori_transaksi"
-        android:textAlignment="center"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/_17ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <RelativeLayout
-        android:id="@+id/wadah_histori"
+        android:id="@+id/wadah_proses"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorPrimary"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/header_histori">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_histori"
+            android:id="@+id/search_proses"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="35dp"
             android:layout_centerInParent="true"
@@ -46,7 +30,7 @@
     </RelativeLayout>
 
     <ProgressBar
-        android:id="@+id/progress_bar_horizontal_histori"
+        android:id="@+id/progress_bar_horizontal_proses"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_15sdp"
@@ -59,15 +43,15 @@
         android:max="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wadah_histori" />
+        app:layout_constraintTop_toBottomOf="@+id/wadah_proses" />
 
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_histori"
+        android:id="@+id/shimmer_proses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/progress_bar_horizontal_histori"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar_horizontal_proses"
         app:shimmer_duration="1000">
 
         <LinearLayout
@@ -90,14 +74,11 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swp_histori"
+        android:id="@+id/swp_proses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progress_bar_horizontal_histori">
+        android:visibility="visible">
         <RelativeLayout
             android:layout_gravity="center_vertical"
             android:id="@+id/template_empty_transaction"
@@ -128,9 +109,10 @@
                 android:textSize="@dimen/_13ssp" />
         </RelativeLayout>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_histori"
+            android:id="@+id/rcv_proses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_histori" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </LinearLayout>

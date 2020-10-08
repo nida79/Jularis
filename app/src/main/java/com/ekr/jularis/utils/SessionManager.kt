@@ -16,6 +16,7 @@ class SessionManager(context: Context):Krate{
     private val PREFS_FOTO : String = "prefs_is_foto"
     private val PREFS_ROLE : String = "prefs_is_role"
     private val PREFS_EMAIL : String = "prefs_is_email"
+    private val PREFS_FCM : String = "prefs_is_fcm"
     override val sharedPreferences: SharedPreferences = context.applicationContext
         .getSharedPreferences(
             "jularis_prefs", Context.MODE_PRIVATE
@@ -29,6 +30,7 @@ class SessionManager(context: Context):Krate{
     var prefFoto by stringPref(PREFS_FOTO,"")
     var prefRole by stringPref(PREFS_ROLE,"")
     var prefEmail by stringPref(PREFS_EMAIL,"")
+    var prefFcm by stringPref(PREFS_FCM,"")
 
     fun logOut() {
         sharedPreferences.edit().clear().apply()

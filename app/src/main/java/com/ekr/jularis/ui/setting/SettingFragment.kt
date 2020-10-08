@@ -3,18 +3,20 @@ package com.ekr.jularis.ui.setting
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.ekr.jularis.R
 import com.ekr.jularis.ui.login.LoginActivity
+import com.ekr.jularis.ui.profile.ProfileActivity
 import com.ekr.jularis.utils.DialogHelper
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.SessionManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.bottom_sheet_dialog.*
+import kotlinx.android.synthetic.main.bottom_sheet_logout.*
 import kotlinx.android.synthetic.main.change_password.*
 import kotlinx.android.synthetic.main.fragment_setting.*
 
@@ -27,15 +29,22 @@ class SettingFragment : Fragment(), SettingContract.View {
         super.onActivityCreated(savedInstanceState)
         settingPresenter = SettingPresenter(this)
         sessionManager = SessionManager(requireActivity())
-        tv_name_setting.text = sessionManager.prefFullname
-        if (!sessionManager.prefIsLogin) {
+        if (sessionManager.prefIsLogin) {
+            tv_name_setting.text = sessionManager.prefFullname
+            btn_logout.visibility = View.VISIBLE
+            setting_wadah_profile.visibility = View.VISIBLE
+            setting_wadah_cp.visibility = View.VISIBLE
+            setting_btn_login.visibility = View.GONE
+            GlideHelper.setImage(requireContext(), sessionManager.prefFoto, img_profile_setting)
+        }
+        if (!sessionManager.prefIsLogin){
             btn_logout.visibility = View.GONE
             setting_wadah_profile.visibility = View.GONE
             setting_wadah_cp.visibility = View.GONE
             setting_btn_login.visibility = View.VISIBLE
-        } else {
-            GlideHelper.setImage(requireContext(), sessionManager.prefFoto, img_profile_setting)
         }
+
+
         dialog = DialogHelper.changePasswordDialog(requireActivity())
     }
 
@@ -47,6 +56,7 @@ class SettingFragment : Fragment(), SettingContract.View {
     }
 
     override fun initListener() {
+
         setting_wadah_cp.setOnClickListener {
             dialog.show()
             dialog.close_cp.setOnClickListener {
@@ -76,11 +86,26 @@ class SettingFragment : Fragment(), SettingContract.View {
             }
         }
 
+        setting_wadah_profile.setOnClickListener {
+            val intent = Intent(requireActivity(),ProfileActivity::class.java)
+            requireActivity().startActivity(intent)
+        }
+
         setting_btn_login.setOnClickListener {
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
         }
         btn_logout.setOnClickListener {
-            settingPresenter.doLogout(sessionManager.prefToken)
+            val bottomSheetDialog = BottomSheetDialog(requireActivity())
+            bottomSheetDialog.setContentView(R.layout.bottom_sheet_logout)
+            bottomSheetDialog.show()
+            bottomSheetDialog.setCanceledOnTouchOutside(false)
+            bottomSheetDialog.btn_sheet_tidak.setOnClickListener {
+                bottomSheetDialog.dismiss()
+            }
+            bottomSheetDialog.btn_sheet_iya.setOnClickListener {
+                settingPresenter.doLogout(sessionManager.prefToken)
+                bottomSheetDialog.dismiss()
+            }
         }
     }
 
@@ -113,12 +138,15 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     override fun resultLogout(status: Boolean) {
         if (status) {
+            btn_logout.visibility = View.GONE
+            setting_wadah_profile.visibility = View.GONE
+            setting_wadah_cp.visibility = View.GONE
+            setting_btn_login.visibility = View.VISIBLE
+            sessionManager.logOut()
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             intent.putExtra("logout", "logout")
             startActivity(intent)
-            sessionManager.logOut()
-            requireActivity().finishAffinity()
-            requireActivity().finish()
+
         }
     }
 

@@ -50,5 +50,18 @@ class DialogHelper {
             dialog.setCancelable(true)
             return dialog
         }
+
+        fun editDialog(activity: Activity):Dialog{
+            val dialog = Dialog(activity)
+            dialog.setContentView(R.layout.layout_edt_profile)
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.window!!.setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT
+            )
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window!!.attributes.windowAnimations = android.R.style.Animation_Dialog
+            dialog.setCancelable(false)
+            return dialog
+        }
     }
 }

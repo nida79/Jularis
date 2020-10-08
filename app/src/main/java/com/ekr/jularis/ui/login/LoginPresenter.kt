@@ -62,5 +62,6 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.Presenter {
         sessionManager.prefToken = "Bearer "+ dataLogin.token
         sessionManager.prefRole = dataLogin.role
         sessionManager.prefFoto = dataLogin.photo
+        sessionManager.prefFcm = dataLogin.firebase_token
     }
 }

@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.ekr.jularis.R
 import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.ui.MainActivity
+import com.ekr.jularis.ui.MainActivity2
 import com.ekr.jularis.ui.detail.DetailActivity
 import com.ekr.jularis.ui.register.RegisterActivity
 import com.ekr.jularis.ui.reset.ResetPasswordActivity
@@ -79,12 +80,26 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun onResult(responseLogin: ResponseLogin) {
         responseLogin.data?.let { loginPresenter.setPrefs(sessionManager, it) }
-        if (terima.equals("logout")) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finishAffinity()
-            finish()
-        } else {
-            finish()
+        when {
+            sessionManager.prefRole !="user" -> {
+                startActivity(Intent(this, MainActivity2::class.java))
+                finishAffinity()
+                finish()
+            }
+            terima.equals("logout") -> {
+                finish()
+            }
+            terima.equals("register")->{
+                startActivity(Intent(this, MainActivity::class.java))
+                finishAffinity()
+                finish()
+            }
+            else -> {
+                startActivity(Intent(this, MainActivity::class.java))
+                finishAffinity()
+                finish()
+
+            }
         }
 
     }

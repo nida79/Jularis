@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_10sdp"
+    android:background="@drawable/rounded_popup">
+    <TextView
+        android:id="@+id/text_keterangan_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sf_ui"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:textSize="@dimen/_17ssp"
+        android:textColor="@color/text_color"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:text="Anda Ingin Keluar Akun ?"/>
+    <LinearLayout
+        android:layout_below="@id/text_keterangan_logout"
+        android:id="@+id/atas_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        tools:ignore="UselessParent">
+
+        <Button
+            android:id="@+id/btn_sheet_iya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_btn"
+            android:backgroundTint="@color/abu_soft"
+            android:fontFamily="@font/dosis_bold"
+            android:text="@string/iya"
+            android:textColor="@color/putih"
+            android:textSize="@dimen/_13ssp"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btn_sheet_tidak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_btn"
+            android:backgroundTint="@color/orange"
+            android:fontFamily="@font/dosis_extrabold"
+            android:text="@string/tidak"
+            android:textColor="@color/putih"
+            android:textSize="@dimen/_13ssp"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+</RelativeLayout>

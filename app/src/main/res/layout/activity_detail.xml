@@ -200,7 +200,6 @@
     <Button
         android:id="@+id/btn_detail_back"
         android:elevation="@dimen/_10sdp"
-        android:fontFamily="@font/dosis_semibold"
         android:paddingStart="@dimen/_15sdp"
         android:layout_marginStart="@dimen/_5sdp"
         android:layout_width="@dimen/_50sdp"

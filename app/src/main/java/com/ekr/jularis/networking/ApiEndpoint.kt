@@ -10,7 +10,6 @@ import retrofit2.http.*
 
 
 interface ApiEndpoint {
-    @Headers("Accept: application/json")
     @FormUrlEncoded
     @POST("login")
     fun signIn(
@@ -18,7 +17,6 @@ interface ApiEndpoint {
         @Field("password") password: String
     ): Call<ResponseLogin>
 
-    @Headers("Accept: application/json")
     @FormUrlEncoded
     @POST("register")
     fun signUp(
@@ -30,7 +28,6 @@ interface ApiEndpoint {
         @Field("address") address: String
     ): Call<ResponseGlobal>
 
-    @Headers("Accept: application/json")
     @GET("product")
     fun getProduct(
         @Query("page") page: Int?,
@@ -39,7 +36,6 @@ interface ApiEndpoint {
         @Query("end_price") end_price: String?
     ): Call<ResponseProduct>
 
-    @Headers("Accept: application/json")
     @FormUrlEncoded
     @POST("checkout")
     fun addCart(
@@ -48,59 +44,31 @@ interface ApiEndpoint {
         @Field("quantity") quantity: Int
     ): Call<ResponseGlobal>
 
-    @Headers("Accept: application/json")
     @GET("checkout")
     fun getCartlist(
         @Header("Authorization") token: String
     ): Call<ResponseCart>
 
-    @Headers("Accept: application/json")
     @POST("checkout/calculation")
     fun doCalculation(
         @Header("Authorization") token: String,
         @Body data: DataPOST
     ): Call<ResponseGlobal>
 
-    @Headers("Accept: application/json")
     @DELETE("checkout-delete-bulk")
     fun deleteItemCart(
         @Header("Authorization") token: String
     ): Call<ResponseGlobal>
 
-    @Headers("Accept: application/json")
     @GET("transaction/process/{product_id}")
     fun getdataPaymentOne(
         @Header("Authorization") token: String,
         @Path("product_id") product_id: String
     ): Call<ResponseGetDataPayment>
 
-    @Headers("Accept: application/json")
     @GET("transaction/process/bulk")
     fun getdataPaymentAll(@Header("Authorization") token: String): Call<ResponseGetDataPayment>
 
-    @Headers("Accept: application/json")
-    @FormUrlEncoded
-    @POST("profile/change-password")
-    fun changePassword(
-        @Header("Authorization") token: String,
-        @Field("old_password") old_password: String,
-        @Field("new_password") new_password: String
-    ): Call<ResponseGlobal>
-
-    @Headers("Accept: application/json")
-    @FormUrlEncoded
-    @POST("profile/update")
-    fun updateProfile(
-        @Header("Authorization") token: String,
-        @Field("username") username: String,
-        @Field("full_name") full_name: String,
-        @Field("email") email: String,
-        @Field("no_telp") no_telp: String,
-        @Field("address") addres: String,
-
-        ): Call<ResponseGlobal>
-
-    @Headers("Accept: application/json")
     @Multipart
     @POST("transaction/photo")
     fun uploadPhotopayment(
@@ -122,14 +90,12 @@ interface ApiEndpoint {
         @Field("checked") checked: Int
     ): Call<ResponseGlobal>
 
-    @Headers("Accept: application/json")
     @POST("transaction")
     fun doPayment(
         @Header("Authorization") token: String,
         @Body datapostPayment: DatapostPayment
     ): Call<ResponseGlobal>
 
-    @Headers("Accept: application/json")
     @POST("transaction")
     fun doPaymentAll(
         @Header("Authorization") token: String,
@@ -142,5 +108,50 @@ interface ApiEndpoint {
         @Header("Authorization") token: String,
         @Field("old_password") old_password: String,
         @Field("new_password") new_password: String
-    ) : Call<ResponseGlobal>
+    ): Call<ResponseGlobal>
+
+    @FormUrlEncoded
+    @POST("profile/update")
+    fun doUpdateProfile(
+        @Header("Authorization") token: String,
+        @Field("full_name") full_name: String,
+        @Field("no_telp") no_telp: String,
+        @Field("address") address: String
+    ): Call<ResponseUpdateProfile>
+
+    @Multipart
+    @POST("profile/change-photo")
+    fun doChangePhotoProfile(
+        @Header("Authorization") token: String,
+        @Part photo: MultipartBody.Part
+    ): Call<ResponseGlobal>
+
+    @GET("profile")
+    fun getProfile(@Header("Authorization") token: String): Call<ResponseGetProfile>
+
+    @GET("transaction")
+    fun getHistoryComplete(
+        @Header("Authorization") token: String,
+        @Query("transaction_state") transaction_state: String = "Selesai",
+        @Query("page") page: Int?,
+        @Query("q") q: String?
+
+
+    ): Call<ResponseHistory>
+
+    @GET("transaction")
+    fun getHistoryProgress(
+        @Header("Authorization") token: String,
+        @Query("transaction_state_not") transaction_state: String = "Selesai",
+        @Query("page") page: Int?,
+        @Query("q") q: String?
+    ): Call<ResponseHistory>
+
+
+    @GET("transaction")
+    fun getHistoryFull(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int?,
+        @Query("q") q: String?
+    ): Call<ResponseHistory>
 }

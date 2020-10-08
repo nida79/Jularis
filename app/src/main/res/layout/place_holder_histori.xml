@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_6sdp"
+    android:layout_marginEnd="@dimen/_6sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_2sdp"
+    app:cardBackgroundColor="@color/putih"
+    app:cardCornerRadius="@dimen/_6sdp"
+    app:cardElevation="@dimen/_8sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.infinityandroid.roundedimageview.RoundedImageView
+            android:id="@+id/phd_img_item_histori"
+            android:layout_width="@dimen/_60sdp"
+            android:background="@drawable/oval_btn"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_margin="@dimen/_4sdp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:corner_radius="10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/phd_tv_tgl_histori"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:ellipsize="end"
+            android:fontFamily="@font/dosis_semibold"
+            android:background="@drawable/oval_btn"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="2020-10-10" />
+
+        <TextView
+            android:id="@+id/phd_tv_title_histori"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/oval_btn"
+            android:ellipsize="end"
+            android:fontFamily="@font/dosis_semibold"
+            android:maxLines="2"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toEndOf="@+id/phd_img_item_histori"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Barang Berkas asdasddasa" />
+
+        <TextView
+            android:id="@+id/phd_tv_price_histori"
+            android:layout_width="0dp"
+            android:background="@drawable/oval_btn"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@id/phd_tv_invoice_histori"
+            app:layout_constraintStart_toEndOf="@+id/phd_img_item_histori"
+            app:layout_constraintTop_toBottomOf="@+id/phd_tv_title_histori"
+            app:layout_constraintVertical_bias="0.24000001"
+            android:text="Rp12.000" />
+        <TextView
+            android:id="@+id/phd_tv_invoice_histori"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/oval_btn"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/phd_img_item_histori"
+            app:layout_constraintTop_toBottomOf="@+id/phd_tv_price_histori"
+            android:text="INV/asdasd/asdasd" />
+
+        <TextView
+            android:id="@+id/phd_tv_state_histori"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/oval_btn"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phd_tv_price_histori"
+            android:text="INV/asdasd/asdasd" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

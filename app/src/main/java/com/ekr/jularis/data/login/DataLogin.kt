@@ -9,6 +9,7 @@ data class DataLogin(
     @SerializedName("no_telp") val no_telp: String,
     @SerializedName("address") val address: String,
     @SerializedName("token") val token : String,
+    @SerializedName("firebase_token") val firebase_token : String,
     @SerializedName("photo") val photo : String,
     @SerializedName("role") val role: String
 )
