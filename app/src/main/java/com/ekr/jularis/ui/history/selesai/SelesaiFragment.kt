@@ -5,56 +5,162 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.R
+import com.ekr.jularis.data.response.HistoriData
+import com.ekr.jularis.data.response.ResponseHistory
+import com.ekr.jularis.databinding.FragmentSelesaiBinding
+import com.ekr.jularis.databinding.FragmentTransactionBinding
+import com.ekr.jularis.ui.history.TransactionAdapter
+import com.ekr.jularis.utils.SessionManager
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class SelesaiFragment : Fragment(), SelesaiContract.View {
+    private var isLoading: Boolean = false
+    private var page: Int = 1
+    private var totalPage: Int = 0
+    private lateinit var transactionAdapter: TransactionAdapter
+    private lateinit var selesaiPresenter: SelesaiPresenter
+    private lateinit var binding: FragmentSelesaiBinding
+    private lateinit var sessionManager: SessionManager
+    private lateinit var manager: LinearLayoutManager
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SelesaiFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SelesaiFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        selesaiPresenter = SelesaiPresenter(this)
+        sessionManager = SessionManager(requireContext())
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    override fun onStart() {
+        super.onStart()
+        selesaiPresenter.getHistoriFirst(sessionManager.prefToken, page, null)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_selesai, container, false)
+        binding = FragmentSelesaiBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SelesaiFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SelesaiFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun initListener() {
+        transactionAdapter = TransactionAdapter(arrayListOf())
+        manager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        binding.rcvSelesai.apply {
+            layoutManager = manager
+            adapter = transactionAdapter
+            setHasFixedSize(true)
+        }
+        binding.swpSelesai.setOnRefreshListener {
+            binding.swpSelesai.isRefreshing = false
+            page = 1
+            selesaiPresenter.getHistoriFirst(sessionManager.prefToken, page, null)
+        }
+        binding.rcvSelesai.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) {
+                    val countItem = manager.itemCount
+                    val lastVisiblePosition = manager.findLastCompletelyVisibleItemPosition()
+                    val isLastPosition = countItem.minus(1) == lastVisiblePosition
+                    if (lastVisiblePosition == countItem - 1) {
+                        if (!isLoading && isLastPosition && page < totalPage) {
+                            page = page.plus(1)
+                            selesaiPresenter.getHistoriNext(sessionManager.prefToken, page, null)
+                        }
+                    }
                 }
             }
+
+        })
+        binding.searchSelesai.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null || query != "") {
+                    selesaiPresenter.getHistoriFirst(sessionManager.prefToken, null, query)
+                } else {
+                    page = 1
+                    selesaiPresenter.getHistoriFirst(sessionManager.prefToken, page, null)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null || newText != "") {
+                    selesaiPresenter.getHistoriFirst(sessionManager.prefToken, null, newText)
+                } else {
+                    page = 1
+                    selesaiPresenter.getHistoriFirst(sessionManager.prefToken, page, null)
+                }
+                return false
+            }
+
+        })
+        transactionAdapter.setOnItemClickListener(object : TransactionAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int, data: HistoriData) {
+                Toast.makeText(requireActivity(), position.toString(), Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    override fun firstLoading(firstLoading: Boolean) {
+        when (firstLoading) {
+            true -> {
+                binding.rcvSelesai.visibility = View.GONE
+                binding.templateEmptySelesai.visibility = View.GONE
+                binding.progressBarHorizontalSelesai.visibility = View.GONE
+                binding.shimmerSelesai.visibility = View.VISIBLE
+                binding.shimmerSelesai.startShimmer()
+            }
+            false -> {
+                binding.templateEmptySelesai.visibility = View.GONE
+                binding.progressBarHorizontalSelesai.visibility = View.GONE
+                binding.shimmerSelesai.stopShimmer()
+                binding.shimmerSelesai.visibility = View.GONE
+                binding.rcvSelesai.visibility = View.VISIBLE
+
+            }
+        }
+    }
+
+    override fun nextLoading(nextLoading: Boolean) {
+        when (nextLoading) {
+            true -> {
+                isLoading = true
+                binding.templateEmptySelesai.visibility = View.GONE
+                binding.shimmerSelesai.visibility = View.GONE
+                binding.progressBarHorizontalSelesai.visibility = View.VISIBLE
+            }
+            false -> {
+                isLoading = false
+                binding.templateEmptySelesai.visibility = View.GONE
+                binding.shimmerSelesai.visibility = View.GONE
+                binding.progressBarHorizontalSelesai.visibility = View.GONE
+            }
+        }
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showEmptyCart(message: String) {
+        binding.rcvSelesai.visibility = View.GONE
+        binding.progressBarHorizontalSelesai.visibility = View.GONE
+        binding.shimmerSelesai.visibility = View.GONE
+        binding.templateEmptySelesai.visibility = View.VISIBLE
+        binding.tvEmptyTrans.text = message
+    }
+
+    override fun resultFirstRequest(responseHistory: ResponseHistory) {
+        totalPage = responseHistory.last_page
+        transactionAdapter.setData(responseHistory.data)
+    }
+
+    override fun resultNextRequest(responseHistory: ResponseHistory) {
+        totalPage = responseHistory.last_page
+        transactionAdapter.setNextData(responseHistory.data)
     }
 }

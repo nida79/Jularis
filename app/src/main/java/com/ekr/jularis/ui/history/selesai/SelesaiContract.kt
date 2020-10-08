@@ -1,10 +1,10 @@
-package com.ekr.jularis.ui.history
+package com.ekr.jularis.ui.history.selesai
 
 import com.ekr.jularis.data.response.ResponseHistory
 
-interface TransactionContract{
+interface SelesaiContract {
     interface Presenter{
-        fun getHistoriFull(token:String,page:Int?,q:String?)
+        fun getHistoriFirst(token:String,page:Int?,q:String?)
         fun getHistoriNext(token:String,page:Int?,q:String?)
     }
     interface View{
@@ -16,4 +16,5 @@ interface TransactionContract{
         fun resultFirstRequest(responseHistory: ResponseHistory)
         fun resultNextRequest(responseHistory: ResponseHistory)
     }
+
 }

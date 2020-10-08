@@ -129,29 +129,18 @@ interface ApiEndpoint {
     @GET("profile")
     fun getProfile(@Header("Authorization") token: String): Call<ResponseGetProfile>
 
-    @GET("transaction")
+    @GET("transaction?transaction_state=Selesai")
     fun getHistoryComplete(
         @Header("Authorization") token: String,
-        @Query("transaction_state") transaction_state: String = "Selesai",
         @Query("page") page: Int?,
         @Query("q") q: String?
-
-
     ): Call<ResponseHistory>
 
-    @GET("transaction")
+    @GET("transaction?transaction_state_not=Selesai")
     fun getHistoryProgress(
         @Header("Authorization") token: String,
-        @Query("transaction_state_not") transaction_state: String = "Selesai",
         @Query("page") page: Int?,
         @Query("q") q: String?
     ): Call<ResponseHistory>
 
-
-    @GET("transaction")
-    fun getHistoryFull(
-        @Header("Authorization") token: String,
-        @Query("page") page: Int?,
-        @Query("q") q: String?
-    ): Call<ResponseHistory>
 }

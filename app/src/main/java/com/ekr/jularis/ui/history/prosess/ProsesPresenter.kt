@@ -1,4 +1,4 @@
-package com.ekr.jularis.ui.history
+package com.ekr.jularis.ui.history.prosess
 
 import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.data.response.ResponseHistory
@@ -8,16 +8,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TransactionPresenter(val view: TransactionContract.View) : TransactionContract.Presenter {
+class ProsesPresenter(val view: ProsesContract.View):ProsesContract.Presenter{
     init {
         view.initListener()
         view.firstLoading(false)
         view.nextLoading(false)
     }
-
-    override fun getHistoriFull(token: String, page: Int?, q: String?) {
+    override fun getHistoriFirst(token: String, page: Int?, q: String?) {
         view.firstLoading(true)
-        ApiService.endpoint.getHistoryFull(token, page, q)
+        ApiService.endpoint.getHistoryProgress(token,page, q)
             .enqueue(object : Callback<ResponseHistory> {
                 override fun onResponse(
                     call: Call<ResponseHistory>,
@@ -48,7 +47,7 @@ class TransactionPresenter(val view: TransactionContract.View) : TransactionCont
 
     override fun getHistoriNext(token: String, page: Int?, q: String?) {
         view.nextLoading(true)
-        ApiService.endpoint.getHistoryFull(token, page, q)
+        ApiService.endpoint.getHistoryProgress(token,page, q)
             .enqueue(object : Callback<ResponseHistory> {
                 override fun onResponse(
                     call: Call<ResponseHistory>,

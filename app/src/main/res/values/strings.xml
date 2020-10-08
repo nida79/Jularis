@@ -83,5 +83,7 @@
     <string name="prosess">Prosess</string>
     <string name="histori_transaksi">Histori Transaksi</string>
     <string name="belum_ada_transaksi">Belum Ada Transaksi</string>
+    <string name="daftar_transaksi">Daftar Transaksi</string>
+    <string name="diproses">Diproses</string>
 
 </resources>

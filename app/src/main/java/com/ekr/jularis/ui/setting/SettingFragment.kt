@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ekr.jularis.R
+import com.ekr.jularis.databinding.FragmentProsesBinding
+import com.ekr.jularis.databinding.FragmentSettingBinding
 import com.ekr.jularis.ui.login.LoginActivity
 import com.ekr.jularis.ui.profile.ProfileActivity
 import com.ekr.jularis.utils.DialogHelper
@@ -24,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_setting.*
 class SettingFragment : Fragment(), SettingContract.View {
     private lateinit var settingPresenter: SettingPresenter
     private lateinit var sessionManager: SessionManager
+    private lateinit var settingBinding: FragmentSettingBinding
     private lateinit var dialog: Dialog
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -52,12 +55,13 @@ class SettingFragment : Fragment(), SettingContract.View {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_setting, container, false)
+        settingBinding = FragmentSettingBinding.inflate(layoutInflater)
+        return settingBinding.root
     }
 
     override fun initListener() {
 
-        setting_wadah_cp.setOnClickListener {
+        settingBinding.settingWadahCp.setOnClickListener {
             dialog.show()
             dialog.close_cp.setOnClickListener {
                 dialog.tie_cp_new.setText("")
@@ -112,11 +116,11 @@ class SettingFragment : Fragment(), SettingContract.View {
     override fun loadingLogout(loading: Boolean) {
         when (loading) {
             false -> {
-                spin_kit_logout.visibility = View.GONE
+                settingBinding.spinKitLogout.visibility = View.GONE
                 btn_logout.visibility = View.VISIBLE
             }
             true -> {
-                spin_kit_logout.visibility = View.VISIBLE
+                settingBinding.spinKitLogout.visibility = View.VISIBLE
                 btn_logout.visibility = View.GONE
             }
         }

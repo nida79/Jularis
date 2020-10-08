@@ -7,13 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.history.prosess.ProsesFragment">
 
-
-
     <RelativeLayout
+        android:layout_marginTop="@dimen/_5sdp"
         android:id="@+id/wadah_proses"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/putih"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.SearchView
@@ -25,8 +24,9 @@
             android:focusableInTouchMode="true"
             android:textAlignment="center"
             app:defaultQueryHint="Mau Cari Apa ?"
+            app:searchIcon="@drawable/ic_search"
             app:queryBackground="@android:color/transparent"
-            app:searchHintIcon="@drawable/ic_search" />
+            />
     </RelativeLayout>
 
     <ProgressBar
@@ -44,7 +44,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wadah_proses" />
-
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_proses"
@@ -79,40 +78,47 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:visibility="visible">
-        <RelativeLayout
-            android:layout_gravity="center_vertical"
-            android:id="@+id/template_empty_transaction"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/putih"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_gravity="center_vertical"
+                android:id="@+id/template_empty_proses"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/putih"
+                android:visibility="gone">
 
-            <ImageView
-                android:id="@+id/img_empty_transaction"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_150sdp"
-                android:contentDescription="@string/logo_app"
-                android:src="@drawable/ic_transfer_1" />
+                <ImageView
+                    android:id="@+id/img_empty_transaction"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_150sdp"
+                    android:contentDescription="@string/logo_app"
+                    android:src="@drawable/ic_transfer_1" />
 
-            <TextView
-                android:id="@+id/tv_empty_trans"
+                <TextView
+                    android:id="@+id/tv_empty_trans"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/img_empty_transaction"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/belum_ada_transaksi"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_13ssp" />
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_proses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img_empty_transaction"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/_10sdp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/belum_ada_transaksi"
-                android:textAlignment="center"
-                android:textSize="@dimen/_13ssp" />
-        </RelativeLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_proses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_histori" />
+                tools:listitem="@layout/item_histori" />
+        </LinearLayout>
+
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

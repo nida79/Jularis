@@ -1,136 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.history.TransactionFragment">
 
-    <TextView
-        android:id="@+id/header_histori"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/putih"
-        android:elevation="@dimen/_4sdp"
-        android:fontFamily="@font/dosis_bold"
-        android:gravity="center"
-        android:text="@string/histori_transaksi"
-        android:textAlignment="center"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/_17ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:id="@+id/wadah_histori"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/header_histori">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_histori"
-            android:layout_width="@dimen/_250sdp"
-            android:layout_height="35dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/oval_search"
-            android:focusableInTouchMode="true"
-            android:textAlignment="center"
-            app:defaultQueryHint="Mau Cari Apa ?"
-            app:queryBackground="@android:color/transparent"
-            app:searchHintIcon="@drawable/ic_search" />
-    </RelativeLayout>
-
-    <ProgressBar
-        android:id="@+id/progress_bar_horizontal_histori"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_15sdp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:indeterminate="true"
-        android:max="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wadah_histori" />
-
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_histori"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/progress_bar_horizontal_histori"
-        app:shimmer_duration="1000">
-
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_histori"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include layout="@layout/place_holder_histori" />
-
-            <include layout="@layout/place_holder_histori" />
-
-            <include layout="@layout/place_holder_histori" />
-
-            <include layout="@layout/place_holder_histori" />
-
-            <include layout="@layout/place_holder_histori" />
-
-            <include layout="@layout/place_holder_histori" />
-        </LinearLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swp_histori"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progress_bar_horizontal_histori">
-        <RelativeLayout
-            android:layout_gravity="center_vertical"
-            android:id="@+id/template_empty_transaction"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/putih"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/img_empty_transaction"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_150sdp"
-                android:contentDescription="@string/logo_app"
-                android:src="@drawable/ic_transfer_1" />
+            android:textAlignment="center">
 
             <TextView
-                android:id="@+id/tv_empty_trans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img_empty_transaction"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/_10sdp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/belum_ada_transaksi"
+                android:fontFamily="@font/dosis_bold"
+                android:text="@string/daftar_transaksi"
                 android:textAlignment="center"
-                android:textSize="@dimen/_13ssp" />
-        </RelativeLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_histori"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_17ssp" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_histori"
             android:layout_width="match_parent"
+            app:tabSelectedTextColor="@color/colorPrimary"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_histori" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</LinearLayout>
+            app:tabIndicatorColor="@color/orange"
+            android:background="@color/putih">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/selesai" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/diproses" />
+        </com.google.android.material.tabs.TabLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_histori"
+        android:layout_width="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_height="match_parent"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

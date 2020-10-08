@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.R
-import com.ekr.jularis.data.product.DataProduct
 import com.ekr.jularis.data.response.HistoriData
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.MoneyHelper
@@ -56,6 +55,7 @@ class TransactionAdapter(private var historiData: ArrayList<HistoriData>) :
     }
 
     override fun getItemCount() = historiData.size
+
     class ViewHolder(itemView: View, private val listener: OnItemClickListener) :
         RecyclerView.ViewHolder(itemView) {
         var lastposition = -1
