@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.admin.product.ProductFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/header_bar"
+            layout="@layout/toolbar_home_user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/wadah_admin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/header_bar"
+            android:background="@color/putih"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_admin_product"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/oval_search"
+                android:focusableInTouchMode="true"
+                android:textAlignment="center"
+                app:defaultQueryHint="Mau Cari Apa ?"
+                app:queryBackground="@android:color/transparent"
+                app:searchIcon="@drawable/ic_search" />
+        </RelativeLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_container_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progress_bar_horizontal_admin_product"
+            app:shimmer_duration="1000">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/place_holder_histori" />
+
+                <include layout="@layout/place_holder_histori" />
+
+                <include layout="@layout/place_holder_histori" />
+
+                <include layout="@layout/place_holder_histori" />
+
+                <include layout="@layout/place_holder_histori" />
+
+                <include layout="@layout/place_holder_histori" />
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swp_product_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progress_bar_horizontal_admin_product"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_product_admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:listitem="@layout/item_prouct_list" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fab_add_product"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/_7sdp"
+            android:elevation="@dimen/_5sdp"
+            android:src="@drawable/ic_fab_add"
+            app:backgroundTint="@color/putih" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_horizontal_admin_product"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_below="@id/wadah_admin"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:indeterminate="true"
+            android:max="100" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>

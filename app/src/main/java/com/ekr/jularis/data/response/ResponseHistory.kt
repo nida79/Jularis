@@ -1,6 +1,7 @@
 package com.ekr.jularis.data.response
 
 
+import com.ekr.jularis.data.histori.HistoriData
 import com.google.gson.annotations.SerializedName
 
 data class ResponseHistory(

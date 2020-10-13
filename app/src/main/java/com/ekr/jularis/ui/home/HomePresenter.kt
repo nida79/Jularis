@@ -38,12 +38,15 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
                             )
                             view.showMessage(responseGlobal.message)
                         }
+                        else->{
+                            view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseProduct>, t: Throwable) {
                     view.onLoading(false)
-                    view.showMessage(t.message.toString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
 
             })
@@ -74,7 +77,7 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
 
                 override fun onFailure(call: Call<ResponseProduct>, t: Throwable) {
                     view.onNextLoading(false)
-                    view.showMessage(t.message.toString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
 
             })
@@ -103,13 +106,16 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
                                 view.resultBuy(result.message, result.data!!)
                             }
                         }
+                        else->{
+                            view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                        }
                     }
 
                 }
 
                 override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.onNextLoading(false)
-                    view.showMessage(t.message.toString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
 
             })

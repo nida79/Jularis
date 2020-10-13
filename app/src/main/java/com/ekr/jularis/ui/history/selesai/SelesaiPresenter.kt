@@ -27,6 +27,7 @@ class SelesaiPresenter (val view:SelesaiContract.View ):SelesaiContract.Presente
                         response.isSuccessful -> {
                             val responseHistory : ResponseHistory? = response.body()
                             responseHistory?.let { view.resultFirstRequest(it) }
+                            responseHistory?.message?.let { view.showEmptyCart(it) }
                         }
                         response.code() != 200 -> {
                             val responseGlobal: ResponseGlobal = Gson().fromJson(
@@ -35,12 +36,15 @@ class SelesaiPresenter (val view:SelesaiContract.View ):SelesaiContract.Presente
                             )
                             view.showEmptyCart(responseGlobal.message)
                         }
+                        else->{
+                            view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseHistory>, t: Throwable) {
                     view.firstLoading(false)
-                    view.showMessage(t.stackTraceToString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
             })
     }
@@ -66,12 +70,15 @@ class SelesaiPresenter (val view:SelesaiContract.View ):SelesaiContract.Presente
                             )
                             view.showMessage(responseGlobal.message)
                         }
+                        else->{
+                            view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseHistory>, t: Throwable) {
                     view.nextLoading(false)
-                    view.showMessage(t.stackTraceToString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
             })
     }

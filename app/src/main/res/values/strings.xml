@@ -34,7 +34,7 @@
     <string name="sisa_barang">Jumlah stok :</string>
     <string name="deskripsi">Deskripsi :</string>
     <string name="lanjutkan_pembayaran">Beli Sekarang</string>
-    <string name="mohon_tunggu">Mohon Tunggu...</string>
+    <string name="mohon_tunggu">Mohon Tunggu…</string>
     <string name="daftar_keranjang">Daftar Keranjang</string>
     <string name="total_harga_barang">Total Harga Barang</string>
     <string name="lanjutkan">Lanjutkan</string>
@@ -47,7 +47,6 @@
     <string name="simpan">Simpan</string>
     <string name="_1">1</string>
     <string name="pembayaran">Pembayaran</string>
-    <string name="produk">Produk</string>
     <string name="pilihan_pembayaran">Pilihan Pembayaran</string>
     <string name="bayar_ditempat">Bayar Ditempat</string>
     <string name="transfer_bank">Transfer Bank</string>
@@ -55,7 +54,6 @@
     <string name="tambahkan_catatan">Tambahkan Catatan</string>
     <string name="tambahkan_catatan_untuk_penjual">Tambahkan catatan untuk penjual</string>
     <string name="rincian_pembayaran">Rincian Pembayaran</string>
-    <string name="jumlah_produk">Jumlah Produk</string>
     <string name="total_harga">Total Harga</string>
     <string name="ongkos_kirim">Ongkos Kirim</string>
     <string name="total_pembayaran">Total Pembayaran</string>
@@ -85,5 +83,32 @@
     <string name="belum_ada_transaksi">Belum Ada Transaksi</string>
     <string name="daftar_transaksi">Daftar Transaksi</string>
     <string name="diproses">Diproses</string>
+    <string name="produk">Produk</string>
+    <string name="update_produk">Update Produk</string>
+    <string name="input_nama_produk">Input Nama Produk</string>
+    <string name="nama_produk">Nama Produk</string>
+    <string name="input_harga">Input Harga</string>
+    <string name="harga">Harga</string>
+    <string name="input_deslripsi">Input Deskripsi</string>
+    <string name="kategori">Kategori</string>
+    <string name="jumlah_produk">Jumlah Produk</string>
+    <string name="foto_produk">Foto Produk</string>
+    <string name="upload">Upload</string>
+    <string name="update">Update</string>
+    <string name="input_jumlah_produk">Input Jumlah Produk</string>
+    <string name="input_harga_ongkos_kirim">Input Harga Ongkos Kirim</string>
+    <string name="detail_pesanan">Detail Pesanan</string>
+    <string name="metode_pembayaran">Metode Pembayaran</string>
+    <string name="bukti_transfer">Bukti Transfer</string>
+    <string name="alamat_pemesanan">Alamat Pemesanan</string>
+    <string name="catatan">Catatan</string>
+    <string name="status_pesanan">Status Pesanan</string>
+    <string name="konfirmasi_pesanan">Konfirmasi</string>
+    <string name="total_penghasilan_saat_ini">Total Penghasilan Saat Ini :</string>
+    <string name="laporan">Laporan</string>
 
+    <string-array name="category_spinner">
+        <item>Sembako</item>
+        <item>Kelontong</item>
+    </string-array>
 </resources>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.admin.product.mange.ProductActivityManage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/putih"
+            android:elevation="@dimen/_3sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/header_manage_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/dosis_semibold"
+                android:text="@string/update_produk"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_17ssp"
+                tools:ignore="RelativeOverlap" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/img_delete_produk"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_delete_red" />
+
+        </RelativeLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/dosis_semibold"
+            android:text="@string/nama_produk"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_13ssp" />
+
+        <EditText
+            android:id="@+id/edit_nama_product"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/rounded_popup"
+            android:elevation="@dimen/_5sdp"
+            android:gravity="top"
+            android:hint="@string/input_nama_produk"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:textColor="@color/hitam"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/dosis_semibold"
+            android:text="@string/harga"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_13ssp" />
+
+        <EditText
+            android:id="@+id/edit_price_product"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/rounded_popup"
+            android:elevation="@dimen/_5sdp"
+            android:gravity="top"
+            android:hint="@string/input_harga"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:textColor="@color/hitam"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/dosis_semibold"
+            android:text="@string/deskripsi"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_13ssp" />
+
+        <EditText
+            android:id="@+id/edit_description_product"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/rounded_popup"
+            android:elevation="@dimen/_5sdp"
+            android:gravity="top"
+            android:hint="@string/input_deslripsi"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:textColor="@color/hitam"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/dosis_semibold"
+            android:text="@string/kategori"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_13ssp" />
+
+         <Spinner
+             android:id="@+id/spinner_update"
+             android:layout_margin="@dimen/_10sdp"
+             android:layout_width="match_parent"
+             android:background="@drawable/spinner_border"
+             android:layout_height="wrap_content"
+             android:gravity="center"
+             android:entries="@array/category_spinner"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/dosis_semibold"
+            android:text="@string/jumlah_produk"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_13ssp" />
+
+        <EditText
+            android:id="@+id/edit_qty_product"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/rounded_popup"
+            android:elevation="@dimen/_5sdp"
+            android:gravity="top"
+            android:hint="@string/input_jumlah_produk"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:textColor="@color/hitam"
+            tools:ignore="RtlSymmetry" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/dosis_semibold"
+            android:text="@string/ongkos_kirim"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_13ssp" />
+
+        <EditText
+            android:id="@+id/edit_ongkir_product"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/rounded_popup"
+            android:elevation="@dimen/_5sdp"
+            android:gravity="top"
+            android:hint="@string/input_harga_ongkos_kirim"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:textColor="@color/hitam"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/dosis_semibold"
+            android:text="@string/foto_produk"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_13ssp" />
+
+        <Button
+            android:id="@+id/update_pick_image"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="40dp"
+            android:textColor="@color/putih"
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/upload"
+            android:background="@drawable/rounded_btn"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="@dimen/_10sdp"
+            android:id="@+id/rcv_image_update"
+            tools:listitem="@layout/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator
+            android:id="@+id/indicator_update"
+            android:layout_gravity="center"
+            app:spi_dotColor="@color/abu_soft"
+            android:layout_width="wrap_content"
+            app:spi_dotSelectedColor="@color/colorAccent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_update_produk"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/putih"
+            android:textSize="@dimen/_15ssp"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/_250sdp"
+            android:fontFamily="@font/dosis_bold"
+            android:layout_height="wrap_content"
+            android:background="@drawable/oval_btn"
+            android:text="@string/simpan"/>
+    </LinearLayout>
+
+
+
+</ScrollView>

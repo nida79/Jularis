@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.R
 import com.ekr.jularis.data.product.DataImageProduct
 import com.ekr.jularis.data.product.DataProduct
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.MoneyHelper
+import com.ekr.jularis.utils.MyDiffutilsCallback
 import kotlinx.android.synthetic.main.item_product.view.*
 
 class HomeAdapter(private var dataProduct: ArrayList<DataProduct>) :
@@ -41,6 +43,19 @@ class HomeAdapter(private var dataProduct: ArrayList<DataProduct>) :
 
     override fun getItemCount() = dataProduct.size
 
+    fun updateItem(newList:List<DataProduct>){
+        val diffutilsCallback = MyDiffutilsCallback(dataProduct,newList)
+        val diffResult : DiffUtil.DiffResult = DiffUtil.calculateDiff(diffutilsCallback)
+        dataProduct.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
+    }
+    fun insertItem(newList:List<DataProduct>){
+        val diffutilsCallback = MyDiffutilsCallback(dataProduct,newList)
+        val diffResult : DiffUtil.DiffResult = DiffUtil.calculateDiff(diffutilsCallback)
+        dataProduct.clear()
+        dataProduct.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
+    }
     fun setData(firstResult: List<DataProduct>) {
         dataProduct.clear()
         dataProduct.addAll(firstResult)

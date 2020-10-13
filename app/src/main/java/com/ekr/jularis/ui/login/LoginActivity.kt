@@ -20,12 +20,14 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     private lateinit var loginPresenter: LoginPresenter
     private lateinit var sessionManager: SessionManager
     private var terima: String? = null
+    private var admin: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         loginPresenter = LoginPresenter(this)
         sessionManager = SessionManager(this)
         terima = intent.getStringExtra("logout").toString()
+        admin = intent.getStringExtra("admin").toString()
 
     }
 
@@ -81,7 +83,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     override fun onResult(responseLogin: ResponseLogin) {
         responseLogin.data?.let { loginPresenter.setPrefs(sessionManager, it) }
         when {
-            sessionManager.prefRole !="user" -> {
+            sessionManager.prefRole != "user" -> {
                 startActivity(Intent(this, MainActivity2::class.java))
                 finishAffinity()
                 finish()
@@ -89,7 +91,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             terima.equals("logout") -> {
                 finish()
             }
-            terima.equals("register")->{
+            terima.equals("register") -> {
                 startActivity(Intent(this, MainActivity::class.java))
                 finishAffinity()
                 finish()
@@ -110,7 +112,13 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun onBackPressed() {
-        finish()
+        if (admin.equals("admin")) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finishAffinity()
+            finish()
+        } else {
+            finish()
+        }
     }
 
 }

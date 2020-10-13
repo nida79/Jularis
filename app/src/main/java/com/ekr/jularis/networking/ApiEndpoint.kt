@@ -1,12 +1,14 @@
 package com.ekr.jularis.networking
 
 import com.ekr.jularis.data.cart.postcheckout.DataPOST
+import com.ekr.jularis.data.histori.HistoriIUpdate
 import com.ekr.jularis.data.payment.DatapostPayment
 import com.ekr.jularis.data.payment.DatapostPayment2
 import com.ekr.jularis.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
+import java.io.File
 
 
 interface ApiEndpoint {
@@ -26,6 +28,19 @@ interface ApiEndpoint {
         @Field("full_name") full_name: String,
         @Field("no_telp") no_telp: String,
         @Field("address") address: String
+    ): Call<ResponseGlobal>
+
+    @Multipart
+    @POST("product/update/{product_id}")
+    fun updateProduct(
+        @Header("Authorization") token: String,
+        @Path("product_id") product_id: String,
+        @Part("name") name: String,
+        @Part("price") price: Int,
+        @Part("description") description: String,
+        @Part("category") category: String,
+        @Part("quantity") quantity: Int,
+        @Part product_picture: List<MultipartBody.Part>?
     ): Call<ResponseGlobal>
 
     @GET("product")
@@ -143,4 +158,16 @@ interface ApiEndpoint {
         @Query("q") q: String?
     ): Call<ResponseHistory>
 
+    @DELETE("product/{product_id}")
+    fun doDeleteProduct(
+        @Header("Authorization") token: String,
+        @Path("product_id") product_id: String
+    ): Call<ResponseGlobal>
+
+    @PUT("transaction/{transaction_product_id}")
+    fun doUpdateTransaction(
+        @Header("Authorization") token: String,
+        @Path("transaction_product_id") transaction_product_id: String,
+        @Body update:HistoriIUpdate
+    ): Call<ResponseGlobal>
 }

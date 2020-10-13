@@ -27,6 +27,7 @@ class ProsesPresenter(val view: ProsesContract.View):ProsesContract.Presenter{
                         response.isSuccessful -> {
                             val responseHistory : ResponseHistory? = response.body()
                             responseHistory?.let { view.resultFirstRequest(it) }
+                            responseHistory?.message?.let { view.showEmptyCart(it) }
                         }
                         response.code() != 200 -> {
                             val responseGlobal: ResponseGlobal = Gson().fromJson(
@@ -35,12 +36,15 @@ class ProsesPresenter(val view: ProsesContract.View):ProsesContract.Presenter{
                             )
                             view.showEmptyCart(responseGlobal.message)
                         }
+                        else->{
+                            view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseHistory>, t: Throwable) {
                     view.firstLoading(false)
-                    view.showMessage(t.stackTraceToString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
             })
     }
@@ -71,7 +75,7 @@ class ProsesPresenter(val view: ProsesContract.View):ProsesContract.Presenter{
 
                 override fun onFailure(call: Call<ResponseHistory>, t: Throwable) {
                     view.nextLoading(false)
-                    view.showMessage(t.stackTraceToString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
             })
     }

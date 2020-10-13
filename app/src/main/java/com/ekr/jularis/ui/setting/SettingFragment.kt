@@ -17,7 +17,6 @@ import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.SessionManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.bottom_sheet_dialog.*
 import kotlinx.android.synthetic.main.bottom_sheet_logout.*
 import kotlinx.android.synthetic.main.change_password.*
 import kotlinx.android.synthetic.main.fragment_setting.*
@@ -99,13 +98,8 @@ class SettingFragment : Fragment(), SettingContract.View {
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
         }
         btn_logout.setOnClickListener {
-            val bottomSheetDialog = BottomSheetDialog(requireActivity())
-            bottomSheetDialog.setContentView(R.layout.bottom_sheet_logout)
+            val bottomSheetDialog = DialogHelper.bottomSheetDialogLogout(requireActivity())
             bottomSheetDialog.show()
-            bottomSheetDialog.setCanceledOnTouchOutside(false)
-            bottomSheetDialog.btn_sheet_tidak.setOnClickListener {
-                bottomSheetDialog.dismiss()
-            }
             bottomSheetDialog.btn_sheet_iya.setOnClickListener {
                 settingPresenter.doLogout(sessionManager.prefToken)
                 bottomSheetDialog.dismiss()
@@ -146,10 +140,18 @@ class SettingFragment : Fragment(), SettingContract.View {
             setting_wadah_profile.visibility = View.GONE
             setting_wadah_cp.visibility = View.GONE
             setting_btn_login.visibility = View.VISIBLE
-            sessionManager.logOut()
-            val intent = Intent(requireActivity(), LoginActivity::class.java)
-            intent.putExtra("logout", "logout")
-            startActivity(intent)
+            if (sessionManager.prefRole!="user"){
+                sessionManager.logOut()
+                val intent = Intent(requireActivity(), LoginActivity::class.java)
+                intent.putExtra("admin", "admin")
+                startActivity(intent)
+            }else{
+                sessionManager.logOut()
+                val intent = Intent(requireActivity(), LoginActivity::class.java)
+                intent.putExtra("logout", "logout")
+                startActivity(intent)
+            }
+
 
         }
     }
@@ -158,4 +160,8 @@ class SettingFragment : Fragment(), SettingContract.View {
         Toasty.info(requireContext(), message, Toasty.LENGTH_SHORT).show()
     }
 
+    companion object {
+        @JvmStatic
+        fun newInstance() = SettingFragment()
+    }
 }

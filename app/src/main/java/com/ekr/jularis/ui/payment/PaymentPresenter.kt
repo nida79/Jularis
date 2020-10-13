@@ -45,13 +45,16 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
                             )
                             view.showMessage(responseGlobal.message)
                         }
+                        else->{
+                            view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                        }
                     }
                 }
 
 
                 override fun onFailure(call: Call<ResponseGetDataPayment>, t: Throwable) {
                     view.onLoading(false)
-                    view.showMessage(t.message.toString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
 
             })
@@ -90,7 +93,7 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
 
                 override fun onFailure(call: Call<ResponsePhotopayment>, t: Throwable) {
                     view.loadingFoto(false)
-                    view.showMessage(t.message.toString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
 
                 }
             })
@@ -125,7 +128,7 @@ class PaymentPresenter(val view: PaymentContract.View) : PaymentContract.Present
 
                 override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.loadingFoto(false)
-                    view.showMessage(t.message.toString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
             })
     }

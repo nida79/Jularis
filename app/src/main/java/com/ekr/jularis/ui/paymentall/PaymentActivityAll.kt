@@ -258,16 +258,7 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
     }
 
     override fun onBackPressed() {
-        val bottomSheetDialog = BottomSheetDialog(this)
-        bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog)
+        val bottomSheetDialog = DialogHelper.bottomSheetDialogTransaksi(this)
         bottomSheetDialog.show()
-        bottomSheetDialog.setCanceledOnTouchOutside(false)
-        bottomSheetDialog.btn_sheet_cancel.setOnClickListener {
-            bottomSheetDialog.dismiss()
-        }
-        bottomSheetDialog.btn_sheet_ok.setOnClickListener {
-            bottomSheetDialog.dismiss()
-            finish()
-        }
     }
 }

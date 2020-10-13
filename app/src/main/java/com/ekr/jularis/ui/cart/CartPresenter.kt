@@ -39,7 +39,7 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
 
             override fun onFailure(call: Call<ResponseCart>, t: Throwable) {
                 view.onLoading(false)
-                view.showToast(t.message.toString())
+                view.showToast("Terjadi Kesalahan, Silahkan Coba Kembali")
 
             }
 
@@ -73,7 +73,7 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
 
             override fun onFailure(call: Call<ResponseCart>, t: Throwable) {
                 view.loadingHorizontal(false)
-                view.showToast(t.message.toString())
+                view.showToast("Terjadi Kesalahan, Silahkan Coba Kembali")
 
             }
 
@@ -110,7 +110,7 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
 
                 override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.loadingHorizontal(false)
-                    view.showToast(t.message.toString())
+                    view.showToast("Terjadi Kesalahan, Silahkan Coba Kembali")
 
                 }
 
@@ -146,7 +146,7 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
 
                 override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.loadingHorizontal(false)
-                    view.showToast(t.message.toString())
+                    view.showToast("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
 
             })

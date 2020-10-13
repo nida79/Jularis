@@ -49,6 +49,7 @@ class RegisterPresnter(val view: RegisterContract.View) : RegisterContract.Prese
 
                 override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.onLoading(false)
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
 
             })

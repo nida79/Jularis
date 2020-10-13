@@ -44,7 +44,7 @@ class DetailPresenter(val view: DetailContract.View) : DetailContract.Presenter 
 
                 override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.onLoading(false)
-                    view.showMessage(t.message.toString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
 
             })
@@ -81,7 +81,7 @@ class DetailPresenter(val view: DetailContract.View) : DetailContract.Presenter 
 
                 override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.onLoading(false)
-                    view.showMessage(t.message.toString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
 
             })

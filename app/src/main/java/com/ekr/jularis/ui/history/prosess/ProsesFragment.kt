@@ -1,7 +1,7 @@
 package com.ekr.jularis.ui.history.prosess
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ekr.jularis.data.response.HistoriData
+import com.ekr.jularis.data.histori.HistoriData
 import com.ekr.jularis.data.response.ResponseHistory
 import com.ekr.jularis.databinding.FragmentProsesBinding
 import com.ekr.jularis.ui.history.TransactionAdapter
+import com.ekr.jularis.ui.history.detail.TransactionActivityDetail
 import com.ekr.jularis.utils.SessionManager
 
 class ProsesFragment : Fragment(), ProsesContract.View {
@@ -34,6 +35,7 @@ class ProsesFragment : Fragment(), ProsesContract.View {
 
     override fun onStart() {
         super.onStart()
+        page = 1
         prosesPresenter.getHistoriFirst(sessionManager.prefToken, page, null)
     }
 
@@ -98,7 +100,9 @@ class ProsesFragment : Fragment(), ProsesContract.View {
         })
         transactionAdapter.setOnItemClickListener(object : TransactionAdapter.OnItemClickListener {
             override fun onItemClick(position: Int, data: HistoriData) {
-                Toast.makeText(requireActivity(), position.toString(), Toast.LENGTH_SHORT).show()
+                val intent = Intent(requireActivity(), TransactionActivityDetail::class.java)
+                intent.putExtra("data", data)
+                requireActivity().startActivity(intent)
             }
         })
     }

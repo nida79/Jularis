@@ -45,7 +45,7 @@ class ProfilePresenter(val view: ProfileContract.View) : ProfileContract.Present
 
             override fun onFailure(call: Call<ResponseGetProfile>, t: Throwable) {
                 view.onLoading(false)
-                view.showMessage(t.stackTraceToString())
+                view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
             }
         })
     }
@@ -80,7 +80,7 @@ class ProfilePresenter(val view: ProfileContract.View) : ProfileContract.Present
                 }
 
                 override fun onFailure(call: Call<ResponseUpdateProfile>, t: Throwable) {
-                    view.showMessage(t.stackTraceToString())
+                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
             })
     }

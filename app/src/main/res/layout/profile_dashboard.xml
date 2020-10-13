@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/_5sdp"
+    app:cardBackgroundColor="@color/putih"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="@dimen/_8sdp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_130sdp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/dashboard_ImgProfile"
+            app:layout_constraintBottom_toTopOf="@+id/dashboard_txt"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/img_no_image"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dashboard_NameProfile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/dosis_bold"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/dashboard_ImgProfile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dashboard_ImgProfile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.29000002"
+            tools:text="Erick Prastya" />
+
+        <TextView
+            android:id="@+id/dashboard_txt"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:fontFamily="@font/dosis_semibold"
+            android:text="@string/total_penghasilan_saat_ini"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_ImgProfile" />
+
+        <TextView
+            android:id="@+id/dashboard_BalanceProfile"
+            android:layout_width="0dp"
+            android:fontFamily="@font/dosis_bold"
+            app:layout_constraintEnd_toStartOf="@id/btn_dashboard_laporan"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
+            tools:text="Rp150.000.000"/>
+
+        <Button
+            android:id="@+id/btn_dashboard_laporan"
+            android:layout_width="@dimen/_80sdp"
+            android:text="@string/laporan"
+            android:textSize="@dimen/_12ssp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:fontFamily="@font/dosis_extrabold"
+            android:textColor="@color/putih"
+            android:layout_height="30dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:background="@drawable/oval_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dashboard_BalanceProfile" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

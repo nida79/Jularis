@@ -33,7 +33,6 @@ class HomeFragment : Fragment(), HomeContract.View {
     private lateinit var homeAdapter: HomeAdapter
     private lateinit var gridManager: GridLayoutManager
     private lateinit var homePresenter: HomePresenter
-    private lateinit var data: List<DataProduct>
     private var isLoading: Boolean = false
     private var page: Int = 1
     private lateinit var dialog: Dialog
@@ -68,7 +67,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun onResume() {
         super.onResume()
-        page.minus(1)
+        page = 1
         homePresenter.getProduct(page, null, null, null)
     }
 
@@ -160,15 +159,15 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun onResultProduct(responseProduct: ResponseProduct) {
-        data = responseProduct.data!!
+        responseProduct.data?.let { homeAdapter.insertItem(it) }
         totalPage = responseProduct.last_page!!
-        data.let { homeAdapter.setData(it) }
+
     }
 
     override fun onResultNextPage(responseProduct: ResponseProduct) {
-        data = responseProduct.data!!
+        responseProduct.data?.let { homeAdapter.updateItem(it) }
         totalPage = responseProduct.last_page!!
-        data.let { homeAdapter.setNextData(it) }
+
     }
 
     override fun showMessage(message: String) {
