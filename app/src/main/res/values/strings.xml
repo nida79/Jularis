@@ -109,6 +109,7 @@
     <string name="input_no_handphone">Input No Handphone</string>
     <string name="pilih_bulan_dan_tahun">Pilih Bulan dan Tahun</string>
     <string name="download">Download</string>
+    <string name="konfirmasi_update">Konfirmasi Update</string>
 
     <string-array name="category_spinner">
         <item>Sembako</item>

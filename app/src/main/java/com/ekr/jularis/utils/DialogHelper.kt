@@ -90,6 +90,13 @@ class DialogHelper {
             return bottomSheetDialog
         }
 
+        fun bottomSheetDialogUpdate(activity: Activity): BottomSheetDialog {
+            val bottomSheetDialog = BottomSheetDialog(activity)
+            bottomSheetDialog.setContentView(R.layout.bottom_sheet_update)
+            bottomSheetDialog.setCanceledOnTouchOutside(false)
+            return bottomSheetDialog
+        }
+
         @SuppressLint("SetTextI18n")
         fun bottomSheetDialogDelete(activity: Activity): BottomSheetDialog {
             val bottomSheetDialog = BottomSheetDialog(activity)
