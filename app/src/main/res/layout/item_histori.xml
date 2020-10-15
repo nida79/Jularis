@@ -31,8 +31,7 @@
 
         <TextView
             android:id="@+id/tv_tgl_histori"
-
-            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,16 +41,16 @@
             android:textColor="@color/text_color"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_title_histori"
+            app:layout_constraintStart_toEndOf="@+id/tv_invoice_histori"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="2020-10-10" />
 
         <TextView
-            android:layout_marginTop="@dimen/_5sdp"
-            android:id="@+id/tv_title_histori"
+            android:id="@+id/tv_invoice_histori"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:ellipsize="end"
             android:fontFamily="@font/dosis_semibold"
@@ -61,7 +60,7 @@
             app:layout_constraintEnd_toStartOf="@id/tv_tgl_histori"
             app:layout_constraintStart_toEndOf="@+id/img_item_histori"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Barang Berkas asdasddasa" />
+            tools:text="INV/2023/09/230" />
 
         <TextView
             android:id="@+id/tv_price_histori"
@@ -71,41 +70,27 @@
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_11ssp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_invoice_histori"
-            app:layout_constraintStart_toEndOf="@+id/img_item_histori"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title_histori"
-            app:layout_constraintVertical_bias="0.24000001"
-            tools:text="Rp12.000" />
-        <TextView
-            android:id="@+id/tv_invoice_histori"
-            android:layout_width="0dp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_state_histori"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:fontFamily="@font/dosis"
-            android:textColor="@color/abu_soft"
-            android:textSize="@dimen/_10ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_item_histori"
-            app:layout_constraintTop_toBottomOf="@+id/tv_price_histori"
-            tools:text="INV/asdasd/asdasd" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_invoice_histori"
+            app:layout_constraintVertical_bias="0.7"
+            tools:text="Rp12.000" />
 
         <TextView
-            android:textAlignment="viewEnd"
             android:id="@+id/tv_state_histori"
-            android:paddingEnd="@dimen/_7sdp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
             android:fontFamily="@font/dosis_semibold"
+            android:paddingEnd="@dimen/_7sdp"
+            android:textAlignment="viewEnd"
             android:textColor="@color/abu_soft"
             android:textSize="@dimen/_11ssp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_invoice_histori"
-            app:layout_constraintTop_toBottomOf="@+id/tv_price_histori"
-            tools:text="Menunggu Konfirmasi"
-            tools:ignore="RtlSymmetry" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_invoice_histori"
+            app:layout_constraintVertical_bias="0.7"
+            tools:ignore="RtlSymmetry"
+            tools:text="Menunggu Konfirmasi" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

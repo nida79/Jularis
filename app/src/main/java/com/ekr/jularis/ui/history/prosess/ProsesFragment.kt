@@ -11,7 +11,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.data.histori.HistoriData
+import com.ekr.jularis.data.response.HistoriNewData
 import com.ekr.jularis.data.response.ResponseHistory
+import com.ekr.jularis.data.response.ResponseNewHistori
 import com.ekr.jularis.databinding.FragmentProsesBinding
 import com.ekr.jularis.ui.history.TransactionAdapter
 import com.ekr.jularis.ui.history.detail.TransactionActivityDetail
@@ -99,7 +101,7 @@ class ProsesFragment : Fragment(), ProsesContract.View {
 
         })
         transactionAdapter.setOnItemClickListener(object : TransactionAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int, data: HistoriData) {
+            override fun onItemClick(position: Int, data: HistoriNewData) {
                 val intent = Intent(requireActivity(), TransactionActivityDetail::class.java)
                 intent.putExtra("data", data)
                 requireActivity().startActivity(intent)
@@ -156,13 +158,13 @@ class ProsesFragment : Fragment(), ProsesContract.View {
         prosesBinding.tvEmptyTrans.text = message
     }
 
-    override fun resultFirstRequest(responseHistory: ResponseHistory) {
-        totalPage = responseHistory.last_page
+    override fun resultFirstRequest(responseHistory: ResponseNewHistori) {
+        totalPage = responseHistory.lastPage
         transactionAdapter.setData(responseHistory.data)
     }
 
-    override fun resultNextRequest(responseHistory: ResponseHistory) {
-        totalPage = responseHistory.last_page
+    override fun resultNextRequest(responseHistory: ResponseNewHistori) {
+        totalPage = responseHistory.lastPage
         transactionAdapter.setNextData(responseHistory.data)
     }
 }

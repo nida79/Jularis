@@ -18,11 +18,11 @@ class TransactionPresenter(val view: TransactionDetailContract.View) :
 
     override fun doUpdate(
         token: String,
-        transaction_product_id: String,
+        transaction_id: String,
         historiIUpdate: HistoriIUpdate
     ) {
         view.onLoading(true)
-        ApiService.endpoint.doUpdateTransaction(token, transaction_product_id, historiIUpdate)
+        ApiService.endpoint.doUpdateTransaction(token, transaction_id, historiIUpdate)
             .enqueue(object : Callback<ResponseGlobal> {
                 override fun onResponse(
                     call: Call<ResponseGlobal>,

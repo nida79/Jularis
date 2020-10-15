@@ -4,7 +4,7 @@ import com.ekr.jularis.data.histori.HistoriIUpdate
 
 interface TransactionDetailContract {
     interface Presenter {
-        fun doUpdate(token:String,transaction_product_id:String,historiIUpdate: HistoriIUpdate)
+        fun doUpdate(token:String,transaction_id:String,historiIUpdate: HistoriIUpdate)
     }
 
     interface View {

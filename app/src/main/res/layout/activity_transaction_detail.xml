@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.history.detail.TransactionActivityDetail">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,69 +41,11 @@
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_payment"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_transactionDetail"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_marginBottom="@dimen/_6sdp"
-            app:cardBackgroundColor="@color/putih"
-            app:cardCornerRadius="@dimen/_6sdp"
-            app:cardElevation="@dimen/_8sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.infinityandroid.roundedimageview.RoundedImageView
-                    android:id="@+id/img_detail_pesanan"
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:layout_margin="@dimen/_4sdp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitXY"
-                    app:corner_radius="10"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_titile_detail_pesanan"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/dosis_semibold"
-                    android:maxLines="2"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/_12ssp"
-                    app:layout_constraintBottom_toTopOf="@+id/tv_harga_detail_pesanan"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/img_detail_pesanan"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Paket sembako lengkap  " />
-
-                <TextView
-                    android:id="@+id/tv_harga_detail_pesanan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/_11ssp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/img_detail_pesanan"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_titile_detail_pesanan"
-                    tools:text="Rp12.000" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
+            android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -214,6 +156,31 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_9sdp"
             android:fontFamily="@font/dosis_semibold"
+            android:text="@string/no_hp_telp"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_15ssp" />
+
+        <TextView
+            android:id="@+id/tvNohp_detail_pesanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/rounded_popup"
+            android:elevation="@dimen/_5sdp"
+            android:fontFamily="@font/dosis"
+            android:padding="@dimen/_7sdp"
+            android:textColor="@color/hitam"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry"
+            tools:text="087879503384" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:fontFamily="@font/dosis_semibold"
             android:text="@string/catatan"
             android:textColor="@color/abu"
             android:textSize="@dimen/_15ssp" />
@@ -304,7 +271,6 @@
                 tools:text="Rp100.000" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/textView10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -318,7 +284,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/tv_ongkir_detail_pesanan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -361,7 +326,6 @@
                 app:layout_constraintTop_toBottomOf="@id/view_bound" />
 
             <TextView
-
                 android:id="@+id/tv_total_detail_pesanan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -377,6 +341,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_11"
                 app:layout_constraintTop_toBottomOf="@id/view_bound"
+                app:layout_constraintVertical_bias="0.75"
                 tools:text="Rp100.0000" />
 
             <Button
@@ -386,7 +351,7 @@
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:background="@drawable/oval_btn"
                 android:fontFamily="@font/dosis_extrabold"
-                android:text="@string/konfirmasi_pesanan"
+                android:text="@string/update"
                 android:textColor="@color/putih"
                 android:textSize="@dimen/_15ssp"
                 android:visibility="visible"
@@ -396,4 +361,6 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_total_detail_pesanan" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
+
 </ScrollView>

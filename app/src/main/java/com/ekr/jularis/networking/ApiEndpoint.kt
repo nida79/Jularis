@@ -134,6 +134,13 @@ interface ApiEndpoint {
         @Field("address") address: String
     ): Call<ResponseUpdateProfile>
 
+    @FormUrlEncoded
+    @POST("profile/update")
+    fun doUpdateFCM(
+        @Header("Authorization") token: String,
+       @Field("firebase_token") firebase_token:String
+    ): Call<ResponseUpdateProfile>
+
     @Multipart
     @POST("profile/change-photo")
     fun doChangePhotoProfile(
@@ -149,14 +156,14 @@ interface ApiEndpoint {
         @Header("Authorization") token: String,
         @Query("page") page: Int?,
         @Query("q") q: String?
-    ): Call<ResponseHistory>
+    ): Call<ResponseNewHistori>
 
     @GET("transaction?transaction_state_not=Selesai")
     fun getHistoryProgress(
         @Header("Authorization") token: String,
         @Query("page") page: Int?,
         @Query("q") q: String?
-    ): Call<ResponseHistory>
+    ): Call<ResponseNewHistori>
 
     @DELETE("product/{product_id}")
     fun doDeleteProduct(
@@ -164,10 +171,10 @@ interface ApiEndpoint {
         @Path("product_id") product_id: String
     ): Call<ResponseGlobal>
 
-    @PUT("transaction/{transaction_product_id}")
+    @PUT("transaction/{transaction_id}")
     fun doUpdateTransaction(
         @Header("Authorization") token: String,
-        @Path("transaction_product_id") transaction_product_id: String,
+        @Path("transaction_id") transaction_id: String,
         @Body update:HistoriIUpdate
     ): Call<ResponseGlobal>
 }

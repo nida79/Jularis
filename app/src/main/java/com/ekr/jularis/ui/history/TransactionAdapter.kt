@@ -1,25 +1,27 @@
 package com.ekr.jularis.ui.history
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.R
-import com.ekr.jularis.data.histori.HistoriData
+import com.ekr.jularis.data.response.HistoriNewData
+
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.MoneyHelper
 import kotlinx.android.synthetic.main.item_histori.view.*
 
-class TransactionAdapter(private var historiData: ArrayList<HistoriData>) :
+class  TransactionAdapter(private var historiData: ArrayList<HistoriNewData>) :
     RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
     private lateinit var mListener: OnItemClickListener
 
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int, data: HistoriData)
+        fun onItemClick(position: Int, data: HistoriNewData)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -27,13 +29,13 @@ class TransactionAdapter(private var historiData: ArrayList<HistoriData>) :
         mListener = listener
     }
 
-    fun setData(firstResult: List<HistoriData>) {
+    fun setData(firstResult: List<HistoriNewData>) {
         historiData.clear()
         historiData.addAll(firstResult)
         notifyDataSetChanged()
     }
 
-    fun setNextData(nextResult: List<HistoriData>) {
+    fun setNextData(nextResult: List<HistoriNewData>) {
         historiData.addAll(nextResult)
         notifyDataSetChanged()
     }
@@ -59,16 +61,16 @@ class TransactionAdapter(private var historiData: ArrayList<HistoriData>) :
     class ViewHolder(itemView: View, private val listener: OnItemClickListener) :
         RecyclerView.ViewHolder(itemView) {
         var lastposition = -1
-        fun bind(historiData: HistoriData) {
+        fun bind(historiData: HistoriNewData) {
             with(itemView) {
                 val position = adapterPosition
                 GlideHelper.setImage(
                     context,
-                    historiData.pictureProductTransaction,
+                    historiData.pictureTransaction,
                     img_item_histori
                 )
-                tv_title_histori.text = historiData.productName
-                MoneyHelper.setRupiah(tv_price_histori, historiData.productAmount)
+
+                MoneyHelper.setRupiah(tv_price_histori, historiData.transactionAmount)
                 tv_state_histori.text = historiData.transactionState
                 tv_invoice_histori.text = historiData.transactionInvoice
                 tv_tgl_histori.text = historiData.transactionDate

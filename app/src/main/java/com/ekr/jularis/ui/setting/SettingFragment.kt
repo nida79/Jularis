@@ -7,19 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ekr.jularis.R
-import com.ekr.jularis.databinding.FragmentProsesBinding
 import com.ekr.jularis.databinding.FragmentSettingBinding
 import com.ekr.jularis.ui.login.LoginActivity
 import com.ekr.jularis.ui.profile.ProfileActivity
-import com.ekr.jularis.utils.DialogHelper
-import com.ekr.jularis.utils.GlideHelper
-import com.ekr.jularis.utils.SessionManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.ekr.jularis.utils.*
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.bottom_sheet_logout.*
 import kotlinx.android.synthetic.main.change_password.*
 import kotlinx.android.synthetic.main.fragment_setting.*
+import java.io.IOException
 
 
 class SettingFragment : Fragment(), SettingContract.View {
@@ -90,7 +88,7 @@ class SettingFragment : Fragment(), SettingContract.View {
         }
 
         setting_wadah_profile.setOnClickListener {
-            val intent = Intent(requireActivity(),ProfileActivity::class.java)
+            val intent = Intent(requireActivity(), ProfileActivity::class.java)
             requireActivity().startActivity(intent)
         }
 
@@ -101,6 +99,9 @@ class SettingFragment : Fragment(), SettingContract.View {
             val bottomSheetDialog = DialogHelper.bottomSheetDialogLogout(requireActivity())
             bottomSheetDialog.show()
             bottomSheetDialog.btn_sheet_iya.setOnClickListener {
+                if (sessionManager.prefRole=="user"){
+                    NotificationHelper.logoutFCM()
+                }
                 settingPresenter.doLogout(sessionManager.prefToken)
                 bottomSheetDialog.dismiss()
             }
@@ -140,18 +141,18 @@ class SettingFragment : Fragment(), SettingContract.View {
             setting_wadah_profile.visibility = View.GONE
             setting_wadah_cp.visibility = View.GONE
             setting_btn_login.visibility = View.VISIBLE
+            sessionManager.logOut()
             if (sessionManager.prefRole!="user"){
-                sessionManager.logOut()
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(Config.TOPIC_GLOBAL)
                 val intent = Intent(requireActivity(), LoginActivity::class.java)
                 intent.putExtra("admin", "admin")
                 startActivity(intent)
             }else{
-                sessionManager.logOut()
+
                 val intent = Intent(requireActivity(), LoginActivity::class.java)
                 intent.putExtra("logout", "logout")
                 startActivity(intent)
             }
-
 
         }
     }

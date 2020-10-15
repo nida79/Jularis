@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekr.jularis.R
 import com.ekr.jularis.data.histori.HistoriData
 import com.ekr.jularis.data.histori.HistoriIUpdate
+import com.ekr.jularis.data.response.HistoriNewData
+import com.ekr.jularis.data.response.HistoriNewProduct
 import com.ekr.jularis.utils.DialogHelper
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.MoneyHelper
@@ -19,8 +22,10 @@ import kotlinx.android.synthetic.main.bottom_sheet_dialog.*
 
 class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract.View {
     private lateinit var update: TransactionPresenter
-    private var historiData: HistoriData? = null
     private lateinit var sessionManager: SessionManager
+    private lateinit var transactionDetailAdapter: TransactionDetailAdapter
+    private lateinit var historiIUpdate: HistoriIUpdate
+    private lateinit var historiNewData: HistoriNewData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transaction_detail)
@@ -31,58 +36,54 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
 
     @SuppressLint("SetTextI18n")
     override fun initListener() {
-        historiData = intent.extras?.getParcelable("data")
-        when {
-            sessionManager.prefRole != "user" -> {
-                btn_konfirmasi.visibility = View.VISIBLE
-                btn_konfirmasi.setOnClickListener {
-                    val dialog = DialogHelper.bottomSheetDialogKonfirm(this)
-                    dialog.show()
-                    dialog.text_keterangan.text = "Update Status Pesanan ?"
-                    dialog.btn_sheet_cancel.text = "Konfirmasi"
-                    dialog.btn_sheet_cancel.setOnClickListener {
-                        val kirim = HistoriIUpdate("Pesanan Dikirim")
-                        update.doUpdate(sessionManager.prefToken,
-                            historiData!!.transactionProductId,kirim)
-                        dialog.dismiss()
-                    }
-                    dialog.btn_sheet_ok.text = "Batal"
-                    dialog.btn_sheet_ok.setOnClickListener {
-                        dialog.dismiss()
-                    }
-                }
-            }
-            else -> {
+        historiNewData = intent.getParcelableExtra("data")!!
+        transactionDetailAdapter = TransactionDetailAdapter(arrayListOf())
+        transactionDetailAdapter.setData(historiNewData.product_list)
+        rcv_transactionDetail.apply {
+            setHasFixedSize(true)
+            layoutManager =
+                LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL,
+                    false)
+            adapter = transactionDetailAdapter
+
+        }
+        when{
+            historiNewData.transactionState =="Selesai"->{
                 btn_konfirmasi.visibility = View.GONE
             }
+            sessionManager.prefRole!="admin"->{
+                btn_konfirmasi.visibility = View.GONE
+            }
+            sessionManager.prefRole =="user" && historiNewData.transactionState =="Dikirim"->{
+                btn_konfirmasi.visibility = View.VISIBLE
+                btn_konfirmasi.setOnClickListener {
+                    historiIUpdate = HistoriIUpdate("Selesai")
+                    update.doUpdate(sessionManager.prefToken,historiNewData.transactionId,historiIUpdate)
+                }
+            }
         }
-        tvStatus_detail_pesanan.text = historiData!!.transactionState
-        if (historiData!!.transactionState == "Selesai") {
-            btn_konfirmasi.visibility = View.GONE
-            tvStatus_detail_pesanan.text = "Barang Telah Diterima"
-        }
-        val foto = let { historiData?.transaction_photo_transfer }
-        if (foto!=null){
-            GlideHelper.setImage(applicationContext,foto,img_bukti_detail_pesanan)
-            img_bukti_detail_pesanan.visibility = View.VISIBLE
+        setupView(historiNewData)
+
+    }
+
+    private fun setupView(historiNewData: HistoriNewData) {
+        tv_metodePayment_detail_pesanan.text = historiNewData.paymentMethod
+        if (historiNewData.paymentMethod == "Transfer Bank"){
             tv_bukti_Detail_pesanan.visibility = View.VISIBLE
+            historiNewData.transactionPhotoTransfer?.let {
+                GlideHelper.setImage(applicationContext,
+                    it,img_bukti_detail_pesanan)
+            }
+            img_bukti_detail_pesanan.visibility=View.VISIBLE
         }
-
-        GlideHelper.setImage(this, historiData!!.pictureProductTransaction, img_detail_pesanan)
-        tv_titile_detail_pesanan.text = historiData!!.productName
-        MoneyHelper.setRupiah(tv_harga_detail_pesanan, historiData!!.historiProduct.price)
-        tvAlamat_detail_pesanan.text = historiData!!.address
-        if (historiData!!.note.equals("")|| historiData!!.note == "null") {
-            tvCatatan_detail_pesanan.text = "Tidak Ada Catatan"
-        } else {
-            tvCatatan_detail_pesanan.text = historiData!!.note
-        }
-        tv_qty_detail_pesanan.text = historiData!!.quantity.toString()
-        MoneyHelper.setRupiah(tv_total_price_detail_pesanan, historiData!!.productAmount)
-        MoneyHelper.setRupiah(tv_ongkir_detail_pesanan, historiData!!.historiProduct.ongkir)
-        MoneyHelper.setRupiah(tv_total_detail_pesanan, historiData!!.productAmount)
-
-
+        tvStatus_detail_pesanan.text = historiNewData.transactionState
+        tvAlamat_detail_pesanan.text = historiNewData.address
+        tvNohp_detail_pesanan.text=historiNewData.userPhone
+        tvCatatan_detail_pesanan.text = historiNewData.note
+        tv_qty_detail_pesanan.text = historiNewData.quantityTotal.toString()
+        MoneyHelper.setRupiah(tv_total_price_detail_pesanan,historiNewData.productAmount)
+        MoneyHelper.setRupiah(tv_ongkir_detail_pesanan,historiNewData.servicePrice)
+        MoneyHelper.setRupiah(tv_total_detail_pesanan,historiNewData.transactionAmount)
     }
 
     override fun onResultUpdate(berhasil: Boolean) {

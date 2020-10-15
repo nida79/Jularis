@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,12 +20,19 @@ import com.ekr.jularis.R
 import com.ekr.jularis.data.cart.postcheckout.Data
 import com.ekr.jularis.data.product.DataProduct
 import com.ekr.jularis.data.response.ResponseProduct
+import com.ekr.jularis.data.response.ResponseUpdateProfile
 import com.ekr.jularis.databinding.FragmentHomeBinding
 import com.ekr.jularis.ui.detail.DetailActivity
 import com.ekr.jularis.ui.login.LoginActivity
 import com.ekr.jularis.ui.payment.PaymentActivity
+import com.ekr.jularis.utils.DialogHelper
 import com.ekr.jularis.utils.SessionManager
+import com.google.android.gms.tasks.Task
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.pop_up_detail.*
+import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -38,17 +46,31 @@ class HomeFragment : Fragment(), HomeContract.View {
     private lateinit var dialog: Dialog
     private var totalPage: Int = 0
     private lateinit var sessionManager: SessionManager
+    private lateinit var dialogFCM: Dialog
     private var qty = 1
+    private var firebasetoken = ""
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        dialogFCM = DialogHelper.globalLoading(requireActivity())
         homePresenter = HomePresenter(this)
         sessionManager = SessionManager(requireActivity())
         dialog = Dialog(requireActivity())
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener { task: Task<InstanceIdResult> ->
+                firebasetoken = task.result!!.token
+                Log.e("FCM_TOKEN", "onCreate: $firebasetoken")
+            }
+
     }
 
     override fun onStart() {
         super.onStart()
         homePresenter.getProduct(page, null, null, null)
+        if (sessionManager.prefIsLogin) {
+            if (sessionManager.prefFcm == "" || sessionManager.prefFcm != firebasetoken) {
+                homePresenter.doUpdateFcm(sessionManager.prefToken, firebasetoken)
+            }
+        }
     }
 
     override fun onCreateView(
@@ -93,7 +115,7 @@ class HomeFragment : Fragment(), HomeContract.View {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null || query != "") {
                     homePresenter.getProduct(null, query, null, null)
-                }else{
+                } else {
                     page = 1
                     homePresenter.getProduct(page, null, null, null)
                 }
@@ -103,7 +125,7 @@ class HomeFragment : Fragment(), HomeContract.View {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null || newText != "") {
                     homePresenter.getProduct(null, newText, null, null)
-                }else{
+                } else {
                     page = 1
                     homePresenter.getProduct(page, null, null, null)
                 }
@@ -145,6 +167,17 @@ class HomeFragment : Fragment(), HomeContract.View {
         }
     }
 
+    override fun fcmLoading(fcmLoading: Boolean) {
+        when (fcmLoading) {
+            true -> dialogFCM.show()
+            false -> dialogFCM.dismiss()
+        }
+    }
+
+    override fun resultFcm(responseUpdateProfile: ResponseUpdateProfile) {
+      responseUpdateProfile.data?.let { homePresenter.setPrefs(sessionManager,it) }
+    }
+
     override fun onNextLoading(nextLoading: Boolean) {
         when (nextLoading) {
             true -> {
@@ -157,6 +190,7 @@ class HomeFragment : Fragment(), HomeContract.View {
             }
         }
     }
+
 
     override fun onResultProduct(responseProduct: ResponseProduct) {
         responseProduct.data?.let { homeAdapter.insertItem(it) }

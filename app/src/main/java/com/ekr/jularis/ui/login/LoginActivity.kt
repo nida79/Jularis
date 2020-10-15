@@ -1,19 +1,20 @@
 package com.ekr.jularis.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.ekr.jularis.R
 import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.ui.MainActivity
 import com.ekr.jularis.ui.MainActivity2
-import com.ekr.jularis.ui.detail.DetailActivity
 import com.ekr.jularis.ui.register.RegisterActivity
 import com.ekr.jularis.ui.reset.ResetPasswordActivity
+import com.ekr.jularis.utils.Config
 import com.ekr.jularis.utils.SessionManager
 import com.ekr.jularis.utils.Validator
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
@@ -84,6 +85,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         responseLogin.data?.let { loginPresenter.setPrefs(sessionManager, it) }
         when {
             sessionManager.prefRole != "user" -> {
+                FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL)
                 startActivity(Intent(this, MainActivity2::class.java))
                 finishAffinity()
                 finish()

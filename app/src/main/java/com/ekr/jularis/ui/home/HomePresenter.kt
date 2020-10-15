@@ -1,8 +1,11 @@
 package com.ekr.jularis.ui.home
 
+import com.ekr.jularis.data.profile.DataProfile
 import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.data.response.ResponseProduct
+import com.ekr.jularis.data.response.ResponseUpdateProfile
 import com.ekr.jularis.networking.ApiService
+import com.ekr.jularis.utils.SessionManager
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,10 +17,17 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
         view.initListener()
         view.onLoading(false)
         view.onNextLoading(false)
+        view.fcmLoading(false)
         view.actionAdapterClick()
 
     }
-    override fun getProduct(page: Int?,seachKey: String?,start_price: String?,end_price: String?) {
+
+    override fun getProduct(
+        page: Int?,
+        seachKey: String?,
+        start_price: String?,
+        end_price: String?
+    ) {
         view.onLoading(true)
         ApiService.endpoint.getProduct(page, seachKey, start_price, end_price)
             .enqueue(object : Callback<ResponseProduct> {
@@ -38,7 +48,7 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
                             )
                             view.showMessage(responseGlobal.message)
                         }
-                        else->{
+                        else -> {
                             view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                         }
                     }
@@ -106,7 +116,7 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
                                 view.resultBuy(result.message, result.data!!)
                             }
                         }
-                        else->{
+                        else -> {
                             view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                         }
                     }
@@ -119,6 +129,34 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
                 }
 
             })
+    }
+
+    override fun doUpdateFcm(token: String, fcmToken: String) {
+        view.fcmLoading(true)
+        ApiService.endpoint.doUpdateFCM(token, fcmToken)
+            .enqueue(object : Callback<ResponseUpdateProfile> {
+                override fun onResponse(
+                    call: Call<ResponseUpdateProfile>,
+                    response: Response<ResponseUpdateProfile>
+                ) {
+                    view.fcmLoading(false)
+                    when {
+                        response.code() != 200 -> {
+                            view.showMessage("Something Went Wrong !")
+                        }
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ResponseUpdateProfile>, t: Throwable) {
+                    view.fcmLoading(false)
+                    view.showMessage("Something Went Wrong !")
+                }
+            })
+    }
+
+    override fun setPrefs(sessionManager: SessionManager, dataProfile: DataProfile) {
+        sessionManager.prefToken = dataProfile.firebaseToken
     }
 
     override fun doCalculatePlus(int: Int) {

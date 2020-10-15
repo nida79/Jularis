@@ -30,6 +30,7 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.activity_payment_all.*
 import kotlinx.android.synthetic.main.bottom_sheet_dialog.*
 import java.io.File
@@ -54,6 +55,7 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
         paymentAllPresenter = PaymentAllPresenter(this)
         sessionManager = SessionManager(this)
         edt_alamat_payment_all.setText(sessionManager.prefAlamat)
+        edt_no_hp_payment_all.setText(sessionManager.prefNohp)
 
     }
 
@@ -76,6 +78,16 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
         radioGroup_all.setOnCheckedChangeListener { _, _ -> radioSelected() }
         uploadPhoto()
         btn_submit_payment_all.setOnClickListener {
+            when{
+                edt_alamat_payment_all.text.toString()==""->{
+                    edt_alamat_payment_all.error = "Alamat Tidak Boleh Kosong"
+                    edt_alamat_payment_all.requestFocus()
+                }
+                edt_no_hp_payment_all.text.toString()==""->{
+                    edt_no_hp_payment_all.error = "No Hp Tidak Boleh Kosong"
+                    edt_no_hp_payment_all.requestFocus()
+                }
+            }
             datapostPayment = DatapostPayment2(
                 data,
                 edt_alamat_payment_all.text.toString(),
@@ -85,7 +97,8 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
                 tipeBayar,
                 ongkir,
                 transactionAmount,
-                photo_id
+                photo_id,
+                edt_no_hp_payment_all.text.toString()
             )
             paymentAllPresenter.postDataPayment(sessionManager.prefToken,datapostPayment)
         }

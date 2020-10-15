@@ -106,6 +106,7 @@
     <string name="konfirmasi_pesanan">Konfirmasi</string>
     <string name="total_penghasilan_saat_ini">Total Penghasilan Saat Ini :</string>
     <string name="laporan">Laporan</string>
+    <string name="input_no_handphone">Input No Handphone</string>
 
     <string-array name="category_spinner">
         <item>Sembako</item>

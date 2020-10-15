@@ -20,14 +20,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val sessionManager = SessionManager(this)
-        if (sessionManager.prefIsLogin){
-            if (sessionManager.prefRole!="user"){
-                startActivity(Intent(this,MainActivity2::class.java))
-                finishAffinity()
-                finish()
-            }
-        }
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().replace(

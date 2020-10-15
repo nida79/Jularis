@@ -12,5 +12,6 @@ data class DatapostPayment2(
     @SerializedName("payment_method") val paymentMethod: String,
     @SerializedName("ongkir") val ongkir: Int,
     @SerializedName("transaction_amount") val transaction_amount : Int,
-    @SerializedName("transaction_photo_id") val transactionPhotoId: String?
+    @SerializedName("transaction_photo_id") val transactionPhotoId: String?,
+    @SerializedName("user_phone") val user_phone: String
 )

@@ -34,7 +34,7 @@
             android:id="@+id/phd_tv_tgl_histori"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:ellipsize="end"
             android:fontFamily="@font/dosis_semibold"
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/oval_btn"
             android:ellipsize="end"
             android:fontFamily="@font/dosis_semibold"
@@ -65,18 +65,20 @@
         <TextView
             android:id="@+id/phd_tv_price_histori"
             android:layout_width="0dp"
-            android:background="@drawable/oval_btn"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/oval_btn"
             android:fontFamily="@font/montserrat_bold"
+            android:text="Rp12.000"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_11ssp"
             app:layout_constraintBottom_toBottomOf="@id/phd_tv_invoice_histori"
             app:layout_constraintStart_toEndOf="@+id/phd_img_item_histori"
             app:layout_constraintTop_toBottomOf="@+id/phd_tv_title_histori"
-            app:layout_constraintVertical_bias="0.24000001"
-            android:text="Rp12.000" />
+            app:layout_constraintVertical_bias="0.69" />
         <TextView
+            android:visibility="gone"
             android:id="@+id/phd_tv_invoice_histori"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -94,14 +96,14 @@
             android:id="@+id/phd_tv_state_histori"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/oval_btn"
             android:fontFamily="@font/dosis_semibold"
+            android:text="INV/asdasd/asdasd"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_11ssp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phd_tv_price_histori"
-            android:text="INV/asdasd/asdasd" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

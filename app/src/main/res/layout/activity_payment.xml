@@ -251,6 +251,39 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView5"
                 tools:ignore="RtlSymmetry" />
 
+
+            <TextView
+                android:id="@+id/textView_header_hp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_9sdp"
+                android:fontFamily="@font/dosis_semibold"
+                android:text="@string/input_no_handphone"
+                android:textColor="@color/abu"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_alamat_payment"
+                 />
+
+            <EditText
+                android:paddingStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/edt_no_hp_payment"
+                android:elevation="@dimen/_5sdp"
+                android:textColor="@color/hitam"
+                android:hint="@string/input_no_handphone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_popup"
+                android:inputType="number"
+                app:layout_constraintTop_toBottomOf="@id/textView_header_hp"
+                android:importantForAutofill="no"
+                tools:ignore="RtlSymmetry" />
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
@@ -263,7 +296,7 @@
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_alamat_payment" />
+                app:layout_constraintTop_toBottomOf="@+id/edt_no_hp_payment" />
 
             <EditText
                 android:id="@+id/edt_catata_payment"

@@ -55,11 +55,22 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
         sessionManager = SessionManager(this)
         product_id = intent.getStringExtra("pd_id").toString()
         edt_alamat_payment.setText(sessionManager.prefAlamat)
+        edt_no_hp_payment.setText(sessionManager.prefNohp)
         paymentPresenter.getDataPayment(sessionManager.prefToken, product_id)
     }
 
     override fun initListener() {
         btn_submit_payment.setOnClickListener {
+            when{
+                edt_alamat_payment.text.toString()==""->{
+                    edt_alamat_payment.error = "Alamat Tidak Boleh Kosong"
+                    edt_alamat_payment.requestFocus()
+                }
+                edt_no_hp_payment.text.toString()==""->{
+                    edt_no_hp_payment.error = "No Hp Tidak Boleh Kosong"
+                    edt_no_hp_payment.requestFocus()
+                }
+            }
             datapostPayment = DatapostPayment(
                 listOf(dataPayment),
                 edt_alamat_payment.text.toString(),
@@ -69,7 +80,8 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
                 tipeBayar,
                 ongkir,
                 transactionAmount,
-                photo_id
+                photo_id,
+                edt_no_hp_payment.text.toString()
             )
             paymentPresenter.postDataPayment(sessionManager.prefToken, datapostPayment)
         }

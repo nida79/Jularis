@@ -7,10 +7,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class HistoriProduct(
-    @SerializedName("category") val category: String,
-    @SerializedName("description") val description: String,
-    @SerializedName("name") val name: String,
-    @SerializedName("ongkir") val ongkir: Int,
+    @SerializedName("product_name") val product_name: String,
+    @SerializedName("product_picture") val product_picture: String,
     @SerializedName("price") val price: Int,
     @SerializedName("product_id") val productId: String,
     @SerializedName("quantity") val quantity: Int
