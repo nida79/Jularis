@@ -1,8 +1,7 @@
 package com.ekr.jularis.ui.history.selesai
 
 import com.ekr.jularis.data.response.ResponseGlobal
-import com.ekr.jularis.data.response.ResponseHistory
-import com.ekr.jularis.data.response.ResponseNewHistori
+import com.ekr.jularis.data.response.ResponseHistori
 import com.ekr.jularis.networking.ApiService
 import com.google.gson.Gson
 import retrofit2.Call
@@ -19,15 +18,15 @@ class SelesaiPresenter(val view: SelesaiContract.View) : SelesaiContract.Present
     override fun getHistoriFirst(token: String, page: Int?, q: String?) {
         view.firstLoading(true)
         ApiService.endpoint.getHistoryComplete(token, page, q)
-            .enqueue(object : Callback<ResponseNewHistori> {
+            .enqueue(object : Callback<ResponseHistori> {
                 override fun onResponse(
-                    call: Call<ResponseNewHistori>,
-                    response: Response<ResponseNewHistori>
+                    call: Call<ResponseHistori>,
+                    response: Response<ResponseHistori>
                 ) {
                     view.firstLoading(false)
                     when {
                         response.isSuccessful -> {
-                            val responseHistory: ResponseNewHistori? = response.body()
+                            val responseHistory: ResponseHistori? = response.body()
                             responseHistory?.let { view.resultFirstRequest(it) }
                             responseHistory?.message?.let { view.showEmptyCart(it) }
                         }
@@ -44,7 +43,7 @@ class SelesaiPresenter(val view: SelesaiContract.View) : SelesaiContract.Present
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseNewHistori>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseHistori>, t: Throwable) {
                     view.firstLoading(false)
                     view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
@@ -54,15 +53,15 @@ class SelesaiPresenter(val view: SelesaiContract.View) : SelesaiContract.Present
     override fun getHistoriNext(token: String, page: Int?, q: String?) {
         view.nextLoading(true)
         ApiService.endpoint.getHistoryComplete(token, page, q)
-            .enqueue(object : Callback<ResponseNewHistori> {
+            .enqueue(object : Callback<ResponseHistori> {
                 override fun onResponse(
-                    call: Call<ResponseNewHistori>,
-                    response: Response<ResponseNewHistori>
+                    call: Call<ResponseHistori>,
+                    response: Response<ResponseHistori>
                 ) {
                     view.nextLoading(false)
                     when {
                         response.isSuccessful -> {
-                            val responseHistory: ResponseNewHistori? = response.body()
+                            val responseHistory: ResponseHistori? = response.body()
                             responseHistory?.let { view.resultNextRequest(it) }
                             responseHistory?.message?.let { view.showEmptyCart(it) }
                         }
@@ -76,7 +75,7 @@ class SelesaiPresenter(val view: SelesaiContract.View) : SelesaiContract.Present
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseNewHistori>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseHistori>, t: Throwable) {
                     view.nextLoading(false)
                     view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }

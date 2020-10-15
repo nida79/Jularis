@@ -1,27 +1,26 @@
 package com.ekr.jularis.ui.history
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.R
-import com.ekr.jularis.data.response.HistoriNewData
+import com.ekr.jularis.data.histori.HistoriData
 
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.MoneyHelper
 import kotlinx.android.synthetic.main.item_histori.view.*
 
-class  TransactionAdapter(private var historiData: ArrayList<HistoriNewData>) :
+class  TransactionAdapter(private var historiData: ArrayList<HistoriData>) :
     RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
     private lateinit var mListener: OnItemClickListener
 
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int, data: HistoriNewData)
+        fun onItemClick(position: Int, data: HistoriData)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -29,13 +28,13 @@ class  TransactionAdapter(private var historiData: ArrayList<HistoriNewData>) :
         mListener = listener
     }
 
-    fun setData(firstResult: List<HistoriNewData>) {
+    fun setData(firstResult: List<HistoriData>) {
         historiData.clear()
         historiData.addAll(firstResult)
         notifyDataSetChanged()
     }
 
-    fun setNextData(nextResult: List<HistoriNewData>) {
+    fun setNextData(nextResult: List<HistoriData>) {
         historiData.addAll(nextResult)
         notifyDataSetChanged()
     }
@@ -61,7 +60,7 @@ class  TransactionAdapter(private var historiData: ArrayList<HistoriNewData>) :
     class ViewHolder(itemView: View, private val listener: OnItemClickListener) :
         RecyclerView.ViewHolder(itemView) {
         var lastposition = -1
-        fun bind(historiData: HistoriNewData) {
+        fun bind(historiData: HistoriData) {
             with(itemView) {
                 val position = adapterPosition
                 GlideHelper.setImage(

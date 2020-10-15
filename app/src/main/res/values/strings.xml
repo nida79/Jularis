@@ -107,6 +107,8 @@
     <string name="total_penghasilan_saat_ini">Total Penghasilan Saat Ini :</string>
     <string name="laporan">Laporan</string>
     <string name="input_no_handphone">Input No Handphone</string>
+    <string name="pilih_bulan_dan_tahun">Pilih Bulan dan Tahun</string>
+    <string name="download">Download</string>
 
     <string-array name="category_spinner">
         <item>Sembako</item>

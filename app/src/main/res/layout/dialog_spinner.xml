@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+
+    <RelativeLayout
+        android:id="@+id/dialog_spinner_wadah_detail"
+        android:layout_width="@dimen/_210sdp"
+        android:layout_height="@dimen/_160sdp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_popup"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42000002">
+
+        <ImageView
+            android:id="@+id/dialog_spinner_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@drawable/ic_baseline_close_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dialog_spinner_cancel"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/pilih_bulan_dan_tahun"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_12ssp" />
+
+        <Button
+            android:id="@+id/dialog_btn_download"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/oval_btn"
+            android:fontFamily="@font/dosis_extrabold"
+            android:text="@string/download"
+            android:textColor="@color/putih"
+            android:textSize="@dimen/_13ssp" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

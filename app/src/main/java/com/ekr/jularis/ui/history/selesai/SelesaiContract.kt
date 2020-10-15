@@ -1,7 +1,6 @@
 package com.ekr.jularis.ui.history.selesai
 
-import com.ekr.jularis.data.response.ResponseHistory
-import com.ekr.jularis.data.response.ResponseNewHistori
+import com.ekr.jularis.data.response.ResponseHistori
 
 interface SelesaiContract {
     interface Presenter{
@@ -14,8 +13,8 @@ interface SelesaiContract {
         fun nextLoading(nextLoading:Boolean)
         fun showMessage(message:String)
         fun showEmptyCart(message: String)
-        fun resultFirstRequest(responseHistory: ResponseNewHistori)
-        fun resultNextRequest(responseHistory: ResponseNewHistori)
+        fun resultFirstRequest(responseHistory: ResponseHistori)
+        fun resultNextRequest(responseHistory: ResponseHistori)
     }
 
 }

@@ -16,7 +16,7 @@ class DialogHelper {
     companion object {
         fun globalLoading(activity: Activity): Dialog {
             val dialog = Dialog(activity)
-            dialog.setContentView(R.layout.pop_loading)
+            dialog.setContentView(R.layout.dialog_global)
             dialog.setCanceledOnTouchOutside(false)
             dialog.window!!.setLayout(
                 WindowManager.LayoutParams.WRAP_CONTENT, WindowManager
@@ -30,7 +30,7 @@ class DialogHelper {
 
         fun successDialog(activity: Activity): Dialog {
             val dialog = Dialog(activity)
-            dialog.setContentView(R.layout.pop_loading)
+            dialog.setContentView(R.layout.dialog_global)
             dialog.setCanceledOnTouchOutside(true)
             dialog.window!!.setLayout(
                 WindowManager.LayoutParams.WRAP_CONTENT, WindowManager

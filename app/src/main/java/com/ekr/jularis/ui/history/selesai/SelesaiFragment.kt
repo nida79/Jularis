@@ -11,9 +11,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.data.histori.HistoriData
-import com.ekr.jularis.data.response.HistoriNewData
-import com.ekr.jularis.data.response.ResponseHistory
-import com.ekr.jularis.data.response.ResponseNewHistori
+import com.ekr.jularis.data.response.ResponseHistori
 import com.ekr.jularis.databinding.FragmentSelesaiBinding
 import com.ekr.jularis.ui.history.TransactionAdapter
 import com.ekr.jularis.ui.history.detail.TransactionActivityDetail
@@ -102,7 +100,7 @@ class SelesaiFragment : Fragment(), SelesaiContract.View {
 
         })
         transactionAdapter.setOnItemClickListener(object : TransactionAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int, data: HistoriNewData) {
+            override fun onItemClick(position: Int, data: HistoriData) {
                 val intent = Intent(requireActivity(), TransactionActivityDetail::class.java)
                 intent.putExtra("data", data)
                 requireActivity().startActivity(intent)
@@ -160,12 +158,12 @@ class SelesaiFragment : Fragment(), SelesaiContract.View {
     }
 
 
-    override fun resultFirstRequest(responseHistory: ResponseNewHistori) {
+    override fun resultFirstRequest(responseHistory: ResponseHistori) {
         totalPage = responseHistory.lastPage
         transactionAdapter.setData(responseHistory.data)
     }
 
-    override fun resultNextRequest(responseHistory: ResponseNewHistori) {
+    override fun resultNextRequest(responseHistory: ResponseHistori) {
         totalPage = responseHistory.lastPage
         transactionAdapter.setNextData(responseHistory.data)
     }

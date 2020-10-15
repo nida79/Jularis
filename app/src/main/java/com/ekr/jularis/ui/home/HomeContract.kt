@@ -13,7 +13,6 @@ interface HomeContract {
         fun getNextProduct(page: Int)
         fun doBuy(token: String, product_id: String, quantity: Int)
         fun doUpdateFcm(token: String,fcmToken:String)
-        fun setPrefs(sessionManager: SessionManager, dataProfile: DataProfile)
         fun doCalculatePlus(int: Int)
         fun doCalculateMinus(int: Int)
     }
@@ -22,7 +21,6 @@ interface HomeContract {
         fun initListener()
         fun onLoading(loading: Boolean)
         fun fcmLoading(fcmLoading:Boolean)
-        fun resultFcm(responseUpdateProfile: ResponseUpdateProfile)
         fun onNextLoading(nextLoading: Boolean)
         fun onResultProduct(responseProduct: ResponseProduct)
         fun onResultNextPage(responseProduct: ResponseProduct)

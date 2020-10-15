@@ -155,9 +155,6 @@ class HomePresenter(val view: HomeContract.View) : HomeContract.Presenter {
             })
     }
 
-    override fun setPrefs(sessionManager: SessionManager, dataProfile: DataProfile) {
-        sessionManager.prefToken = dataProfile.firebaseToken
-    }
 
     override fun doCalculatePlus(int: Int) {
         var hasil = int

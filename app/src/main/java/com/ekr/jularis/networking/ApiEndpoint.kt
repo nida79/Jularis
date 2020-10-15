@@ -8,7 +8,6 @@ import com.ekr.jularis.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
-import java.io.File
 
 
 interface ApiEndpoint {
@@ -156,14 +155,14 @@ interface ApiEndpoint {
         @Header("Authorization") token: String,
         @Query("page") page: Int?,
         @Query("q") q: String?
-    ): Call<ResponseNewHistori>
+    ): Call<ResponseHistori>
 
     @GET("transaction?transaction_state_not=Selesai")
     fun getHistoryProgress(
         @Header("Authorization") token: String,
         @Query("page") page: Int?,
         @Query("q") q: String?
-    ): Call<ResponseNewHistori>
+    ): Call<ResponseHistori>
 
     @DELETE("product/{product_id}")
     fun doDeleteProduct(

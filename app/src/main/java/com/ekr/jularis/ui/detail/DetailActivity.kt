@@ -18,7 +18,7 @@ import com.ekr.jularis.utils.SessionManager
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.pop_up_detail.*
+import kotlinx.android.synthetic.main.dialog_count_product.*
 
 
 class DetailActivity : AppCompatActivity(), DetailContract.View {
@@ -92,7 +92,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     override fun actionButton() {
         btn_detail_buy.setOnClickListener {
             if (sessionManager.prefIsLogin) {
-                dialog.setContentView(R.layout.pop_up_detail)
+                dialog.setContentView(R.layout.dialog_count_product)
                 dialog.setCanceledOnTouchOutside(false)
                dialog.window!!.setLayout(
                     WindowManager.LayoutParams.WRAP_CONTENT, WindowManager

@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ekr.jularis.R
-import com.ekr.jularis.data.response.HistoriNewProduct
+import com.ekr.jularis.data.histori.HistoriProduct
 import com.ekr.jularis.utils.GlideHelper
+import com.ekr.jularis.utils.MoneyHelper
+import kotlinx.android.synthetic.main.activity_transaction_detail.view.*
 import kotlinx.android.synthetic.main.item_payment.view.*
 
-class TransactionDetailAdapter(private var data: ArrayList<HistoriNewProduct>) :
+class TransactionDetailAdapter(private var data: ArrayList<HistoriProduct>) :
     RecyclerView.Adapter<TransactionDetailAdapter.ViewHolder>() {
 
-    fun setData(firstResult: List<HistoriNewProduct>) {
+    fun setData(firstResult: List<HistoriProduct>) {
         data.clear()
         data.addAll(firstResult)
         notifyDataSetChanged()
@@ -33,11 +35,12 @@ class TransactionDetailAdapter(private var data: ArrayList<HistoriNewProduct>) :
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
-        fun bind(historiNewProduct: HistoriNewProduct) {
+        fun bind(historiProduct: HistoriProduct) {
             with(itemView){
-                GlideHelper.setImage(context,historiNewProduct.productPicture,img_item_payment)
-                tv_title_payment.text = historiNewProduct.productName
-                tv_qty_payment.text = "x ${historiNewProduct.quantity}"
+                MoneyHelper.setRupiah(tv_price_payment,historiProduct.price)
+                GlideHelper.setImage(context,historiProduct.productPicture,img_item_payment)
+                tv_title_payment.text = historiProduct.productName
+                tv_qty_payment.text = "x ${historiProduct.quantity}"
             }
         }
 

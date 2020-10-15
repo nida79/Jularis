@@ -1,7 +1,7 @@
 package com.ekr.jularis.ui.history.prosess
 
 import com.ekr.jularis.data.response.ResponseGlobal
-import com.ekr.jularis.data.response.ResponseNewHistori
+import com.ekr.jularis.data.response.ResponseHistori
 import com.ekr.jularis.networking.ApiService
 import com.google.gson.Gson
 import retrofit2.Call
@@ -18,15 +18,15 @@ class ProsesPresenter(val view: ProsesContract.View) : ProsesContract.Presenter 
     override fun getHistoriFirst(token: String, page: Int?, q: String?) {
         view.firstLoading(true)
         ApiService.endpoint.getHistoryProgress(token, page, q)
-            .enqueue(object : Callback<ResponseNewHistori> {
+            .enqueue(object : Callback<ResponseHistori> {
                 override fun onResponse(
-                    call: Call<ResponseNewHistori>,
-                    response: Response<ResponseNewHistori>
+                    call: Call<ResponseHistori>,
+                    response: Response<ResponseHistori>
                 ) {
                     view.firstLoading(false)
                     when {
                         response.isSuccessful -> {
-                            val responseHistory: ResponseNewHistori? = response.body()
+                            val responseHistory: ResponseHistori? = response.body()
                             responseHistory?.let { view.resultFirstRequest(it) }
                             responseHistory?.message?.let { view.showEmptyCart(it) }
                         }
@@ -40,7 +40,7 @@ class ProsesPresenter(val view: ProsesContract.View) : ProsesContract.Presenter 
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseNewHistori>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseHistori>, t: Throwable) {
                     view.firstLoading(false)
                     view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }
@@ -50,15 +50,15 @@ class ProsesPresenter(val view: ProsesContract.View) : ProsesContract.Presenter 
     override fun getHistoriNext(token: String, page: Int?, q: String?) {
         view.nextLoading(true)
         ApiService.endpoint.getHistoryProgress(token, page, q)
-            .enqueue(object : Callback<ResponseNewHistori> {
+            .enqueue(object : Callback<ResponseHistori> {
                 override fun onResponse(
-                    call: Call<ResponseNewHistori>,
-                    response: Response<ResponseNewHistori>
+                    call: Call<ResponseHistori>,
+                    response: Response<ResponseHistori>
                 ) {
                     view.nextLoading(false)
                     when {
                         response.isSuccessful -> {
-                            val responseHistory: ResponseNewHistori? = response.body()
+                            val responseHistory: ResponseHistori? = response.body()
                             responseHistory?.let { view.resultNextRequest(it) }
                         }
                         response.code() != 200 -> {
@@ -71,7 +71,7 @@ class ProsesPresenter(val view: ProsesContract.View) : ProsesContract.Presenter 
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseNewHistori>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseHistori>, t: Throwable) {
                     view.nextLoading(false)
                     view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                 }

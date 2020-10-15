@@ -7,9 +7,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class HistoriProduct(
-    @SerializedName("product_name") val product_name: String,
-    @SerializedName("product_picture") val product_picture: String,
-    @SerializedName("price") val price: Int,
-    @SerializedName("product_id") val productId: String,
-    @SerializedName("quantity") val quantity: Int
-): Parcelable
+    @SerializedName("product_name") val productName: String,
+    @SerializedName("product_picture") val productPicture: String,
+    @SerializedName("quantity") val quantity: Int,
+    @SerializedName("price") val price: Int
+) : Parcelable

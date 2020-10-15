@@ -20,7 +20,6 @@ import com.ekr.jularis.R
 import com.ekr.jularis.data.cart.postcheckout.Data
 import com.ekr.jularis.data.product.DataProduct
 import com.ekr.jularis.data.response.ResponseProduct
-import com.ekr.jularis.data.response.ResponseUpdateProfile
 import com.ekr.jularis.databinding.FragmentHomeBinding
 import com.ekr.jularis.ui.detail.DetailActivity
 import com.ekr.jularis.ui.login.LoginActivity
@@ -30,10 +29,7 @@ import com.ekr.jularis.utils.SessionManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.iid.InstanceIdResult
-import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.pop_up_detail.*
-import java.util.*
-import kotlin.collections.ArrayList
+import kotlinx.android.synthetic.main.dialog_count_product.*
 
 
 class HomeFragment : Fragment(), HomeContract.View {
@@ -55,22 +51,26 @@ class HomeFragment : Fragment(), HomeContract.View {
         homePresenter = HomePresenter(this)
         sessionManager = SessionManager(requireActivity())
         dialog = Dialog(requireActivity())
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener { task: Task<InstanceIdResult> ->
-                firebasetoken = task.result!!.token
-                Log.e("FCM_TOKEN", "onCreate: $firebasetoken")
-            }
-
     }
 
     override fun onStart() {
         super.onStart()
-        homePresenter.getProduct(page, null, null, null)
-        if (sessionManager.prefIsLogin) {
-            if (sessionManager.prefFcm == "" || sessionManager.prefFcm != firebasetoken) {
-                homePresenter.doUpdateFcm(sessionManager.prefToken, firebasetoken)
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener { task: Task<InstanceIdResult> ->
+                if (task.isSuccessful && task.isComplete) {
+                    firebasetoken = task.result!!.token
+                    Log.e("inidia", "tokenbaru: $firebasetoken")
+                    if (sessionManager.prefIsLogin) {
+                        if (sessionManager.prefFcm != firebasetoken) {
+                            sessionManager.prefFcm=firebasetoken
+                            homePresenter.doUpdateFcm(sessionManager.prefToken, firebasetoken)
+                        }
+                    }
+                }
             }
-        }
+
+        homePresenter.getProduct(page, null, null, null)
+
     }
 
     override fun onCreateView(
@@ -174,10 +174,6 @@ class HomeFragment : Fragment(), HomeContract.View {
         }
     }
 
-    override fun resultFcm(responseUpdateProfile: ResponseUpdateProfile) {
-      responseUpdateProfile.data?.let { homePresenter.setPrefs(sessionManager,it) }
-    }
-
     override fun onNextLoading(nextLoading: Boolean) {
         when (nextLoading) {
             true -> {
@@ -237,7 +233,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
             override fun onButtonClick(position: Int, data: DataProduct) {
                 if (sessionManager.prefIsLogin) {
-                    dialog.setContentView(R.layout.pop_up_detail)
+                    dialog.setContentView(R.layout.dialog_count_product)
                     dialog.setCanceledOnTouchOutside(false)
                     dialog.window!!.setLayout(
                         WindowManager.LayoutParams.WRAP_CONTENT, WindowManager
