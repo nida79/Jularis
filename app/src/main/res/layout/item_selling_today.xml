@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    app:cardBackgroundColor="@color/putih"
+    app:cardCornerRadius="@dimen/_6sdp"
+    app:cardElevation="@dimen/_8sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.infinityandroid.roundedimageview.RoundedImageView
+            android:id="@+id/img_item_productToday"
+            android:layout_width="@dimen/_60sdp"
+            android:src="@drawable/img_no_image"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_alignParentStart="true"
+            android:layout_margin="@dimen/_4sdp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:corner_radius="10" />
+
+        <TextView
+            android:id="@+id/tv_title_productToday"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_17sdp"
+            android:layout_toStartOf="@+id/tv_qty_productToday"
+            android:layout_toEndOf="@+id/img_item_productToday"
+            android:ellipsize="end"
+            android:fontFamily="@font/dosis_semibold"
+            android:maxLines="2"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_15ssp"
+            tools:text="Barang Berkas" />
+
+        <TextView
+            android:id="@+id/tv_qty_productToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_15ssp"
+            tools:text="20" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

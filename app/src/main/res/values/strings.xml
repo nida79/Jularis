@@ -110,6 +110,10 @@
     <string name="pilih_bulan_dan_tahun">Pilih Bulan dan Tahun</string>
     <string name="download">Download</string>
     <string name="konfirmasi_update">Konfirmasi Update</string>
+    <string name="daftar_3_produk_paling_laris">Daftar Produk Paling Laris</string>
+    <string name="produk_terjual_hari_ini">Produk Terjual Hari ini</string>
+    <string name="pemasukan_hari_ini">Pemasukan Hari Ini</string>
+    <string name="loading">Loading..</string>
 
     <string-array name="category_spinner">
         <item>Sembako</item>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_130sdp"
+    android:layout_height="@dimen/_150sdp"
+    android:layout_margin="@dimen/_2sdp"
+    android:background="@color/putih"
+    app:cardUseCompatPadding="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="@dimen/_4sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_topsel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/logo_app"
+            android:scaleType="fitXY"
+            android:src="@drawable/test" />
+        <FrameLayout
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:background="@drawable/label_top"
+                android:id="@+id/tv_qty_top"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/montserrat_bold"
+                android:padding="@dimen/_5sdp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/putih"
+                android:textSize="@dimen/_13ssp"
+                tools:text="30" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_overlay">
+
+            <TextView
+                android:background="@drawable/bg_overlay"
+                android:id="@+id/tv_title_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:padding="@dimen/_5sdp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="#FFF"
+                android:textSize="@dimen/_11ssp"
+                tools:text="Beras Limapuluh kilo " />
+
+
+        </FrameLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

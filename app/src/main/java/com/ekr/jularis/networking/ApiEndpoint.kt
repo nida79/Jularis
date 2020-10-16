@@ -137,7 +137,7 @@ interface ApiEndpoint {
     @POST("profile/update")
     fun doUpdateFCM(
         @Header("Authorization") token: String,
-       @Field("firebase_token") firebase_token:String
+        @Field("firebase_token") firebase_token: String
     ): Call<ResponseUpdateProfile>
 
     @Multipart
@@ -174,6 +174,16 @@ interface ApiEndpoint {
     fun doUpdateTransaction(
         @Header("Authorization") token: String,
         @Path("transaction_id") transaction_id: String,
-        @Body update:HistoriIUpdate
+        @Body update: HistoriIUpdate
     ): Call<ResponseGlobal>
+
+    //    @Headers("Content-Type","application/json")
+    @GET("dashboard/total-amount")
+    fun getTotalAmount(@Header("Authorization") token: String): Call<ResponseBalanced>
+
+    @GET("dashboard/transaction-top?limit=3")
+    fun getTopSelling(@Header("Authorization") token: String): Call<ResponseTopselling>
+
+    @GET("dashboard/transaction-today")
+    fun getSellingToday(@Header("Authorization") token: String): Call<ResponseSellingtoday>
 }

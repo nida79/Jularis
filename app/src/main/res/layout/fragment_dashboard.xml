@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/swp_dashboard"
     android:layout_height="match_parent"
     tools:context=".ui.admin.dashboard.DashboardFragment">
 
@@ -26,7 +26,79 @@
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_17ssp" />
 
+            <ProgressBar
+                android:id="@+id/progress_bar_horizontal_dashboard"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:indeterminate="true"
+                android:max="100"
+                android:visibility="gone" />
+
             <include layout="@layout/profile_dashboard" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/dosis_semibold"
+                android:text="@string/daftar_3_produk_paling_laris"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_13ssp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_top_Selling"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="@string/produk_terjual_hari_ini"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/_13ssp" />
+
+                <TextView
+
+                    android:id="@+id/amount_today"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/dosis_bold"
+                    android:gravity="end"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/_13ssp"
+                    tools:text="Rp200.0000.0000" />
+
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_sellingToday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                tools:listitem="@layout/item_selling_today" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
