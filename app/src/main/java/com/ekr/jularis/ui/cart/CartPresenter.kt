@@ -93,9 +93,8 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
                     when {
                         response.isSuccessful -> {
                             val result: ResponseGlobal? = response.body()
-                            if (result!!.status) {
-                                view.resultUpdate(result.message)
-                            }
+                            view.resultUpdate(result!!.status)
+                            view.showToast(result.message)
                         }
                         response.code() != 200 -> {
                             val result: ResponseGlobal = Gson().fromJson(
@@ -130,9 +129,8 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
                     when {
                         response.isSuccessful -> {
                             val result: ResponseGlobal? = response.body()
-                            if (result!!.status) {
-                                view.resultUpdate(result.message)
-                            }
+                            view.resultUpdate(result!!.status)
+                            view.showToast(result.message)
                         }
                         response.code() != 200 -> {
                             val result: ResponseGlobal = Gson().fromJson(
@@ -166,8 +164,7 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
                         response.isSuccessful -> {
                             val result: ResponseGlobal? = response.body()
                             if (result!!.status) {
-
-                                view.resultUpdate(result.message)
+                                view.resultUpdate(result.status)
                             }
                         }
                         response.code() != 200 -> {
@@ -200,8 +197,7 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
                     response.isSuccessful -> {
                         val result: ResponseGlobal? = response.body()
                         if (result!!.status) {
-
-                            view.resultUpdate(result.message)
+                            view.resultUpdate(result.status)
                         }
                     }
                     response.code() != 200 -> {
@@ -234,7 +230,7 @@ class CartPresenter(val view: CartContract.View) : CartContract.Presenter {
                         val result: ResponseGlobal? = response.body()
                         if (result!!.status) {
                             view.showToast(result.message)
-                            view.resultUpdate(result.message)
+                            view.resultUpdate(result.status)
                         }
                     }
                     response.code() != 200 -> {

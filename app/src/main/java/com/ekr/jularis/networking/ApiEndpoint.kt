@@ -4,6 +4,7 @@ import com.ekr.jularis.data.cart.postcheckout.DataPOST
 import com.ekr.jularis.data.histori.HistoriIUpdate
 import com.ekr.jularis.data.payment.DatapostPayment
 import com.ekr.jularis.data.payment.DatapostPayment2
+import com.ekr.jularis.data.product.OngkirData
 import com.ekr.jularis.data.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -186,4 +187,10 @@ interface ApiEndpoint {
 
     @GET("dashboard/transaction-today")
     fun getSellingToday(@Header("Authorization") token: String): Call<ResponseSellingtoday>
+
+    @POST("ongkir")
+    fun setOngkir(
+        @Header("Authorization") token: String,
+        @Body ongkirData: OngkirData
+    ): Call<ResponseOngkir>
 }

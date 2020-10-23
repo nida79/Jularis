@@ -1,10 +1,14 @@
 package com.ekr.jularis.ui.home
 
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +17,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +29,9 @@ import com.ekr.jularis.databinding.FragmentHomeBinding
 import com.ekr.jularis.ui.detail.DetailActivity
 import com.ekr.jularis.ui.login.LoginActivity
 import com.ekr.jularis.ui.payment.PaymentActivity
+import com.ekr.jularis.utils.Config.CHANNEL_DESC
+import com.ekr.jularis.utils.Config.CHANNEL_ID
+import com.ekr.jularis.utils.Config.CHANNEL_NAME
 import com.ekr.jularis.utils.DialogHelper
 import com.ekr.jularis.utils.SessionManager
 import com.google.android.gms.tasks.Task
@@ -44,6 +52,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     private lateinit var sessionManager: SessionManager
     private lateinit var dialogFCM: Dialog
     private var qty = 1
+    private var setok = 1
     private var firebasetoken = ""
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -62,7 +71,7 @@ class HomeFragment : Fragment(), HomeContract.View {
                     Log.e("inidia", "tokenbaru: $firebasetoken")
                     if (sessionManager.prefIsLogin) {
                         if (sessionManager.prefFcm != firebasetoken) {
-                            sessionManager.prefFcm=firebasetoken
+                            sessionManager.prefFcm = firebasetoken
                             homePresenter.doUpdateFcm(sessionManager.prefToken, firebasetoken)
                         }
                     }
@@ -94,6 +103,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun initListener() {
+        setupNotification()
         homeAdapter = HomeAdapter(arrayListOf())
         gridManager = if (requireActivity().resources.configuration.orientation
             == Configuration.ORIENTATION_PORTRAIT
@@ -148,6 +158,19 @@ class HomeFragment : Fragment(), HomeContract.View {
             }
         })
 
+    }
+
+    private fun setupNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                CHANNEL_ID, CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            channel.description = CHANNEL_DESC
+            val manager: NotificationManager =
+                getSystemService(requireContext(), NotificationManager::class.java)!!
+            manager.createNotificationChannel(channel)
+        }
     }
 
     override fun onLoading(loading: Boolean) {
@@ -207,10 +230,16 @@ class HomeFragment : Fragment(), HomeContract.View {
     override fun resultCounter(int: Int) {
         qty = int
         dialog.pop_up_tv_result.text = qty.toString()
-        if (qty <= 1) {
-            dialog.pop_up_min.visibility = View.GONE
-        } else {
-            dialog.pop_up_min.visibility = View.VISIBLE
+        when {
+            qty <= 1 -> {
+                dialog.pop_up_min.visibility = View.GONE
+            }
+            qty == setok -> {
+                dialog.pop_up_pls.visibility = View.GONE
+            }
+            else -> {
+                dialog.pop_up_min.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -231,6 +260,7 @@ class HomeFragment : Fragment(), HomeContract.View {
                 startActivity(intent)
             }
 
+            @SuppressLint("SetTextI18n")
             override fun onButtonClick(position: Int, data: DataProduct) {
                 if (sessionManager.prefIsLogin) {
                     dialog.setContentView(R.layout.dialog_count_product)
@@ -242,6 +272,8 @@ class HomeFragment : Fragment(), HomeContract.View {
                     dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                     dialog.window!!.attributes.windowAnimations = android.R.style.Animation_Dialog
                     dialog.setCancelable(true)
+                    dialog.header2.text = "Stok Produk : ${data.quantity}"
+                    setok = data.quantity
                     dialog.show()
                     dialog.pop_up_pls.setOnClickListener {
                         homePresenter.doCalculatePlus(qty)
@@ -252,6 +284,7 @@ class HomeFragment : Fragment(), HomeContract.View {
                     dialog.pop_up_cancel_detail.setOnClickListener {
                         dialog.dismiss()
                     }
+
                     dialog.pop_up_submit.setOnClickListener {
                         homePresenter.doBuy(
                             sessionManager.prefToken, data.product_id, qty

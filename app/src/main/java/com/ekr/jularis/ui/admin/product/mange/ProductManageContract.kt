@@ -12,7 +12,8 @@ interface ProductManageContract {
             description: String,
             category: String,
             quantity: String,
-            ongkir:String,
+            product_discont_quantity: String?,
+            product_discont_present: String?,
             photo_product: List<File>?
         )
 
@@ -25,7 +26,8 @@ interface ProductManageContract {
             description: String,
             category: String,
             quantity: String,
-            ongkir:String,
+            product_discont_quantity: String?,
+            product_discont_present: String?,
             photo_product: List<File>
         )
     }

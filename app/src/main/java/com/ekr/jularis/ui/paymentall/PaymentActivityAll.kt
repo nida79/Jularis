@@ -1,6 +1,7 @@
 package com.ekr.jularis.ui.paymentall
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
@@ -46,7 +47,7 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
     private lateinit var dialog: Dialog
     private var tipeBayar = "Bayar Ditempat"
     private var photo_id: String? = null
-    private lateinit var data : List<DataGetPayment>
+    private lateinit var data: List<DataGetPayment>
     private lateinit var datapostPayment: DatapostPayment2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +64,7 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
         super.onStart()
         paymentAllPresenter.getDataPayment(sessionManager.prefToken)
     }
+
     override fun initListener() {
 
         paymentAdapter = PaymentAdapter(arrayListOf())
@@ -72,18 +74,18 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
             setHasFixedSize(true)
         }
         swp_paymnt_all.setOnRefreshListener {
-            swp_paymnt_all.isRefreshing= false
+            swp_paymnt_all.isRefreshing = false
             paymentAllPresenter.getDataPayment(sessionManager.prefToken)
         }
         radioGroup_all.setOnCheckedChangeListener { _, _ -> radioSelected() }
         uploadPhoto()
         btn_submit_payment_all.setOnClickListener {
-            when{
-                edt_alamat_payment_all.text.toString()==""->{
+            when {
+                edt_alamat_payment_all.text.toString() == "" -> {
                     edt_alamat_payment_all.error = "Alamat Tidak Boleh Kosong"
                     edt_alamat_payment_all.requestFocus()
                 }
-                edt_no_hp_payment_all.text.toString()==""->{
+                edt_no_hp_payment_all.text.toString() == "" -> {
                     edt_no_hp_payment_all.error = "No Hp Tidak Boleh Kosong"
                     edt_no_hp_payment_all.requestFocus()
                 }
@@ -100,7 +102,7 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
                 photo_id,
                 edt_no_hp_payment_all.text.toString()
             )
-            paymentAllPresenter.postDataPayment(sessionManager.prefToken,datapostPayment)
+            paymentAllPresenter.postDataPayment(sessionManager.prefToken, datapostPayment)
         }
     }
 
@@ -160,7 +162,11 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
         }
     }
 
-    override fun onResultDataPayment(responseGetDataPayment: ResponseGetDataPayment,dataPayment: List<DataGetPayment>) {
+    @SuppressLint("SetTextI18n")
+    override fun onResultDataPayment(
+        responseGetDataPayment: ResponseGetDataPayment,
+        dataPayment: List<DataGetPayment>
+    ) {
         paymentAdapter.setData(responseGetDataPayment.data)
         data = dataPayment
         transactionAmount = responseGetDataPayment.transactionAmount
@@ -171,6 +177,13 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
         MoneyHelper.setRupiah(tv_ongkir_payment_all, ongkir)
         MoneyHelper.setRupiah(tv_total_payment_all, transactionAmount)
         tv_total_qty_payment_all.text = count.toString()
+        if (dataPayment[0].productPayment.product_discont_present != 0) {
+            textView11_all.visibility = View.VISIBLE
+            tv_discountpersen_payment_all.visibility = View.VISIBLE
+            tv_discountpersen_payment_all.text =
+                dataPayment[0].productPayment.product_discont_present.toString() + "%"
+
+        }
     }
 
     override fun onResultUploadPhoto(photo_payment: String) {
@@ -179,15 +192,15 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
     }
 
     override fun resultPayment(sukses: Boolean) {
-        if (sukses){
-           startActivity(Intent(this,MainActivity::class.java))
+        if (sukses) {
+            startActivity(Intent(this, MainActivity::class.java))
             finishAffinity()
             finish()
         }
     }
 
     override fun showMessage(message: String) {
-      Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun uploadPhoto() {

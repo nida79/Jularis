@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/pop_up_wadah_detail"
         android:layout_width="@dimen/_210sdp"
-        android:layout_height="@dimen/_160sdp"
+        android:layout_height="@dimen/_180sdp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_popup"
         android:orientation="vertical"
@@ -30,23 +30,34 @@
             android:src="@drawable/ic_baseline_close_24" />
 
         <TextView
+            android:id="@+id/header1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/pop_up_tv_result"
             android:layout_below="@id/pop_up_cancel_detail"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/_15sdp"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/masukkan_jumlah_barang"
             android:textColor="@color/abu"
             android:textSize="@dimen/_12ssp" />
+        <TextView
+            android:id="@+id/header2"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header1"
+           android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/montserrat_bold"
+            tools:text="Produk Tersedia : 30"
+            android:textColor="@color/abu"
+            android:textSize="@dimen/_10ssp" />
 
         <ImageView
             android:id="@+id/pop_up_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_below="@+id/header2"
             android:layout_marginEnd="@dimen/_25sdp"
             android:layout_toStartOf="@id/pop_up_tv_result"
             android:contentDescription="@string/logo_app"
@@ -58,7 +69,8 @@
             android:id="@+id/pop_up_tv_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_below="@+id/header2"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:contentDescription="@string/logo_app"
             android:fontFamily="@font/montserrat_bold"
@@ -71,8 +83,9 @@
             android:id="@+id/pop_up_pls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_below="@+id/header2"
             android:layout_marginStart="@dimen/_25sdp"
+
             android:layout_toEndOf="@id/pop_up_tv_result"
             android:contentDescription="@string/logo_app"
             android:elevation="@dimen/_15sdp"

@@ -8,11 +8,16 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.networking.ApiService
 import com.google.gson.Gson
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import com.facebook.stetho.Stetho as Stetho1
+
 
 class ProductManagePresenter(val view: ProductManageContract.View, val context: Context) :
     ProductManageContract.Presenter {
@@ -29,7 +34,8 @@ class ProductManagePresenter(val view: ProductManageContract.View, val context: 
         description: String,
         category: String,
         quantity: String,
-        ongkir: String,
+        product_discont_quantity: String?,
+        product_discont_present: String?,
         photo_product: List<File>?
     ) {
         view.onLoading(true)
@@ -40,7 +46,10 @@ class ProductManagePresenter(val view: ProductManageContract.View, val context: 
             .addMultipartFileList("product_picture[]", photo_product)
             .addMultipartParameter("name", name)
             .addMultipartParameter("price", price)
+            .addMultipartParameter("ongkir", "0")
             .addMultipartParameter("category", category)
+            .addMultipartParameter("product_discont_quantity", product_discont_quantity)
+            .addMultipartParameter("product_discont_present", product_discont_present)
             .addMultipartParameter("description", description)
             .addMultipartParameter("quantity", quantity)
             .setPriority(Priority.HIGH)
@@ -102,19 +111,31 @@ class ProductManagePresenter(val view: ProductManageContract.View, val context: 
         description: String,
         category: String,
         quantity: String,
-        ongkir: String,
+        product_discont_quantity: String?,
+        product_discont_present: String?,
         photo_product: List<File>
     ) {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val httpClient =
+            OkHttpClient.Builder().addInterceptor(interceptor).addInterceptor { chain ->
+                val request: Request =
+                    chain.request().newBuilder().addHeader("Accept", "application/json").build()
+                chain.proceed(request)
+            }.build()
         view.onLoading(true)
-        AndroidNetworking.initialize(context)
+        val ongkir = "0"
+        AndroidNetworking.initialize(context, httpClient)
         AndroidNetworking.upload("http://103.55.36.171:8001/v1/product")
             .addHeaders("Authorization", token)
             .addMultipartFileList("product_picture[]", photo_product)
             .addMultipartParameter("name", name)
             .addMultipartParameter("price", price)
             .addMultipartParameter("category", category)
-            .addMultipartParameter("description", description)
             .addMultipartParameter("ongkir", ongkir)
+            .addMultipartParameter("description", description)
+            .addMultipartParameter("product_discont_quantity", product_discont_quantity)
+            .addMultipartParameter("product_discont_present", product_discont_present)
             .addMultipartParameter("quantity", quantity)
             .setPriority(Priority.HIGH)
             .build()

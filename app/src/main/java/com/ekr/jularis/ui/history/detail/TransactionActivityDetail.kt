@@ -25,12 +25,15 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
     private lateinit var historiIUpdate: HistoriIUpdate
     private lateinit var historiData: HistoriData
     private lateinit var dialog: Dialog
+    private lateinit var global : Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transaction_detail)
+        global = DialogHelper.globalLoading(this)
         sessionManager = SessionManager(this)
         update = TransactionPresenter(this)
         dialog = DialogHelper.bottomSheetDialogUpdate(this)
+
 
     }
 
@@ -53,10 +56,7 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
             historiData.transactionState == "Selesai" -> {
                 btn_konfirmasi.visibility = View.GONE
             }
-            sessionManager.prefRole != "admin" -> {
-                btn_konfirmasi.visibility = View.GONE
-            }
-            sessionManager.prefRole == "user" && historiData.transactionState == "Dikirim" -> {
+            historiData.transactionState == "Dikirim" -> {
                 btn_konfirmasi.visibility = View.VISIBLE
                 btn_konfirmasi.setOnClickListener {
                     dialog.text_keterangan_update.text =
@@ -72,9 +72,10 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
                         dialog.dismiss()
                     }
                     dialog.btn_sheet_update_cancel.setOnClickListener { dialog.dismiss() }
-
                 }
-
+            }
+            sessionManager.prefRole == "user" -> {
+                btn_konfirmasi.visibility = View.GONE
             }
             sessionManager.prefRole != "user" && historiData.transactionState == "Menunggu Konfirmasi" -> {
                 btn_konfirmasi.setOnClickListener {
@@ -94,23 +95,7 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
 
                 }
             }
-            sessionManager.prefRole != "user" && historiData.transactionState == "Dikirim" -> {
-                btn_konfirmasi.setOnClickListener {
-                    dialog.text_keterangan_update.text =
-                        "Konfirmasi Update! Update Status Pengiriman Menjadi Selesai ?"
-                    dialog.show()
-                    dialog.btn_sheet_update_ok.setOnClickListener {
-                        historiIUpdate = HistoriIUpdate("Selesai")
-                        update.doUpdate(
-                            sessionManager.prefToken,
-                            historiData.transactionId,
-                            historiIUpdate
-                        )
-                        dialog.dismiss()
-                    }
-                    dialog.btn_sheet_update_cancel.setOnClickListener { dialog.dismiss() }
-                }
-            }
+
         }
         setupView(historiData)
 
@@ -140,18 +125,19 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
 
     override fun onResultUpdate(berhasil: Boolean) {
         if (berhasil) {
+            global.dismiss()
             finish()
         }
     }
 
     override fun onLoading(loading: Boolean) {
-        val dialog = DialogHelper.globalLoading(this)
+
         when (loading) {
             true -> {
-                dialog.show()
+                global.show()
             }
             false -> {
-                dialog.dismiss()
+                global.dismiss()
             }
         }
     }

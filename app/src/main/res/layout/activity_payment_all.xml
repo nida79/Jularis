@@ -366,6 +366,37 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView9_all"
                     tools:text="Rp100.000" />
 
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/textView11_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="@string/potongan_harga"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_discountpersen_payment_all"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10_all" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tv_discountpersen_payment_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/hijau"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView11_all"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10_all"
+                    tools:text="20%" />
+
+
                 <View
                     android:id="@+id/view_bound_all"
                     android:layout_width="0dp"
@@ -374,7 +405,7 @@
                     android:background="@color/abu"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_ongkir_payment_all" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_discountpersen_payment_all" />
 
                 <TextView
                     android:id="@+id/tv_11_all"

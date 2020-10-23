@@ -20,6 +20,6 @@ interface CartContract {
         fun showToast(message: String)
         fun loadingHorizontal(boolean: Boolean)
         fun onResult(responseCart: ResponseCart)
-        fun resultUpdate(message: String)
+        fun resultUpdate(hasil:Boolean)
     }
 }

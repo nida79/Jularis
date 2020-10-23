@@ -414,6 +414,36 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView9"
                 tools:text="Rp100.000" />
 
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/textView11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/dosis_semibold"
+                android:text="@string/potongan_harga"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_discountqty_payment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_discountqty_payment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:fontFamily="@font/dosis_semibold"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/hijau"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                tools:text="25%" />
+
             <View
                 android:id="@+id/view_bound"
                 android:layout_width="0dp"
@@ -422,7 +452,7 @@
                 android:background="@color/abu"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_ongkir_payment" />
+                app:layout_constraintTop_toBottomOf="@id/tv_discountqty_payment" />
 
             <TextView
                 android:id="@+id/tv_11"

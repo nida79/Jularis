@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekr.jularis.R
 import com.ekr.jularis.data.product.DataProduct
@@ -34,11 +35,12 @@ import java.util.*
 class ProductActivityManage : AppCompatActivity(), ProductManageContract.View {
     private lateinit var productPresenter: ProductManagePresenter
     private lateinit var sessionManager: SessionManager
-    private  var dataProduct: DataProduct? = null
+    private var dataProduct: DataProduct? = null
     private var returnValue = ArrayList<String>()
     private val mFile = ArrayList<File>()
     private lateinit var options: Options
     private lateinit var dialog: Dialog
+    private var discount = false
     private lateinit var imagePickerAdapter: ImagePickerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,13 +63,12 @@ class ProductActivityManage : AppCompatActivity(), ProductManageContract.View {
     override fun initListener() {
         dataProduct = intent.extras?.getParcelable("data")
         imagePickerAdapter = ImagePickerAdapter(arrayListOf())
-        if (dataProduct!=null){
+        if (dataProduct != null) {
             edit_nama_product.setText(dataProduct!!.name)
             edit_price_product.setText(dataProduct!!.price.toString())
             edit_description_product.setText(dataProduct!!.description)
             edit_qty_product.setText(dataProduct!!.quantity.toString())
-            edit_ongkir_product.setText(dataProduct!!.ongkir)
-
+            spinner_update.setText(dataProduct!!.category)
             btn_update_produk.setOnClickListener {
                 productPresenter.doUpdateProduct(
                     sessionManager.prefToken,
@@ -75,9 +76,10 @@ class ProductActivityManage : AppCompatActivity(), ProductManageContract.View {
                     edit_nama_product.text.toString(),
                     edit_price_product.text.toString(),
                     edit_description_product.text.toString(),
-                    spinner_update.selectedItem.toString(),
+                    spinner_update.text.toString(),
                     edit_qty_product.text.toString(),
-                    edit_ongkir_product.text.toString(),
+                    discount_qty.text.toString(),
+                    discount_persen.text.toString(),
                     mFile
                 )
             }
@@ -85,49 +87,52 @@ class ProductActivityManage : AppCompatActivity(), ProductManageContract.View {
                 val peringatan = DialogHelper.bottomSheetDialogDelete(this)
                 peringatan.show()
                 peringatan.btn_sheet_ok.setOnClickListener {
-                    productPresenter.doDeleteProduct(sessionManager.prefToken, dataProduct!!.product_id)
+                    productPresenter.doDeleteProduct(
+                        sessionManager.prefToken,
+                        dataProduct!!.product_id
+                    )
                     peringatan.dismiss()
                 }
 
             }
-        }
-        else{
+        } else {
             img_delete_produk.visibility = View.GONE
             header_manage_product.text = "Tambah Produk"
             btn_update_produk.setOnClickListener {
-                when{
-                    edit_nama_product.text.toString().isEmpty() ->{
+                when {
+                    edit_nama_product.text.toString().isEmpty() -> {
                         edit_nama_product.error = "Nama Produk Tidak Boleh Kosong"
                         edit_nama_product.requestFocus()
                     }
-                    edit_price_product.text.toString().isEmpty() ->{
+                    edit_price_product.text.toString().isEmpty() -> {
                         edit_price_product.error = "Harga Tidak Boleh Kosong"
                         edit_price_product.requestFocus()
                     }
-                    edit_description_product.text.toString().isEmpty() ->{
+                    edit_description_product.text.toString().isEmpty() -> {
                         edit_description_product.error = "Deskripsi Tidak Boleh Kosong"
                         edit_description_product.requestFocus()
                     }
-                    edit_qty_product.text.toString().isEmpty() ->{
+                    edit_qty_product.text.toString().isEmpty() -> {
                         edit_qty_product.error = "Jumlah Produk Tidak Boleh Kosong"
                         edit_qty_product.requestFocus()
                     }
-                    edit_ongkir_product.text.toString().isEmpty() ->{
-                        edit_ongkir_product.error = "Ongkos Kirim Tidak Boleh Kosong"
-                        edit_ongkir_product.requestFocus()
+                    mFile.isEmpty() -> {
+                        Toasty.warning(
+                            applicationContext,
+                            "Foto Belum Ditambahkan",
+                            Toasty.LENGTH_SHORT
+                        ).show()
                     }
-                    mFile.isEmpty()->{
-                        Toasty.warning(applicationContext,"Foto Belum Ditambahkan",Toasty.LENGTH_SHORT).show()
-                    }
-                    else->{
+                    else -> {
                         productPresenter.doAddProduct(
                             sessionManager.prefToken,
                             edit_nama_product.text.toString(),
                             edit_price_product.text.toString(),
                             edit_description_product.text.toString(),
-                            spinner_update.selectedItem.toString(),
+                            spinner_update.text.toString(),
                             edit_qty_product.text.toString(),
-                            edit_ongkir_product.text.toString(),
+                            discount_qty.text.toString(),
+                            discount_persen.text.toString(),
                             mFile
                         )
                     }
@@ -135,6 +140,38 @@ class ProductActivityManage : AppCompatActivity(), ProductManageContract.View {
 
             }
 
+        }
+        btn_discount.setOnClickListener {
+            when (discount) {
+                false -> {
+                    btn_discount.setCompoundDrawablesWithIntrinsicBounds(
+                        null,
+                        null,
+                        ContextCompat.getDrawable(
+                            applicationContext,
+                            R.drawable.ic_remove_circle_24px
+                        ),
+                        null
+                    )
+                    discount = true
+                    discount_persen.visibility = View.VISIBLE
+                    discount_qty.visibility = View.VISIBLE
+                }
+                true -> {
+                    discount = false
+                    btn_discount.setCompoundDrawablesWithIntrinsicBounds(
+                        null,
+                        null,
+                        ContextCompat.getDrawable(
+                            applicationContext,
+                            R.drawable.ic_add_circle_24px
+                        ),
+                        null
+                    )
+                    discount_persen.visibility = View.GONE
+                    discount_qty.visibility = View.GONE
+                }
+            }
         }
         update_pick_image.setOnClickListener {
             Dexter.withActivity(this)
@@ -170,7 +207,8 @@ class ProductActivityManage : AppCompatActivity(), ProductManageContract.View {
                 .check()
         }
         rcv_image_update.apply {
-            layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL,
+            layoutManager = LinearLayoutManager(
+                applicationContext, LinearLayoutManager.HORIZONTAL,
                 false
             )
             setHasFixedSize(true)

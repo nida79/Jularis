@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_popup"
+    android:orientation="vertical"
+    android:padding="@dimen/_15sdp">
+
+    <ImageView
+        android:id="@+id/close_ongkir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:contentDescription="@string/logo_app"
+        android:src="@drawable/ic_baseline_close_24" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="@string/ongkir_0_km_2_km"
+        android:textColor="@color/abu"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_no_hp_payment_all" />
+
+    <EditText
+        android:id="@+id/edt_ongkir_first"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/rounded_popup"
+        android:elevation="@dimen/_5sdp"
+        android:gravity="top"
+        android:hint="@string/input_harga_ongkos_kirim"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:textColor="@color/hitam"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="@string/ongkir_3_km_5_km"
+        android:textColor="@color/abu"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_no_hp_payment_all" />
+
+    <EditText
+        android:id="@+id/edt_ongkir_second"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/rounded_popup"
+        android:elevation="@dimen/_5sdp"
+        android:gravity="top"
+        android:hint="@string/input_harga_ongkos_kirim"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:textColor="@color/hitam"
+        tools:ignore="RtlSymmetry" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="Onkir 6 Km - 10 Km"
+        android:textColor="@color/abu"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_no_hp_payment_all" />
+
+    <EditText
+        android:id="@+id/edt_ongkir_third"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/rounded_popup"
+        android:elevation="@dimen/_5sdp"
+        android:gravity="top"
+        android:hint="@string/input_harga_ongkos_kirim"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:textColor="@color/hitam"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="@string/ongkir_diatas_10_km"
+        android:textColor="@color/abu"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_no_hp_payment_all" />
+
+    <EditText
+        android:id="@+id/edt_ongkir_four"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/rounded_popup"
+        android:elevation="@dimen/_5sdp"
+        android:gravity="top"
+        android:hint="@string/input_harga_ongkos_kirim"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:textColor="@color/hitam"
+        tools:ignore="RtlSymmetry" />
+
+
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit_ongkir"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        style="@style/SpinKitView.Large.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:SpinKit_Color="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/btn_ongkir_submit"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/rounded_btn"
+        android:fontFamily="@font/dosis_extrabold"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/submit"
+        android:textColor="#FFF"
+        android:textSize="@dimen/_13ssp" />
+</LinearLayout>

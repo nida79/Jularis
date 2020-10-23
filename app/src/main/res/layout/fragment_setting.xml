@@ -177,29 +177,34 @@
                 android:layout_below="@id/tv_pp_setting"/>
         </RelativeLayout>
         <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rlv_setting_ongkir"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:ignore="UselessParent">
+
             <de.hdodenhof.circleimageview.CircleImageView
-                app:civ_border_width="1dp"
-                app:civ_border_color="@color/abu"
-                android:layout_centerVertical="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="@dimen/_15sdp"
                 android:id="@+id/img_ab_setting"
                 android:layout_width="wrap_content"
+                android:tint="@color/abu_soft"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_priority_high_24"
-                android:contentDescription="@string/todo" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="18dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_delivery"
+                app:civ_border_color="@color/abu"
+                app:civ_border_width="1dp" />
             <TextView
                 android:layout_marginStart="@dimen/_15sdp"
                 android:id="@+id/tv_ab_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_color"
-                android:text="@string/about_us"
+                android:text="@string/pengaturan_harga_ongkir"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/dosis_semibold"
@@ -223,6 +228,8 @@
                 android:layout_below="@id/tv_ab_setting"/>
         </RelativeLayout>
         <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/setting_wadah_aktifitas"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -235,15 +242,16 @@
                 android:id="@+id/img_hs_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_help_outline_24"
-                android:contentDescription="@string/todo" />
+                android:src="@drawable/ic_baseline_people_24"
+                android:contentDescription="@string/todo"
+                app:tint="@color/abu_soft" />
             <TextView
                 android:layout_marginStart="@dimen/_15sdp"
                 android:id="@+id/tv_hs_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_color"
-                android:text="@string/help_and_support"
+                android:text="@string/aktifitas_karyawan"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/dosis_semibold"

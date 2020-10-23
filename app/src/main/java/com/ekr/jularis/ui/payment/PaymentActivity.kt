@@ -172,6 +172,12 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
         tv_total_qty_payment.text = responseGetDataPayment.data[0].quantity.toString()
         MoneyHelper.setRupiah(tv_ongkir_payment, ongkir)
         MoneyHelper.setRupiah(tv_total_payment, transactionAmount)
+        if (responseGetDataPayment.data[0].productPayment.product_discont_present!=0){
+            tv_discountqty_payment.text = responseGetDataPayment.data[0].productPayment.product_discont_present.toString()+"%"
+            tv_discountqty_payment.visibility = View.VISIBLE
+            textView11.visibility = View.VISIBLE
+        }
+
 
     }
 

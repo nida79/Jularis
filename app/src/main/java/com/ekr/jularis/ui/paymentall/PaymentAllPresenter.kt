@@ -82,7 +82,7 @@ class PaymentAllPresenter(val view: PaymentAllContract.View) : PaymentAllContrac
                         }
                         response.code() != 200 -> {
                             val result: ResponseGlobal = Gson().fromJson(
-                                response.errorBody()!!.charStream(),
+                                response.errorBody()!!.string(),
                                 ResponseGlobal::class.java
                             )
                             view.showMessage(result.message)

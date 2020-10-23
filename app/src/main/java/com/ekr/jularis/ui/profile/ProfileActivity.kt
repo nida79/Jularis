@@ -6,14 +6,13 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.ekr.jularis.R
 import com.ekr.jularis.data.profile.DataGet
-import com.ekr.jularis.ui.MainActivity
 import com.ekr.jularis.utils.DialogHelper
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.SessionManager
@@ -24,8 +23,6 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import es.dmoral.toasty.Toasty
-import hu.autsoft.krate.stringSetPref
-import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.layout_edt_profile.*
 import java.io.File

@@ -96,7 +96,6 @@
     <string name="upload">Upload</string>
     <string name="update">Update</string>
     <string name="input_jumlah_produk">Input Jumlah Produk</string>
-    <string name="input_harga_ongkos_kirim">Input Harga Ongkos Kirim</string>
     <string name="detail_pesanan">Detail Pesanan</string>
     <string name="metode_pembayaran">Metode Pembayaran</string>
     <string name="bukti_transfer">Bukti Transfer</string>
@@ -114,6 +113,18 @@
     <string name="produk_terjual_hari_ini">Produk Terjual Hari ini</string>
     <string name="pemasukan_hari_ini">Pemasukan Hari Ini</string>
     <string name="loading">Loading..</string>
+    <string name="produk_tersedia">Produk Tersedia</string>
+    <string name="input_kategori">Input Kategori</string>
+    <string name="tambah_discount">Tambah Discount</string>
+    <string name="input_minimal_pembelian">Input Minimal Pembelian</string>
+    <string name="input_besar_discount">Input Besar Discount</string>
+    <string name="potongan_harga">Potongan Harga</string>
+    <string name="aktifitas_karyawan">Aktifitas Karyawan</string>
+    <string name="pengaturan_harga_ongkir">Pengaturan Harga Ongkir</string>
+    <string name="input_harga_ongkos_kirim">Input Harga Ongkos Kirim</string>
+    <string name="ongkir_3_km_5_km">Ongkir 3 Km - 5 Km</string>
+    <string name="ongkir_0_km_2_km">Ongkir 0 Km - 2 Km</string>
+    <string name="ongkir_diatas_10_km">Ongkir Diatas 10 Km</string>
 
     <string-array name="category_spinner">
         <item>Sembako</item>

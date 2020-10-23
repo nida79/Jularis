@@ -146,8 +146,10 @@ class CartFragment : Fragment(), CartContract.View {
         }
     }
 
-    override fun resultUpdate(message: String) {
-        cartPresenter.getCartUpdate(sessionManager.prefToken)
+    override fun resultUpdate(hasil:Boolean) {
+       if (hasil){
+           cartPresenter.getCartUpdate(sessionManager.prefToken)
+       }
     }
 
     override fun onResult(responseCart: ResponseCart) {

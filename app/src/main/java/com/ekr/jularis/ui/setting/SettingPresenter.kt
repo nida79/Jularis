@@ -1,6 +1,9 @@
 package com.ekr.jularis.ui.setting
 
+import android.util.Log
+import com.ekr.jularis.data.product.OngkirData
 import com.ekr.jularis.data.response.ResponseGlobal
+import com.ekr.jularis.data.response.ResponseOngkir
 import com.ekr.jularis.networking.ApiService
 import com.google.gson.Gson
 import retrofit2.Call
@@ -77,6 +80,35 @@ class SettingPresenter (val view: SettingContract.View):SettingContract.Presente
 
             override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                 view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+            }
+        })
+    }
+
+    override fun setOngkir(token: String, data: OngkirData) {
+        ApiService.endpoint.setOngkir(token,data).enqueue(object : Callback<ResponseOngkir> {
+            override fun onResponse(
+                call: Call<ResponseOngkir>,
+                response: Response<ResponseOngkir>
+            ) {
+                when{
+                    response.isSuccessful->{
+                        val result : ResponseOngkir? = response.body()
+                        view.resultOngkir(result!!.status)
+                        view.showMessage(result.message)
+                    }
+                    response.code()!=200->{
+                        val result: ResponseGlobal = Gson().fromJson(
+                            response.errorBody()!!.charStream(),
+                            ResponseGlobal::class.java
+                        )
+                        view.showMessage(result.message)
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<ResponseOngkir>, t: Throwable) {
+                t.message?.let { view.showMessage(it) }
             }
         })
     }

@@ -67,9 +67,6 @@
             android:paddingStart="@dimen/_10sdp"
             android:paddingTop="@dimen/_10sdp"
             android:textColor="@color/hitam"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
             tools:ignore="RtlSymmetry" />
 
         <TextView
@@ -95,9 +92,6 @@
             android:paddingStart="@dimen/_10sdp"
             android:paddingTop="@dimen/_10sdp"
             android:textColor="@color/hitam"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
             tools:ignore="RtlSymmetry" />
 
         <TextView
@@ -134,14 +128,21 @@
             android:textColor="@color/abu"
             android:textSize="@dimen/_13ssp" />
 
-         <Spinner
-             android:id="@+id/spinner_update"
-             android:layout_margin="@dimen/_10sdp"
-             android:layout_width="match_parent"
-             android:background="@drawable/spinner_border"
-             android:layout_height="wrap_content"
-             android:gravity="center"
-             android:entries="@array/category_spinner"/>
+        <EditText
+            android:id="@+id/spinner_update"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/rounded_popup"
+            android:elevation="@dimen/_5sdp"
+            android:gravity="top"
+            android:hint="@string/input_kategori"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:textColor="@color/hitam"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -167,24 +168,48 @@
             android:paddingTop="@dimen/_10sdp"
             android:textColor="@color/hitam"
             tools:ignore="RtlSymmetry" />
+
+
         <TextView
+            android:id="@+id/btn_discount"
+            android:drawablePadding="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/dosis_semibold"
-            android:text="@string/ongkos_kirim"
-            android:textColor="@color/abu"
-            android:textSize="@dimen/_13ssp" />
+            android:text="@string/tambah_discount"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_13ssp"
+            app:drawableEndCompat="@drawable/ic_add_circle_24px" />
 
         <EditText
-            android:id="@+id/edit_ongkir_product"
+            android:visibility="gone"
+            android:id="@+id/discount_qty"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="@dimen/_10sdp"
             android:background="@drawable/rounded_popup"
             android:elevation="@dimen/_5sdp"
             android:gravity="top"
-            android:hint="@string/input_harga_ongkos_kirim"
+            android:hint="@string/input_minimal_pembelian"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:textColor="@color/hitam"
+            tools:ignore="RtlSymmetry" />
+
+        <EditText
+            android:visibility="gone"
+            android:id="@+id/discount_persen"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/rounded_popup"
+            android:elevation="@dimen/_5sdp"
+            android:gravity="top"
+            android:hint="@string/input_besar_discount"
             android:importantForAutofill="no"
             android:inputType="number"
             android:paddingStart="@dimen/_10sdp"
@@ -193,6 +218,7 @@
             tools:ignore="RtlSymmetry" />
 
         <TextView
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
