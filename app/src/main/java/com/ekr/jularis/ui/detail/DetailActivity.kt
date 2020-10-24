@@ -1,5 +1,6 @@
 package com.ekr.jularis.ui.detail
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -36,6 +37,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         dialog = Dialog(this)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initListener() {
         val terImage = intent.extras!!.getParcelableArrayList<DataImageProduct>("image")
         dataProduct = intent.extras!!.getParcelable("data")!!
@@ -54,6 +56,11 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
             tv_detail_stok.text = dataProduct.quantity.toString()
             tv_detail_deskripsi.text = dataProduct.description
             MoneyHelper.setRupiah(tv_detail_harga, dataProduct.price)
+        if (dataProduct.product_discont_present!=0){
+            tv_potongan.visibility=View.VISIBLE
+            detail_potongan.visibility=View.VISIBLE
+            detail_potongan.text = "Potongan ${dataProduct.product_discont_present}% untuk pemebelian Lebih dari ${dataProduct.product_discont_quantity} produk"
+        }
 
 
     }

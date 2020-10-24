@@ -1,22 +1,21 @@
 package com.ekr.jularis.ui.admin.dashboard
 
-import com.ekr.jularis.data.response.ResponseBalanced
-import com.ekr.jularis.data.response.ResponseGlobal
-import com.ekr.jularis.data.response.ResponseSellingtoday
-import com.ekr.jularis.data.response.ResponseTopselling
+import android.app.Activity
+import com.ekr.jularis.data.dashboard.PostDownload
+import com.ekr.jularis.data.response.*
 import com.ekr.jularis.networking.ApiService
-import com.google.android.gms.common.api.Api
+import com.ekr.jularis.utils.DownloadUtils
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class DashboardPresenter(val view: DashboardContract.View) : DashboardContract.Presenter {
     init {
         view.initListener()
         view.onLoading(false)
-//        view.nextLoading(false)
-//        view.emptyTemplate(false)
+        view.onDownloadProgress(false)
     }
 
     override fun getTotalAmount(token: String) {
@@ -56,7 +55,7 @@ class DashboardPresenter(val view: DashboardContract.View) : DashboardContract.P
                     }
                     response.code() != 200 -> {
                         val responseGlobal: ResponseGlobal? = Gson().fromJson(
-                            response.errorBody()?.charStream(),
+                            response.errorBody()?.string(),
                             ResponseGlobal::class.java
                         )
                         responseGlobal?.message?.let { view.showMessage(it) }
@@ -87,7 +86,7 @@ class DashboardPresenter(val view: DashboardContract.View) : DashboardContract.P
                     }
                     response.code() != 200 -> {
                         val responseGlobal: ResponseGlobal? = Gson().fromJson(
-                            response.errorBody()?.charStream(),
+                            response.errorBody()?.string(),
                             ResponseGlobal::class.java
                         )
                         responseGlobal?.message?.let { view.showMessage(it) }
@@ -101,6 +100,43 @@ class DashboardPresenter(val view: DashboardContract.View) : DashboardContract.P
                 view.showMessage("Something went wrong")
             }
         })
+    }
+
+    override fun dogetReport(token: String, postDownload: PostDownload) {
+        view.onDownloadProgress(true)
+        ApiService.endpoint.getReport(token, postDownload).enqueue(object :
+            Callback<ResponseGetReport> {
+            override fun onResponse(
+                call: Call<ResponseGetReport>,
+                response: Response<ResponseGetReport>
+            ) {
+                view.onDownloadProgress(false)
+                when {
+                    response.isSuccessful -> {
+                        val result: ResponseGetReport? = response.body()
+                        result?.let { view.resultGetUrl(it) }
+                    }
+                    response.code() != 200 -> {
+                        val responseGlobal: ResponseGlobal? = Gson().fromJson(
+                            response.errorBody()?.string(),
+                            ResponseGlobal::class.java
+                        )
+                        responseGlobal?.message?.let { view.showMessage(it) }
+                    }
+                    else -> view.showMessage(response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseGetReport>, t: Throwable) {
+                view.onDownloadProgress(false)
+                view.showMessage("Something went wrong!")
+            }
+        })
+    }
+
+    override fun downloadReport(activity: Activity, url: String) {
+        DownloadUtils.downloadLaporan(activity,url)
+
     }
 
 }

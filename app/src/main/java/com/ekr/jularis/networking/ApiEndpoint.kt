@@ -1,12 +1,14 @@
 package com.ekr.jularis.networking
 
 import com.ekr.jularis.data.cart.postcheckout.DataPOST
+import com.ekr.jularis.data.dashboard.PostDownload
 import com.ekr.jularis.data.histori.HistoriIUpdate
 import com.ekr.jularis.data.payment.DatapostPayment
 import com.ekr.jularis.data.payment.DatapostPayment2
 import com.ekr.jularis.data.product.OngkirData
 import com.ekr.jularis.data.response.*
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -193,4 +195,13 @@ interface ApiEndpoint {
         @Header("Authorization") token: String,
         @Body ongkirData: OngkirData
     ): Call<ResponseOngkir>
+
+    @POST("transaction/report")
+    fun getReport(
+        @Header("Authorization") token: String,
+        @Body postDownload: PostDownload
+    ): Call<ResponseGetReport>
+
+    @GET
+    fun downloadMonthly(@Url urlString: String?):Call<ResponseBody>
 }

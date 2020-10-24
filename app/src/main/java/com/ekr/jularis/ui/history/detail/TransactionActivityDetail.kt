@@ -2,21 +2,23 @@ package com.ekr.jularis.ui.history.detail
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekr.jularis.R
-import com.ekr.jularis.data.histori.HistoriIUpdate
 import com.ekr.jularis.data.histori.HistoriData
+import com.ekr.jularis.data.histori.HistoriIUpdate
 import com.ekr.jularis.utils.DialogHelper
 import com.ekr.jularis.utils.GlideHelper
 import com.ekr.jularis.utils.MoneyHelper
 import com.ekr.jularis.utils.SessionManager
 import kotlinx.android.synthetic.main.activity_transaction_detail.*
-import kotlinx.android.synthetic.main.bottom_sheet_dialog.*
 import kotlinx.android.synthetic.main.bottom_sheet_update.*
+
 
 class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract.View {
     private lateinit var update: TransactionPresenter
@@ -25,7 +27,7 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
     private lateinit var historiIUpdate: HistoriIUpdate
     private lateinit var historiData: HistoriData
     private lateinit var dialog: Dialog
-    private lateinit var global : Dialog
+    private lateinit var global: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transaction_detail)
@@ -101,6 +103,7 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
 
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     private fun setupView(historiData: HistoriData) {
         tv_metodePayment_detail_pesanan.text = historiData.paymentMethod
         if (historiData.paymentMethod == "Transfer Bank") {
@@ -121,6 +124,21 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
         MoneyHelper.setRupiah(tv_total_price_detail_pesanan, historiData.productAmount)
         MoneyHelper.setRupiah(tv_ongkir_detail_pesanan, historiData.servicePrice)
         MoneyHelper.setRupiah(tv_total_detail_pesanan, historiData.transactionAmount)
+        btn_maps.setOnClickListener {
+            val googlemap = "com.google.android.apps.maps"
+            val gmmIntentUri = Uri.parse("google.navigation:q=${historiData.address}") as Uri
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage(googlemap)
+            if (mapIntent.resolveActivity(packageManager) != null) {
+                startActivity(mapIntent)
+            } else {
+                Toast.makeText(
+                    applicationContext,
+                    "Google Maps Belum Terinstal, Install Terlebih dahulu.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 
     override fun onResultUpdate(berhasil: Boolean) {

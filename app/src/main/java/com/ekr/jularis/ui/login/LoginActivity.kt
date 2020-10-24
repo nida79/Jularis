@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.ekr.jularis.MainActivity3
 import com.ekr.jularis.R
 import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.ui.MainActivity
@@ -84,9 +85,15 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     override fun onResult(responseLogin: ResponseLogin) {
         responseLogin.data?.let { loginPresenter.setPrefs(sessionManager, it) }
         when {
-            sessionManager.prefRole != "user" -> {
+            sessionManager.prefRole == "admin" -> {
                 FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL)
                 startActivity(Intent(this, MainActivity2::class.java))
+                finishAffinity()
+                finish()
+            }
+            sessionManager.prefRole == "krw" -> {
+                FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL)
+                startActivity(Intent(this, MainActivity3::class.java))
                 finishAffinity()
                 finish()
             }
@@ -105,7 +112,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
             }
         }
-
     }
 
     override fun showMessage(message: String) {

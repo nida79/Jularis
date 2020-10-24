@@ -125,6 +125,7 @@
     <string name="ongkir_3_km_5_km">Ongkir 3 Km - 5 Km</string>
     <string name="ongkir_0_km_2_km">Ongkir 0 Km - 2 Km</string>
     <string name="ongkir_diatas_10_km">Ongkir Diatas 10 Km</string>
+    <string name="lokasi">Lokasi</string>
 
     <string-array name="category_spinner">
         <item>Sembako</item>

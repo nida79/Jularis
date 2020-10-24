@@ -149,6 +149,20 @@
             android:textStyle="bold"
             tools:ignore="RtlSymmetry"
             tools:text="Jalan Pelita Indah 2 Rt 08 rw 08 no 56i" />
+        <Button
+            android:id="@+id/btn_maps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lokasi"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:elevation="@dimen/_5sdp"
+            android:fontFamily="@font/dosis_bold"
+            android:textColor="@color/putih"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_gravity="end"
+            android:background="@drawable/oval_btn"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -298,6 +312,36 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView9"
                 tools:text="Rp100.000" />
 
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/textView11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/dosis_semibold"
+                android:text="@string/potongan_harga"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_dicount_detail_pesanan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_dicount_detail_pesanan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:fontFamily="@font/dosis_semibold"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/hijau"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                tools:text="10%" />
+
             <View
                 android:id="@+id/view_bound"
                 android:layout_width="0dp"
@@ -306,7 +350,7 @@
                 android:background="@color/abu"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_ongkir_detail_pesanan" />
+                app:layout_constraintTop_toBottomOf="@id/tv_dicount_detail_pesanan" />
 
             <TextView
                 android:id="@+id/tv_11"

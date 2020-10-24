@@ -3,6 +3,8 @@ package com.ekr.jularis.ui.profile
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.app.DownloadManager
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri

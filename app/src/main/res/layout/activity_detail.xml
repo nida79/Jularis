@@ -109,11 +109,39 @@
                     android:textSize="@dimen/_13ssp"
                     tools:text="24" />
 
+                <TextView
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textSize="@dimen/_13ssp"
+                    android:id="@+id/tv_potongan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/potongan_harga"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textColor="@color/hitam"
+                    android:layout_below="@id/tv_detail_harga"/>
+                <TextView
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textSize="@dimen/_13ssp"
+                    android:id="@+id/detail_potongan"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Discount 10% untuk pemebelian Lebih dari 10 produk"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/hitam"
+                    android:layout_below="@id/tv_potongan"/>
+
+
+
                 <View
                     android:id="@+id/pembatas"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_below="@+id/tv_detail_harga"
+                    android:layout_below="@+id/detail_potongan"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="@dimen/_10sdp"

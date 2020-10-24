@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/navigation_product_krw"
+        android:icon="@drawable/ic_baseline_fastfood_24"
+        android:title="@string/produk"
+        app:cnb_iconColor="@color/colorPrimary" />
+
+    <item
+        android:id="@+id/navigation_trans_krw"
+        android:icon="@drawable/ic_transfer_1"
+        android:title="@string/transaksi"
+        app:cnb_iconColor="@color/colorPrimary" />
+
+
+    <item
+        android:id="@+id/navigation_setting_krw"
+        android:icon="@drawable/ic_outline_settings"
+        android:title="@string/pengaturan"
+        app:cnb_iconColor="@color/colorPrimary" />
+
+</menu>

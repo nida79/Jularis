@@ -28,6 +28,7 @@ class SettingFragment : Fragment(), SettingContract.View {
     private lateinit var settingBinding: FragmentSettingBinding
     private lateinit var dialog: Dialog
     private lateinit var dialogOngkir: Dialog
+    private lateinit var ongkirData: OngkirData
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         settingPresenter = SettingPresenter(this)
@@ -93,40 +94,60 @@ class SettingFragment : Fragment(), SettingContract.View {
 
             }
         }
-
         settingBinding.rlvSettingOngkir.setOnClickListener {
             dialogOngkir.show()
             dialogOngkir.btn_ongkir_submit.setOnClickListener {
                 dialogOngkir.btn_ongkir_submit.visibility = View.GONE
                 dialogOngkir.spin_kit_ongkir.visibility = View.VISIBLE
-                if (dialogOngkir.edt_ongkir_first.text.toString()
-                        .isEmpty() || dialogOngkir.edt_ongkir_second.text.toString()
-                        .isEmpty() || dialogOngkir.edt_ongkir_third.text.toString()
-                        .isEmpty() || dialogOngkir.edt_ongkir_four.text.toString().isEmpty()
-                ) {
-                    val ongkirData = OngkirData(
-                        null, null, null, null
-                    )
-                    settingPresenter.setOngkir(sessionManager.prefToken, ongkirData)
-                }else{
-                    val ongkirData = OngkirData(
-                        dialogOngkir.edt_ongkir_first.text.toString().toInt(),
-                        dialogOngkir.edt_ongkir_second.text.toString().toInt(),
-                        dialogOngkir.edt_ongkir_third.text.toString().toInt(),
-                        dialogOngkir.edt_ongkir_four.text.toString().toInt()
-                    )
-                    settingPresenter.setOngkir(sessionManager.prefToken, ongkirData)
+                when {
+                    dialogOngkir.edt_ongkir_first.text.toString().isEmpty() -> {
+                        ongkirData = OngkirData(
+                            null,
+                            dialogOngkir.edt_ongkir_second.text.toString(),
+                            dialogOngkir.edt_ongkir_third.text.toString(),
+                            dialogOngkir.edt_ongkir_four.text.toString()
+                        )
+                    }
+                    dialogOngkir.edt_ongkir_second.text.toString().isEmpty() -> {
+                        ongkirData = OngkirData(
+                            dialogOngkir.edt_ongkir_first.text.toString(),
+                           null,
+                            dialogOngkir.edt_ongkir_third.text.toString(),
+                            dialogOngkir.edt_ongkir_four.text.toString()
+                        )
+                    }
+                    dialogOngkir.edt_ongkir_third.text.toString().isEmpty() -> {
+                        ongkirData = OngkirData(
+                            dialogOngkir.edt_ongkir_first.text.toString(),
+                            dialogOngkir.edt_ongkir_second.text.toString(),
+                            null,
+                            dialogOngkir.edt_ongkir_four.text.toString()
+                        )
+                    }
+                    dialogOngkir.edt_ongkir_four.text.toString().isEmpty() -> {
+                        ongkirData = OngkirData(
+                            dialogOngkir.edt_ongkir_first.text.toString(),
+                            dialogOngkir.edt_ongkir_second.text.toString(),
+                            dialogOngkir.edt_ongkir_third.text.toString(),
+                          null
+                        )
+                    }
+                    else->{
+                    ongkirData = OngkirData(
+                        dialogOngkir.edt_ongkir_first.text.toString(),
+                        dialogOngkir.edt_ongkir_second.text.toString(),
+                        dialogOngkir.edt_ongkir_third.text.toString(),
+                        dialogOngkir.edt_ongkir_four.text.toString())
                 }
-
+                }
+                settingPresenter.setOngkir(sessionManager.prefToken,ongkirData)
             }
             dialogOngkir.close_ongkir.setOnClickListener { dialogOngkir.dismiss() }
         }
-
         setting_wadah_profile.setOnClickListener {
             val intent = Intent(requireActivity(), ProfileActivity::class.java)
             requireActivity().startActivity(intent)
         }
-
         setting_btn_login.setOnClickListener {
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
         }
@@ -180,7 +201,7 @@ class SettingFragment : Fragment(), SettingContract.View {
             dialogOngkir.edt_ongkir_third.setText("")
             dialogOngkir.edt_ongkir_four.setText("")
             dialogOngkir.dismiss()
-        }else {
+        } else {
             dialogOngkir.spin_kit_ongkir.visibility = View.GONE
             dialogOngkir.btn_ongkir_submit.visibility = View.VISIBLE
         }
