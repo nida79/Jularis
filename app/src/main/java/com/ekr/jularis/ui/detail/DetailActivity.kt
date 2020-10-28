@@ -29,6 +29,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     private lateinit var dataProduct : DataProduct
     private lateinit var sessionManager: SessionManager
     private var qty = 1
+    private var jumlahProduk = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -52,6 +53,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         img_slider.setOnIndicatorClickListener { position ->
             img_slider.currentPagePosition = position
         }
+           jumlahProduk =dataProduct.quantity
             tv_detail_name.text = dataProduct.name
             tv_detail_stok.text = dataProduct.quantity.toString()
             tv_detail_deskripsi.text = dataProduct.description
@@ -86,15 +88,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         }
     }
 
-    override fun resultCounter(int: Int) {
-        qty = int
-        dialog.pop_up_tv_result.text = qty.toString()
-        if (qty<=1){
-            dialog.pop_up_min.visibility = View.GONE
-        }else{
-            dialog.pop_up_min.visibility = View.VISIBLE
-        }
-    }
+
 
     override fun actionButton() {
         btn_detail_buy.setOnClickListener {
@@ -109,6 +103,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
                 dialog.window!!.attributes.windowAnimations = android.R.style.Animation_Dialog
                 dialog.setCancelable(true)
                 dialog.show()
+
                 dialog.pop_up_pls.setOnClickListener {
                     detailPresenter.doCalculatePlus(qty)
                 }
@@ -143,5 +138,19 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
 
         }
     }
-
+    override fun resultCounter(int: Int) {
+        qty = int
+        dialog.pop_up_tv_result.text = qty.toString()
+        when {
+            qty <= 1 -> {
+                dialog.pop_up_min.visibility = View.GONE
+            }
+            qty == jumlahProduk -> {
+                dialog.pop_up_pls.visibility = View.GONE
+            }
+            else -> {
+                dialog.pop_up_min.visibility = View.VISIBLE
+            }
+        }
+    }
 }

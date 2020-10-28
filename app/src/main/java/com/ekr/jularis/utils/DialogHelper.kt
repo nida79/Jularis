@@ -127,7 +127,7 @@ class DialogHelper {
             dialog.setContentView(R.layout.dialog_set_ongkir)
             dialog.setCanceledOnTouchOutside(false)
             dialog.window!!.setLayout(
-                WindowManager.LayoutParams.WRAP_CONTENT, WindowManager
+                WindowManager.LayoutParams.MATCH_PARENT, WindowManager
                     .LayoutParams.WRAP_CONTENT
             )
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

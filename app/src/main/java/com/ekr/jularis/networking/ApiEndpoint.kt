@@ -202,6 +202,7 @@ interface ApiEndpoint {
         @Body postDownload: PostDownload
     ): Call<ResponseGetReport>
 
-    @GET
-    fun downloadMonthly(@Url urlString: String?):Call<ResponseBody>
+    @GET("ongkir")
+    fun getOngkir(@Header("Authorization") token: String): Call<ResponseOngkir>
+
 }
