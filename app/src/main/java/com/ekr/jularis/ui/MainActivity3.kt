@@ -1,18 +1,15 @@
-package com.ekr.jularis
+package com.ekr.jularis.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.ekr.jularis.ui.MainActivity
-import com.ekr.jularis.ui.MainActivity2
-import com.ekr.jularis.ui.admin.dashboard.DashboardFragment
+import com.ekr.jularis.R
 import com.ekr.jularis.ui.admin.product.ProductFragment
 import com.ekr.jularis.ui.history.TransactionFragment
 import com.ekr.jularis.ui.setting.SettingFragment
 import com.ekr.jularis.utils.SessionManager
-import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.activity_main3.*
 
 class MainActivity3 : AppCompatActivity() {
@@ -34,16 +31,17 @@ class MainActivity3 : AppCompatActivity() {
                     finish()
                 }
             }
+            if (savedInstanceState == null) {
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_container_krw,
+                    ProductFragment()
+                ).commit()
+            }
+            animatedBottomBarKrw.setItemSelected(R.id.navigation_product_krw)
+            fragmentChanged()
 
         }
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().replace(
-                R.id.fragment_container_krw,
-                ProductFragment()
-            ).commit()
-        }
-        animatedBottomBarKrw.setItemSelected(R.id.navigation_product_krw)
-        fragmentChanged()
+
 
     }
 

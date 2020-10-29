@@ -22,10 +22,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val sessionManager = SessionManager(this)
         if (sessionManager.prefIsLogin){
-            if (sessionManager.prefRole!="user"){
-                startActivity(Intent(this,MainActivity2::class.java))
-                finishAffinity()
-                finish()
+            when(sessionManager.prefRole){
+                "admin"->{
+                    startActivity(Intent(this,MainActivity2::class.java))
+                    finishAffinity()
+                    finish()
+                }
+                "employee"->{
+                    startActivity(Intent(this,MainActivity3::class.java))
+                    finishAffinity()
+                    finish()
+                }
             }
         }
         if (savedInstanceState == null) {

@@ -141,6 +141,7 @@ class SettingPresenter (val view: SettingContract.View):SettingContract.Presente
 
             override fun onFailure(call: Call<ResponseOngkir>, t: Throwable) {
                 t.message?.let { view.showMessage(it) }
+                view.resultOngkir(false)
             }
         })
     }

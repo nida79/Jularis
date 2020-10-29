@@ -42,10 +42,17 @@ class SettingFragment : Fragment(), SettingContract.View {
             setting_wadah_profile.visibility = View.VISIBLE
             setting_wadah_cp.visibility = View.VISIBLE
             setting_btn_login.visibility = View.GONE
-            if (sessionManager.prefRole == "admin") {
-                settingBinding.settingWadahAktifitas.visibility = View.VISIBLE
-                settingBinding.rlvSettingOngkir.visibility = View.VISIBLE
+            when (sessionManager.prefRole) {
+                "admin" -> {
+                    settingBinding.settingWadahAktifitas.visibility = View.VISIBLE
+                    settingBinding.rlvSettingOngkir.visibility = View.VISIBLE
+                }
+                "employee" -> {
+                    settingBinding.rlvSettingOngkir.visibility = View.VISIBLE
+                }
             }
+
+
             GlideHelper.setImage(requireContext(), sessionManager.prefFoto, img_profile_setting)
         }
         if (!sessionManager.prefIsLogin) {
@@ -69,11 +76,11 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     override fun onStart() {
         super.onStart()
-       if (sessionManager.prefIsLogin){
-           if (sessionManager.prefRole!="user"){
-               settingPresenter.getOngkir(sessionManager.prefToken)
-           }
-       }
+        if (sessionManager.prefIsLogin) {
+            if (sessionManager.prefRole != "user") {
+                settingPresenter.getOngkir(sessionManager.prefToken)
+            }
+        }
     }
 
     override fun initListener() {
@@ -109,36 +116,42 @@ class SettingFragment : Fragment(), SettingContract.View {
         settingBinding.rlvSettingOngkir.setOnClickListener {
             dialogOngkir.show()
             dialogOngkir.btn_ongkir_submit.setOnClickListener {
-                dialogOngkir.btn_ongkir_submit.visibility = View.GONE
-                dialogOngkir.spin_kit_ongkir.visibility = View.VISIBLE
+
                 when {
                     dialogOngkir.edt_ongkir_first.text.toString().isEmpty() -> {
-                        dialogOngkir.edt_ongkir_first.requestFocus()
+
                         dialogOngkir.edt_ongkir_first.error = "Kolom Tidak Boleh Kosong"
+                        dialogOngkir.edt_ongkir_first.requestFocus()
 
                     }
                     dialogOngkir.edt_ongkir_second.text.toString().isEmpty() -> {
-                        dialogOngkir.edt_ongkir_second.requestFocus()
+
                         dialogOngkir.edt_ongkir_second.error = "Kolom Tidak Boleh Kosong"
+                        dialogOngkir.edt_ongkir_second.requestFocus()
                     }
                     dialogOngkir.edt_ongkir_third.text.toString().isEmpty() -> {
-                        dialogOngkir.edt_ongkir_third.requestFocus()
+
                         dialogOngkir.edt_ongkir_third.error = "Kolom Tidak Boleh Kosong"
+                        dialogOngkir.edt_ongkir_third.requestFocus()
                     }
                     dialogOngkir.edt_ongkir_four.text.toString().isEmpty() -> {
-                        dialogOngkir.edt_ongkir_four.requestFocus()
+
                         dialogOngkir.edt_ongkir_four.error = "Kolom Tidak Boleh Kosong"
+                        dialogOngkir.edt_ongkir_four.requestFocus()
                     }
-                    else -> {
+                    else->{
                         ongkirData = OngkirData(
                             dialogOngkir.edt_ongkir_first.text.toString(),
                             dialogOngkir.edt_ongkir_second.text.toString(),
                             dialogOngkir.edt_ongkir_third.text.toString(),
                             dialogOngkir.edt_ongkir_four.text.toString()
                         )
+                        dialogOngkir.btn_ongkir_submit.visibility = View.GONE
+                        dialogOngkir.spin_kit_ongkir.visibility = View.VISIBLE
+                        settingPresenter.setOngkir(sessionManager.prefToken, ongkirData)
                     }
                 }
-                settingPresenter.setOngkir(sessionManager.prefToken, ongkirData)
+
             }
             dialogOngkir.close_ongkir.setOnClickListener { dialogOngkir.dismiss() }
         }
@@ -197,11 +210,57 @@ class SettingFragment : Fragment(), SettingContract.View {
 
     override fun resultGetOngkir(responseOngkir: ResponseOngkir) {
         if (responseOngkir.status) {
-            dialogOngkir.edt_ongkir_first.setText(responseOngkir.ongkirData?.get(0)?.value.toString())
-            dialogOngkir.edt_ongkir_second.setText(responseOngkir.ongkirData?.get(1)?.value.toString())
-            dialogOngkir.edt_ongkir_third.setText(responseOngkir.ongkirData?.get(2)?.value.toString())
-            dialogOngkir.edt_ongkir_four.setText(responseOngkir.ongkirData?.get(3)?.value.toString())
+            if (responseOngkir.ongkirData!![0].key == "0-2"){
+                dialogOngkir.edt_ongkir_first.setText(responseOngkir.ongkirData[0].value.toString())
+            }
+            if (responseOngkir.ongkirData[1].key == "0-2"){
+                dialogOngkir.edt_ongkir_first.setText(responseOngkir.ongkirData[1].value.toString())
+            }
+            if (responseOngkir.ongkirData[2].key == "0-2"){
+                dialogOngkir.edt_ongkir_first.setText(responseOngkir.ongkirData[2].value.toString())
+            }
+            if (responseOngkir.ongkirData[3].key == "0-2"){
+                dialogOngkir.edt_ongkir_first.setText(responseOngkir.ongkirData[3].value.toString())
+            }
+            if (responseOngkir.ongkirData[0].key == "2-5"){
+                dialogOngkir.edt_ongkir_second.setText(responseOngkir.ongkirData[0].value.toString())
+            }
+            if (responseOngkir.ongkirData[1].key == "2-5"){
+                dialogOngkir.edt_ongkir_second.setText(responseOngkir.ongkirData[1].value.toString())
+            }
+            if (responseOngkir.ongkirData[2].key == "2-5"){
+                dialogOngkir.edt_ongkir_second.setText(responseOngkir.ongkirData[2].value.toString())
+            }
+            if (responseOngkir.ongkirData[3].key == "2-5"){
+                dialogOngkir.edt_ongkir_second.setText(responseOngkir.ongkirData[3].value.toString())
+            }
+            if (responseOngkir.ongkirData[0].key == "5-10"){
+                dialogOngkir.edt_ongkir_third.setText(responseOngkir.ongkirData[0].value.toString())
+            }
+            if (responseOngkir.ongkirData[1].key == "5-10"){
+                dialogOngkir.edt_ongkir_third.setText(responseOngkir.ongkirData[1].value.toString())
+            }
+            if (responseOngkir.ongkirData[2].key == "5-10"){
+                dialogOngkir.edt_ongkir_third.setText(responseOngkir.ongkirData[2].value.toString())
+            }
+            if (responseOngkir.ongkirData[3].key == "5-10"){
+                dialogOngkir.edt_ongkir_third.setText(responseOngkir.ongkirData[3].value.toString())
+            }
+            if (responseOngkir.ongkirData[0].key == "10<"){
+                dialogOngkir.edt_ongkir_four.setText(responseOngkir.ongkirData[0].value.toString())
+            }
+            if (responseOngkir.ongkirData[1].key == "10<"){
+                dialogOngkir.edt_ongkir_four.setText(responseOngkir.ongkirData[1].value.toString())
+            }
+            if (responseOngkir.ongkirData[2].key == "10<"){
+                dialogOngkir.edt_ongkir_four.setText(responseOngkir.ongkirData[2].value.toString())
+            }
+            if (responseOngkir.ongkirData[3].key == "10<"){
+                dialogOngkir.edt_ongkir_four.setText(responseOngkir.ongkirData[3].value.toString())
+            }
+
         }
+
     }
 
     override fun loadingOngkir(loading: Boolean) {

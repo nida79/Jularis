@@ -24,10 +24,17 @@ class MainActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_main2)
         val sessionManager = SessionManager(this)
         if (sessionManager.prefIsLogin) {
-            if (sessionManager.prefRole != "admin") {
-                startActivity(Intent(this, MainActivity::class.java))
-                finishAffinity()
-                finish()
+            when (sessionManager.prefRole) {
+                "user" -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finishAffinity()
+                    finish()
+                }
+                "employee" -> {
+                    startActivity(Intent(this, MainActivity3::class.java))
+                    finishAffinity()
+                    finish()
+                }
             }
         }
         if (savedInstanceState == null) {
@@ -60,6 +67,7 @@ class MainActivity2 : AppCompatActivity() {
             return@setOnItemSelectedListener
         }
     }
+
     override fun onBackPressed() {
         if ((System.currentTimeMillis() - exit) > 2000) {
             Toast.makeText(applicationContext, "Tekan Sekali Lagi Untuk Keluar", Toast.LENGTH_SHORT)

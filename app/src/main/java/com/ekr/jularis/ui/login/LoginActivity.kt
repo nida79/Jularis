@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.ekr.jularis.MainActivity3
+import com.ekr.jularis.ui.MainActivity3
 import com.ekr.jularis.R
 import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.ui.MainActivity
@@ -91,7 +91,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
                 finishAffinity()
                 finish()
             }
-            sessionManager.prefRole == "krw" -> {
+            sessionManager.prefRole == "employee" -> {
                 FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL)
                 startActivity(Intent(this, MainActivity3::class.java))
                 finishAffinity()
