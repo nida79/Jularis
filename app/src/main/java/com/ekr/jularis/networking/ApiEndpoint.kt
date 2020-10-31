@@ -205,4 +205,17 @@ interface ApiEndpoint {
     @GET("ongkir")
     fun getOngkir(@Header("Authorization") token: String): Call<ResponseOngkir>
 
+    @GET("employee")
+    fun getEmployee(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int?,
+        @Query("q") q: String?
+    ): Call<ResponseGetEmployee>
+
+    @GET("employee-activity")
+    fun getEmployeeActivity(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int?,
+        @Query("q") q: String?
+    ): Call<ResponseKegiatanEmployee>
 }

@@ -19,7 +19,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.MainActivity3"></activity>
+        <activity android:name=".ui.admin.employee.manage.EmployeeActivityManage"></activity>
+        <activity android:name=".ui.admin.employee.EmployeeActivity" />
+        <activity android:name=".ui.MainActivity3" />
         <activity android:name=".ui.login.LoginActivityUser" />
         <activity android:name=".ui.history.detail.TransactionActivityDetail" />
         <activity android:name=".ui.admin.product.mange.ProductActivityManage" />

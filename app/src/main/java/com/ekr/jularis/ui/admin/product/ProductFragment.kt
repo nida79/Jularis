@@ -138,7 +138,9 @@ class ProductFragment : Fragment(), ProductContract.View {
     }
 
     override fun showMessage(message: String) {
-        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
+        if (context!=null){
+            Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun actionAdapterClick() {

@@ -119,13 +119,16 @@
     <string name="input_minimal_pembelian">Input Minimal Pembelian</string>
     <string name="input_besar_discount">Input Besar Discount</string>
     <string name="potongan_harga">Potongan Harga</string>
-    <string name="aktifitas_karyawan">Aktifitas Karyawan</string>
+    <string name="aktifitas_karyawan">Manajemen Karyawan</string>
     <string name="pengaturan_harga_ongkir">Pengaturan Harga Ongkir</string>
     <string name="input_harga_ongkos_kirim">Input Harga Ongkos Kirim</string>
     <string name="ongkir_3_km_5_km">Ongkir 3 Km - 5 Km</string>
     <string name="ongkir_0_km_2_km">Ongkir 0 Km - 2 Km</string>
     <string name="ongkir_diatas_10_km">Ongkir Diatas 10 Km</string>
     <string name="lokasi">Lokasi</string>
+    <string name="pegawai">Pegawai</string>
+    <string name="data">Data</string>
+    <string name="aktifitas">Aktifitas</string>
 
     <string-array name="category_spinner">
         <item>Sembako</item>

@@ -11,6 +11,7 @@ import com.ekr.jularis.data.product.OngkirData
 import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.data.response.ResponseOngkir
 import com.ekr.jularis.databinding.FragmentSettingBinding
+import com.ekr.jularis.ui.admin.employee.EmployeeActivity
 import com.ekr.jularis.ui.login.LoginActivity
 import com.ekr.jularis.ui.profile.ProfileActivity
 import com.ekr.jularis.utils.*
@@ -173,6 +174,9 @@ class SettingFragment : Fragment(), SettingContract.View {
                 settingPresenter.doLogout(sessionManager.prefToken)
                 bottomSheetDialog.dismiss()
             }
+        }
+        settingBinding.settingWadahAktifitas.setOnClickListener {
+            startActivity(Intent(requireActivity(),EmployeeActivity::class.java))
         }
     }
 
