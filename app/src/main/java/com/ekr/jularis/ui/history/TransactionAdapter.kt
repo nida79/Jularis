@@ -68,7 +68,6 @@ class  TransactionAdapter(private var historiData: ArrayList<HistoriData>) :
                     historiData.pictureTransaction,
                     img_item_histori
                 )
-
                 MoneyHelper.setRupiah(tv_price_histori, historiData.transactionAmount)
                 tv_state_histori.text = historiData.transactionState
                 tv_invoice_histori.text = historiData.transactionInvoice

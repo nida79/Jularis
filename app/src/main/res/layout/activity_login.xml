@@ -25,8 +25,8 @@
 
     <ImageView
         android:id="@+id/imageView_Login"
-        android:layout_width="@dimen/_230sdp"
-        android:layout_height="@dimen/_230sdp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
         android:contentDescription="@string/logo_app"
         android:src="@drawable/jularis"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -156,5 +156,13 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView_Login"
         app:layout_constraintVertical_bias="0.65999997" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spin_kit_login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

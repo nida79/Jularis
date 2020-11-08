@@ -1,9 +1,13 @@
 package com.ekr.jularis.ui.history.detail
 
+import android.app.Activity
 import com.ekr.jularis.data.histori.HistoriIUpdate
+import com.ekr.jularis.data.histori.ReportDaily
+import com.ekr.jularis.data.response.ResponseGetReport
 import com.ekr.jularis.data.response.ResponseGlobal
 import com.ekr.jularis.data.response.ResponseLogin
 import com.ekr.jularis.networking.ApiService
+import com.ekr.jularis.utils.DownloadUtils
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,5 +59,42 @@ class TransactionPresenter(val view: TransactionDetailContract.View) :
 
             })
     }
+
+    override fun downloadReport(activity: Activity, url: String) {
+        DownloadUtils.downloadLaporan(activity, url)
+    }
+
+    override fun doGetUrl(token: String, reportDaily: ReportDaily) {
+        view.onLoading(true)
+        ApiService.endpoint.postReportDaily(token, reportDaily)
+            .enqueue(object : Callback<ResponseGetReport> {
+                override fun onResponse(
+                    call: Call<ResponseGetReport>,
+                    response: Response<ResponseGetReport>
+                ) {
+                    view.onLoading(false)
+                    when {
+                        response.isSuccessful -> {
+                            val result: ResponseGetReport? = response.body()
+                            result?.let { view.onResultDwonload(it) }
+                        }
+                        response.code() != 200 -> {
+                            val responseGlobal: ResponseGlobal? = Gson().fromJson(
+                                response.errorBody()?.string(),
+                                ResponseGlobal::class.java
+                            )
+                            responseGlobal?.message?.let { view.showMessage(it) }
+                        }
+                        else -> view.showMessage(response.message())
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseGetReport>, t: Throwable) {
+                    view.onLoading(false)
+                    view.showMessage("Terjadi Kesalahan Silahkan Ulangi Kembali !")
+                }
+            })
+    }
+
 
 }

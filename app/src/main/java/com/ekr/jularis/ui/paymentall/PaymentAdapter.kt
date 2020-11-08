@@ -15,9 +15,9 @@ class PaymentAdapter(private var dataGetPayment: ArrayList<DataGetPayment>) :
     RecyclerView.Adapter<PaymentAdapter.ViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_payment, parent, false)
-    )
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_payment, parent, false)
+        )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        holder.bind(dataGetPayment[position],dataGetPayment[position].picturePayment.picture)

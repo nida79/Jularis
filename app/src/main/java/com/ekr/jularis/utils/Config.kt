@@ -16,4 +16,7 @@ object Config {
     const val NOTIFICATION_ID = 100
     const val NOTIFICATION_ID_BIG_IMAGE = 101
     const val SHARED_PREF = "ah_firebase"
+
+    const val CLIENT_ID = "491460880800-sg6aq3qi4ulr8qj1d36khtsqs18084hb.apps.googleusercontent.com"
+    const val CLIENT_SECRET = "MDhit5Dw3_70zpuePK3wQVdE"
 }

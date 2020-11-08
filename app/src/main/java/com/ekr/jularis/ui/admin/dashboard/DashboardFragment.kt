@@ -140,7 +140,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), DashboardContra
         }
     }
 
-    fun requestPermision() {
+    private fun requestPermision() {
         Dexter.withActivity(requireActivity())
             .withPermissions(
                 Manifest.permission.READ_EXTERNAL_STORAGE,

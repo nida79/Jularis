@@ -12,20 +12,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.smarteist.autoimageslider.SliderView
-            android:id="@+id/img_slider"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_185sdp"
-            app:sliderIndicatorAnimationDuration="600"
-            app:sliderIndicatorGravity="end|bottom"
-            app:sliderIndicatorMargin="5dp"
-            app:sliderIndicatorOrientation="horizontal"
-            app:sliderIndicatorPadding="1dp"
-            app:sliderIndicatorRadius="2dp"
-            app:sliderIndicatorRtlMode="auto"
-            app:sliderIndicatorSelectedColor="@color/colorPrimary"
-            app:sliderIndicatorUnselectedColor="@color/abu"
-            app:sliderScrollTimeInSec="1" />
+       <FrameLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <ImageView
+               android:id="@+id/btn_detail_back"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:src="@drawable/ic_arrow_back_black_24dp"
+               android:layout_marginTop="@dimen/_10sdp"
+               android:layout_marginEnd="@dimen/_10sdp"/>
+           <com.smarteist.autoimageslider.SliderView
+               android:id="@+id/img_slider"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/_185sdp"
+               app:sliderIndicatorAnimationDuration="600"
+               app:sliderIndicatorGravity="end|bottom"
+               app:sliderIndicatorMargin="5dp"
+               app:sliderIndicatorOrientation="horizontal"
+               app:sliderIndicatorPadding="1dp"
+               app:sliderIndicatorRadius="2dp"
+               app:sliderIndicatorRtlMode="auto"
+               app:sliderIndicatorSelectedColor="@color/colorPrimary"
+               app:sliderIndicatorUnselectedColor="@color/abu"
+               app:sliderScrollTimeInSec="1" />
+       </FrameLayout>
 
         <TextView
             android:id="@+id/tv_detail_name"
@@ -226,9 +237,9 @@
         android:textColor="@color/putih"
         android:textSize="@dimen/_11ssp" />
     <Button
-        android:id="@+id/btn_detail_back"
+        android:id="@+id/btn_whatsapp"
         android:elevation="@dimen/_10sdp"
-        android:paddingStart="@dimen/_15sdp"
+        android:paddingStart="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_5sdp"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="wrap_content"
@@ -236,6 +247,6 @@
         android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rounded_back"
-        android:drawableStart="@drawable/ic_baseline_arrow_back_24"
+        android:drawableStart="@drawable/ic_whatsapp"
         tools:ignore="RtlSymmetry" />
 </RelativeLayout>

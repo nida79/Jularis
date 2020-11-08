@@ -17,6 +17,7 @@ data class HistoriData(
     @SerializedName("service_price") val servicePrice: Int,
     @SerializedName("transaction_amount") val transactionAmount: Int,
     @SerializedName("transaction_date") val transactionDate: String,
+    @SerializedName("transaction_date_format") val transaction_date_format: String,
     @SerializedName("transaction_id") val transactionId: String,
     @SerializedName("transaction_invoice") val transactionInvoice: String,
     @SerializedName("transaction_photo_transfer") val transactionPhotoTransfer: String?,

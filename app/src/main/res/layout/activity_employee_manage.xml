@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.admin.employee.manage.EmployeeActivityManage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/putih"
+        android:elevation="@dimen/_4sdp">
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/img_delete_karyawan"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/ic_delete_red" />
+
+        <TextView
+            android:id="@+id/tv_header_karyawan"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/dosis_bold"
+            android:gravity="center"
+            android:text="@string/tambah_karyawan"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_15ssp" />
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="@dimen/_250sdp"
+        android:id="@+id/wadah_krw_username"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:hint="@string/username"
+        android:textColorHint="@color/abu">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_krw_username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_baseline_person"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/dosis_semibold"
+            android:inputType="text"
+            android:textColor="@color/hitam" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:hint="@string/nama_lengkap"
+        android:textColorHint="@color/abu">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_krw_nama"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_baseline_person"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/dosis_semibold"
+            android:inputType="text"
+            android:textColor="@color/hitam" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="@dimen/_250sdp"
+        android:id="@+id/wadah_krw_email"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:hint="@string/email_address"
+        android:textColorHint="@color/abu">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_krw_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/dosis_semibold"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/hitam" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:hint="@string/alamat_lengkap"
+        android:textColorHint="@color/abu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_krw_alamat"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_baseline_pin"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/dosis_semibold"
+            android:inputType="text"
+            android:textColor="@color/hitam" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:hint="@string/no_hp_telp"
+        android:textColorHint="@color/abu"
+        app:counterEnabled="true"
+        app:counterMaxLength="13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_4">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_krw_nohp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_phone"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/dosis_semibold"
+            android:inputType="number"
+            android:maxLength="13"
+            android:textColor="@color/hitam" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="@dimen/_250sdp"
+        android:id="@+id/wadah_krw_pswd"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        app:passwordToggleEnabled="true"
+        android:hint="@string/password"
+        android:textColorHint="@color/abu">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_krw_pswd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/dosis_semibold"
+            android:inputType="textPassword"
+            android:textColor="@color/hitam" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_krw_submit"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/rounded_btn"
+        android:fontFamily="@font/dosis_extrabold"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/submit"
+        android:textColor="#FFF"
+        android:textSize="@dimen/_13ssp" />
+</LinearLayout>

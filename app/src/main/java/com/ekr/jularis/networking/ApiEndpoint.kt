@@ -2,7 +2,10 @@ package com.ekr.jularis.networking
 
 import com.ekr.jularis.data.cart.postcheckout.DataPOST
 import com.ekr.jularis.data.dashboard.PostDownload
+import com.ekr.jularis.data.employee.EmployeeAdd
 import com.ekr.jularis.data.histori.HistoriIUpdate
+import com.ekr.jularis.data.histori.ReportDaily
+import com.ekr.jularis.data.login.LoginGoogle
 import com.ekr.jularis.data.payment.DatapostPayment
 import com.ekr.jularis.data.payment.DatapostPayment2
 import com.ekr.jularis.data.product.OngkirData
@@ -20,6 +23,9 @@ interface ApiEndpoint {
         @Field("email") username: String,
         @Field("password") password: String
     ): Call<ResponseLogin>
+
+    @POST("login")
+    fun loginGoogle(@Body login: LoginGoogle):Call<ResponseLogin>
 
     @FormUrlEncoded
     @POST("register")
@@ -218,4 +224,29 @@ interface ApiEndpoint {
         @Query("page") page: Int?,
         @Query("q") q: String?
     ): Call<ResponseKegiatanEmployee>
+
+    @POST("employee")
+    fun doAddEmployee(
+        @Header("Authorization") token: String,
+        @Body employeeAdd: EmployeeAdd
+    ): Call<ResponseGlobal>
+
+    @PUT("employee/{id_user}")
+    fun doUpdateEmployee(
+        @Header("Authorization") token: String,
+        @Path("id_user") id_user: String,
+        @Body update: EmployeeAdd
+    ): Call<ResponseGlobal>
+
+    @DELETE("employee/{id_user}")
+    fun doDeleteEmployee(
+        @Header("Authorization") token: String,
+        @Path("id_user") id_user: String
+    ): Call<ResponseGlobal>
+
+    @POST("transaction/report")
+    fun postReportDaily(
+        @Header("Authorization") token: String,
+        @Body reportDaily: ReportDaily
+    ): Call<ResponseGetReport>
 }

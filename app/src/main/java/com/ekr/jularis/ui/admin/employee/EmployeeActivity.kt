@@ -17,7 +17,7 @@ class EmployeeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employee)
         viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        viewPagerAdapter.addFragment(EmployeeFragmentList(), "Daftar Pegawai")
+        viewPagerAdapter.addFragment(EmployeeFragmentList(), "Daftar Karyawan")
         viewPagerAdapter.addFragment(EmployeeFragmentAktifitas(), "Kegiatan")
         vp_employee.adapter = viewPagerAdapter
         tab_layout_employee.setupWithViewPager(vp_employee)

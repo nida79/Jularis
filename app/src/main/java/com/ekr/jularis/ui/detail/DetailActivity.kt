@@ -3,8 +3,10 @@ package com.ekr.jularis.ui.detail
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -42,6 +44,32 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     override fun initListener() {
         val terImage = intent.extras!!.getParcelableArrayList<DataImageProduct>("image")
         dataProduct = intent.extras!!.getParcelable("data")!!
+        btn_whatsapp.setOnClickListener {
+            val pm = packageManager
+            try {
+                val info = pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA)
+                if (info!=null){
+                    val phoneNumberWithCountryCode = "+6281220168871"
+                    val message = "Hallo Admin Laris-App, Saya butuh bantuan\n"
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(
+                                String.format(
+                                    "https://api.whatsapp.com/send?phone=%s&text=%s",
+                                    phoneNumberWithCountryCode, message
+                                )
+                            )
+                        )
+                    )
+                }
+
+            } catch (e: PackageManager.NameNotFoundException) {
+                Toast.makeText(this, "WhatsApp not Installed", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        }
         btn_detail_back.setOnClickListener {
             finish()
         }
@@ -95,10 +123,10 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
             if (sessionManager.prefIsLogin) {
                 dialog.setContentView(R.layout.dialog_count_product)
                 dialog.setCanceledOnTouchOutside(false)
-               dialog.window!!.setLayout(
-                    WindowManager.LayoutParams.WRAP_CONTENT, WindowManager
-                        .LayoutParams.WRAP_CONTENT
-                )
+                dialog.window!!.setLayout(
+                   WindowManager.LayoutParams.WRAP_CONTENT, WindowManager
+                       .LayoutParams.WRAP_CONTENT
+               )
                 dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.window!!.attributes.windowAnimations = android.R.style.Animation_Dialog
                 dialog.setCancelable(true)
@@ -131,8 +159,8 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
             if (sessionManager.prefIsLogin) {
                 detailPresenter.doAddCart(sessionManager.prefToken, dataProduct.product_id, 1)
             } else {
-                val intent = Intent(this,LoginActivity::class.java)
-                intent.putExtra("logout","detail")
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.putExtra("logout", "detail")
                 startActivity(intent)
             }
 

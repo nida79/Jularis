@@ -1,23 +1,36 @@
 package com.ekr.jularis.ui.history.detail
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekr.jularis.R
+import com.ekr.jularis.data.dashboard.PostDownload
 import com.ekr.jularis.data.histori.HistoriData
 import com.ekr.jularis.data.histori.HistoriIUpdate
-import com.ekr.jularis.utils.DialogHelper
-import com.ekr.jularis.utils.GlideHelper
-import com.ekr.jularis.utils.MoneyHelper
-import com.ekr.jularis.utils.SessionManager
+import com.ekr.jularis.data.histori.ReportDaily
+import com.ekr.jularis.data.response.ResponseGetReport
+import com.ekr.jularis.utils.*
+import com.github.dewinjm.monthyearpicker.MonthYearPickerDialogFragment
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_transaction_detail.*
 import kotlinx.android.synthetic.main.bottom_sheet_update.*
+import java.util.*
 
 
 class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract.View {
@@ -26,6 +39,7 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
     private lateinit var transactionDetailAdapter: TransactionDetailAdapter
     private lateinit var historiIUpdate: HistoriIUpdate
     private lateinit var historiData: HistoriData
+    private lateinit var reportDaily: ReportDaily
     private lateinit var dialog: Dialog
     private lateinit var global: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +55,12 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
 
     @SuppressLint("SetTextI18n")
     override fun initListener() {
+        setupnotification()
         historiData = intent.getParcelableExtra("data")!!
+        reportDaily = ReportDaily(
+            historiData.transaction_date_format,
+            historiData.transaction_date_format
+        )
         transactionDetailAdapter = TransactionDetailAdapter(arrayListOf())
         transactionDetailAdapter.setData(historiData.product_list)
         rcv_transactionDetail.apply {
@@ -100,6 +119,9 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
 
         }
         setupView(historiData)
+        download_Daily.setOnClickListener {
+        requestPermision()
+        }
 
     }
 
@@ -139,6 +161,7 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
                 ).show()
             }
         }
+
     }
 
     override fun onResultUpdate(berhasil: Boolean) {
@@ -148,8 +171,53 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
         }
     }
 
-    override fun onLoading(loading: Boolean) {
+    private fun requestPermision() {
+        Dexter.withActivity(this)
+            .withPermissions(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    if (report.areAllPermissionsGranted()) {
+                        update.doGetUrl(sessionManager.prefToken, reportDaily)
+                    }
 
+                    if (report.isAnyPermissionPermanentlyDenied) {
+                        Toast.makeText(
+                            applicationContext,
+                            "Mohon Aktifkan Perizinan",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: List<PermissionRequest>,
+                    token: PermissionToken
+                ) {
+                    token.continuePermissionRequest()
+                }
+            }).withErrorListener {
+                Toasty.error(
+                    applicationContext, "Error occurred! ", Toasty.LENGTH_LONG
+                ).show()
+            }
+            .onSameThread()
+            .check()
+
+    }
+
+    override fun onResultDwonload(responseGetReport: ResponseGetReport) {
+        if (responseGetReport.status) {
+            update.downloadReport(this,responseGetReport.url)
+
+        } else {
+            showMessage("Download Tidak Berhasil")
+        }
+    }
+
+    override fun onLoading(loading: Boolean) {
         when (loading) {
             true -> {
                 global.show()
@@ -162,5 +230,19 @@ class TransactionActivityDetail : AppCompatActivity(), TransactionDetailContract
 
     override fun showMessage(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+    }
+    private fun setupnotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                Config.CHANNEL_ID, Config.CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+
+            )
+            channel.description = Config.CHANNEL_DESC
+
+            val manager: NotificationManager =
+                ContextCompat.getSystemService(applicationContext, NotificationManager::class.java)!!
+            manager.createNotificationChannel(channel)
+        }
     }
 }

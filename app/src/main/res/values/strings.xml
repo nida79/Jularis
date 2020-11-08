@@ -126,9 +126,10 @@
     <string name="ongkir_0_km_2_km">Ongkir 0 Km - 2 Km</string>
     <string name="ongkir_diatas_10_km">Ongkir Diatas 10 Km</string>
     <string name="lokasi">Lokasi</string>
-    <string name="pegawai">Pegawai</string>
+    <string name="pegawai">Karyawan</string>
     <string name="data">Data</string>
     <string name="aktifitas">Aktifitas</string>
+    <string name="tambah_karyawan">Tambah Karyawan</string>
 
     <string-array name="category_spinner">
         <item>Sembako</item>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "840176652328",
+    "firebase_url": "https://jularis-f1c42.firebaseio.com",
+    "project_id": "jularis-f1c42",
+    "storage_bucket": "jularis-f1c42.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840176652328:android:afcaff2c857832ddefe51d",
+        "android_client_info": {
+          "package_name": "com.ekr.jularis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840176652328-74ars6evrjn1ggg6fbjkmv18glqlcirq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2GpsJ9KfqjfjECfe-aFT_0UNRdQ5bVUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840176652328-74ars6evrjn1ggg6fbjkmv18glqlcirq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
