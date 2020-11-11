@@ -164,11 +164,10 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             val account: GoogleSignInAccount = task.getResult(ApiException::class.java)!!
             val email = account.email.toString()
             val name = account.displayName.toString()
-            Log.e("COBA", "HASIL GOOGLE $email" )
             loginGoogle = LoginGoogle(email, name)
             loginPresenter.doLoginGoogle(loginGoogle)
         } catch (e: ApiException) {
-            Log.e("Error Google Login", "signInResult:failed code=" + e.getStatusCode());
+            Log.e("Error Google Login", "signInResult:failed code=" + e.statusCode)
         }
     }
 
