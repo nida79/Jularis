@@ -19,6 +19,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,6 +53,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), DashboardContra
     private lateinit var todaysellingAdapter: TodaysellingAdapter
     private var tahun = ""
     private var bulan = ""
+    private val REQUEST_CODE = 17
     private lateinit var dialog: Dialog
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +67,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), DashboardContra
 
     override fun onStart() {
         super.onStart()
+
+        dashboardPresenter.doCheckUpdate(requireActivity(),REQUEST_CODE)
         dashboardPresenter.getTotalAmount(sessionManager.prefToken)
         dashboardPresenter.getTopSelling(sessionManager.prefToken)
         dashboardPresenter.getSellingToday(sessionManager.prefToken)
@@ -138,6 +142,11 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), DashboardContra
         btn_dashboard_laporan.setOnClickListener {
             requestPermision()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        dashboardPresenter.doCheckUpdate(requireActivity(),REQUEST_CODE)
     }
 
     private fun requestPermision() {
@@ -242,7 +251,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), DashboardContra
 
 
     override fun resultTotalAmount(uang: Int) {
-        if (uang != null) {
+        if (uang != 0 ||uang  != null) {
             MoneyHelper.setRupiah(dashboard_BalanceProfile, uang)
         } else {
             dashboard_BalanceProfile.text = "Loading.."
@@ -271,6 +280,25 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), DashboardContra
             val manager: NotificationManager =
                 ContextCompat.getSystemService(requireContext(), NotificationManager::class.java)!!
             manager.createNotificationChannel(channel)
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE) {
+            Toasty.info(requireContext(), "Update Dilakukan", Toasty.LENGTH_LONG).show()
+            if (resultCode != AppCompatActivity.RESULT_OK) {
+                Toasty.error(
+                    requireContext(),
+                    "Terjadi Kesalahan, Gagal Update Aplikasi",
+                    Toasty.LENGTH_LONG
+                ).show()
+                Log.e("Error Update", "Perbarui Gagal $resultCode")
+
+            }
+        }
+        if (requestCode == REQUEST_CODE && resultCode == AppCompatActivity.RESULT_CANCELED) {
+            Toasty.warning(requireContext(), "Batal Update", Toasty.LENGTH_SHORT).show()
+            requireActivity().finish()
         }
     }
 }

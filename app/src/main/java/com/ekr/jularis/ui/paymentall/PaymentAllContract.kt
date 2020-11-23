@@ -1,15 +1,13 @@
 package com.ekr.jularis.ui.paymentall
 
-import com.ekr.jularis.data.payment.DataGetPayment
-import com.ekr.jularis.data.payment.DataPayment
-import com.ekr.jularis.data.payment.DatapostPayment
-import com.ekr.jularis.data.payment.DatapostPayment2
+import com.ekr.jularis.data.payment.*
 import com.ekr.jularis.data.response.ResponseGetDataPayment
 import java.io.File
 
 interface PaymentAllContract{
     interface Presenter{
         fun getDataPayment(token:String)
+        fun changeAddressPayment(token:String,alamat:DataAlamat)
         fun uploadFoto(token: String,photo: File)
         fun postDataPayment(token: String,datapostPayment: DatapostPayment2)
     }
@@ -18,6 +16,8 @@ interface PaymentAllContract{
         fun radioSelected()
         fun onLoading(loading : Boolean)
         fun loadingFoto(loadingFoto:Boolean)
+        fun loadingChangeAddress(loadingCA:Boolean)
+        fun resultChangeAddress(hasil:Boolean)
         fun onResultDataPayment(responseGetDataPayment: ResponseGetDataPayment,dataPayment:List<DataGetPayment>)
         fun onResultUploadPhoto(photo_payment:String)
         fun resultPayment(sukses:Boolean)

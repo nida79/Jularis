@@ -57,6 +57,20 @@ class DialogHelper {
             return dialog
         }
 
+        fun changeAddressDialog(activity: Activity): Dialog {
+            val dialog = Dialog(activity)
+            dialog.setContentView(R.layout.dialog_changeaddress)
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.window!!.setLayout(
+                WindowManager.LayoutParams.WRAP_CONTENT, WindowManager
+                    .LayoutParams.WRAP_CONTENT
+            )
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window!!.attributes.windowAnimations = android.R.style.Animation_Dialog
+            dialog.setCancelable(true)
+            return dialog
+        }
+
         fun editDialog(activity: Activity): Dialog {
             val dialog = Dialog(activity)
             dialog.setContentView(R.layout.layout_edt_profile)

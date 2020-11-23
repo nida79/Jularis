@@ -16,6 +16,8 @@ interface DashboardContract {
         fun getSellingToday (token: String)
         fun dogetReport(token: String,postDownload: PostDownload)
         fun downloadReport(activity: Activity,url:String)
+        fun doCheckUpdate(activity: Activity,requestCode:Int)
+        fun doResumeUpdate(activity: Activity,requestCode:Int)
     }
     interface View{
         fun onLoading(loading:Boolean)

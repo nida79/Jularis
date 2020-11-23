@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.ekr.jularis.R
+import com.ekr.jularis.data.payment.DataAlamat
 import com.ekr.jularis.data.payment.DataPayment
 import com.ekr.jularis.data.payment.DatapostPayment
 import com.ekr.jularis.data.response.ResponseGetDataPayment
@@ -31,7 +32,9 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_payment.*
+import kotlinx.android.synthetic.main.activity_payment_all.*
 import kotlinx.android.synthetic.main.bottom_sheet_dialog.*
+import kotlinx.android.synthetic.main.dialog_changeaddress.*
 import java.io.File
 
 class PaymentActivity : AppCompatActivity(), PaymentContract.View {
@@ -39,6 +42,8 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
     private var transactionAmount = 0
     private var ongkir = 0
     private var count = 0
+    private var gantiAlamat = ""
+    private lateinit var dataAlamat: DataAlamat
     private lateinit var dialog: Dialog
     private var tipeBayar = "Bayar Ditempat"
     private lateinit var sessionManager: SessionManager
@@ -47,16 +52,19 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
     private var photo_id: String? = null
     private lateinit var dataPayment: DataPayment
     private lateinit var datapostPayment: DatapostPayment
+    private lateinit var dialogChange: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         dialog = DialogHelper.globalLoading(this)
+        dialogChange = DialogHelper.changeAddressDialog(this)
         paymentPresenter = PaymentPresenter(this)
         sessionManager = SessionManager(this)
         product_id = intent.getStringExtra("pd_id").toString()
         edt_alamat_payment.setText(sessionManager.prefAlamat)
         edt_no_hp_payment.setText(sessionManager.prefNohp)
         paymentPresenter.getDataPayment(sessionManager.prefToken, product_id)
+        edt_alamat_payment.showSoftInputOnFocus = false
     }
 
     override fun initListener() {
@@ -87,6 +95,27 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
         }
         radioGroup.setOnCheckedChangeListener { _, _ ->
             radioSelected()
+        }
+        edt_alamat_payment.setOnClickListener {
+            dialogChange.show()
+            dialogChange.cancel_changealamat.setOnClickListener {
+                dialogChange.dismiss()
+            }
+            dialogChange.btn_changealamat.setOnClickListener {
+                gantiAlamat = dialogChange.change_alamat.text.toString()
+                dataAlamat = DataAlamat(gantiAlamat)
+                if (gantiAlamat.isEmpty()) {
+                    dialogChange.change_alamat.requestFocus()
+                    dialogChange.change_alamat.error = "Kolom Tidak Boleh Kosong"
+
+                } else {
+                    paymentPresenter.changeAlamat(
+                        sessionManager.prefToken,
+                        product_id,
+                        dataAlamat
+                    )
+                }
+            }
         }
         uploadPhoto()
 
@@ -152,6 +181,27 @@ class PaymentActivity : AppCompatActivity(), PaymentContract.View {
                 dialog.dismiss()
                 progress_bar_horizontal_payment.visibility = View.GONE
             }
+        }
+    }
+
+    override fun loadingChangeAddress(loadingCA: Boolean) {
+        when(loadingCA){
+            true -> {
+                dialogChange.spin_kit_ca.visibility = View.VISIBLE
+                dialogChange.btn_changealamat.visibility = View.GONE
+            }
+            false -> {
+                dialogChange.spin_kit_ca.visibility = View.GONE
+                dialogChange.btn_changealamat.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    override fun resultChangeAddress(hasil: Boolean) {
+        if (hasil) {
+            dialogChange.change_alamat.setText(gantiAlamat)
+            edt_alamat_payment.setText(gantiAlamat)
+            dialogChange.dismiss()
         }
     }
 

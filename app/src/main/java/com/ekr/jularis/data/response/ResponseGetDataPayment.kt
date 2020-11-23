@@ -9,5 +9,6 @@ data class ResponseGetDataPayment(
     @SerializedName("count") val count: Int,
     @SerializedName("data") val data: List<DataGetPayment>,
     @SerializedName("ongkir") val ongkir: Int,
-    @SerializedName("transaction_amount") val transactionAmount: Int
+    @SerializedName("transaction_amount") val transactionAmount: Int,
+    @SerializedName("discount") val discount: String
 )

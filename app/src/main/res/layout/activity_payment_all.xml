@@ -186,6 +186,7 @@
                     tools:layout_editor_absoluteY="269dp" />
 
                 <EditText
+                  android:focusable="false"
                     android:id="@+id/edt_alamat_payment_all"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_65sdp"

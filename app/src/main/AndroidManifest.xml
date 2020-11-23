@@ -11,10 +11,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_icon_app"
+        android:icon="@mipmap/ic_aplikasi"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_icon_app_round"
+        android:roundIcon="@mipmap/ic_aplikasi_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"

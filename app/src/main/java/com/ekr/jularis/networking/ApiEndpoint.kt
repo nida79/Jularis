@@ -6,6 +6,7 @@ import com.ekr.jularis.data.employee.EmployeeAdd
 import com.ekr.jularis.data.histori.HistoriIUpdate
 import com.ekr.jularis.data.histori.ReportDaily
 import com.ekr.jularis.data.login.LoginGoogle
+import com.ekr.jularis.data.payment.DataAlamat
 import com.ekr.jularis.data.payment.DatapostPayment
 import com.ekr.jularis.data.payment.DatapostPayment2
 import com.ekr.jularis.data.product.OngkirData
@@ -25,7 +26,7 @@ interface ApiEndpoint {
     ): Call<ResponseLogin>
 
     @POST("login")
-    fun loginGoogle(@Body login: LoginGoogle):Call<ResponseLogin>
+    fun loginGoogle(@Body login: LoginGoogle): Call<ResponseLogin>
 
     @FormUrlEncoded
     @POST("register")
@@ -89,8 +90,21 @@ interface ApiEndpoint {
         @Path("product_id") product_id: String
     ): Call<ResponseGetDataPayment>
 
+    @POST("transaction/process/{product_id}")
+    fun changeAddressPaymentOne(
+        @Header("Authorization") token: String,
+        @Path("product_id") product_id: String,
+        @Body address: DataAlamat
+    ): Call<ResponseGetDataPayment>
+
     @GET("transaction/process/bulk")
     fun getdataPaymentAll(@Header("Authorization") token: String): Call<ResponseGetDataPayment>
+
+    @POST("transaction/process/bulk")
+    fun changeAddressPaymentAll(
+        @Header("Authorization") token: String,
+        @Body address: DataAlamat
+    ): Call<ResponseGetDataPayment>
 
     @Multipart
     @POST("transaction/photo")

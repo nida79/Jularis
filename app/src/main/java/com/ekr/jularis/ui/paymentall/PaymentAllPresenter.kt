@@ -1,10 +1,7 @@
 package com.ekr.jularis.ui.paymentall
 
 import android.util.Log
-import com.ekr.jularis.data.payment.DataGetPayment
-import com.ekr.jularis.data.payment.DataPayment
-import com.ekr.jularis.data.payment.DatapostPayment
-import com.ekr.jularis.data.payment.DatapostPayment2
+import com.ekr.jularis.data.payment.*
 import com.ekr.jularis.data.response.ResponseCart
 import com.ekr.jularis.data.response.ResponseGetDataPayment
 import com.ekr.jularis.data.response.ResponseGlobal
@@ -25,6 +22,7 @@ class PaymentAllPresenter(val view: PaymentAllContract.View) : PaymentAllContrac
         view.radioSelected()
         view.onLoading(false)
         view.loadingFoto(false)
+        view.loadingChangeAddress(false)
     }
 
     override fun getDataPayment(token: String) {
@@ -48,7 +46,7 @@ class PaymentAllPresenter(val view: PaymentAllContract.View) : PaymentAllContrac
                             )
                             view.showMessage(responseGlobal.message)
                         }
-                        else->{
+                        else -> {
                             view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
                         }
                     }
@@ -56,8 +54,50 @@ class PaymentAllPresenter(val view: PaymentAllContract.View) : PaymentAllContrac
 
                 override fun onFailure(call: Call<ResponseGetDataPayment>, t: Throwable) {
                     view.onLoading(false)
-                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                    Log.e("Cek", "onFailure: ${t.stackTrace}  , ${t.localizedMessage}" )
+                    view.showMessage(t.stackTraceToString())
                 }
+            })
+    }
+
+    override fun changeAddressPayment(token: String, alamat: DataAlamat) {
+        view.loadingChangeAddress(true)
+        ApiService.endpoint.changeAddressPaymentAll(token, alamat)
+            .enqueue(object : Callback<ResponseGetDataPayment> {
+                override fun onResponse(
+                    call: Call<ResponseGetDataPayment>,
+                    response: Response<ResponseGetDataPayment>
+                ) {
+                    view.loadingChangeAddress(false)
+                    when {
+                        response.isSuccessful -> {
+                            view.resultChangeAddress(true)
+                            val result: ResponseGetDataPayment? = response.body()
+                            result?.let { view.onResultDataPayment(it, result.data) }
+                            view.showMessage("Ganti Alamat Berhasil")
+                        }
+                        response.code() != 200 -> {
+                            val responseGlobal: ResponseGlobal = Gson().fromJson(
+                                response.errorBody()!!.charStream(),
+                                ResponseGlobal::class.java
+                            )
+                            view.resultChangeAddress(false)
+                            view.showMessage(responseGlobal.message)
+                        }
+                        else -> {
+                            view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseGetDataPayment>, t: Throwable) {
+                    view.loadingChangeAddress(false)
+                    view.resultChangeAddress(false)
+//                    view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                    view.showMessage(t.stackTraceToString())
+                    Log.e("Ceking", "onFailure: ${t.stackTrace} dan : ${t.localizedMessage}", )
+                }
+
             })
     }
 

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ekr.jularis.R
+import com.ekr.jularis.data.payment.DataAlamat
 import com.ekr.jularis.data.payment.DataGetPayment
 import com.ekr.jularis.data.payment.DatapostPayment2
 import com.ekr.jularis.data.response.ResponseGetDataPayment
@@ -24,16 +25,14 @@ import com.ekr.jularis.utils.DialogHelper
 import com.ekr.jularis.utils.MoneyHelper
 import com.ekr.jularis.utils.SessionManager
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.activity_payment_all.*
-import kotlinx.android.synthetic.main.bottom_sheet_dialog.*
+import kotlinx.android.synthetic.main.dialog_changeaddress.*
 import java.io.File
 
 class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
@@ -47,17 +46,42 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
     private lateinit var dialog: Dialog
     private var tipeBayar = "Bayar Ditempat"
     private var photo_id: String? = null
+    private var gantiAlamat = ""
+    private lateinit var dataAlamat: DataAlamat
     private lateinit var data: List<DataGetPayment>
     private lateinit var datapostPayment: DatapostPayment2
+    private lateinit var dialogChange: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment_all)
         dialog = DialogHelper.globalLoading(this)
+        dialogChange = DialogHelper.changeAddressDialog(this)
         paymentAllPresenter = PaymentAllPresenter(this)
         sessionManager = SessionManager(this)
         edt_alamat_payment_all.setText(sessionManager.prefAlamat)
         edt_no_hp_payment_all.setText(sessionManager.prefNohp)
+        edt_alamat_payment_all.showSoftInputOnFocus = false
+        edt_alamat_payment_all.setOnClickListener {
+            dialogChange.show()
+            dialogChange.change_alamat.setText(edt_alamat_payment_all.text.toString())
+            dialogChange.cancel_changealamat.setOnClickListener {
+                dialogChange.dismiss()
+            }
+            dialogChange.btn_changealamat.setOnClickListener {
+                gantiAlamat = dialogChange.change_alamat.text.toString()
+                dataAlamat = DataAlamat(gantiAlamat)
+                if (gantiAlamat.isEmpty()) {
+                    dialogChange.change_alamat.requestFocus()
+                    dialogChange.change_alamat.error = "Kolom Tidak Boleh Kosong"
 
+                } else {
+                    paymentAllPresenter.changeAddressPayment(
+                        sessionManager.prefToken,
+                        dataAlamat
+                    )
+                }
+            }
+        }
     }
 
     override fun onStart() {
@@ -104,6 +128,7 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
             )
             paymentAllPresenter.postDataPayment(sessionManager.prefToken, datapostPayment)
         }
+
     }
 
     override fun radioSelected() {
@@ -162,6 +187,27 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
         }
     }
 
+    override fun loadingChangeAddress(loadingCA: Boolean) {
+        when(loadingCA){
+            true -> {
+                dialogChange.spin_kit_ca.visibility = View.VISIBLE
+                dialogChange.btn_changealamat.visibility = View.GONE
+            }
+            false -> {
+                dialogChange.spin_kit_ca.visibility = View.GONE
+                dialogChange.btn_changealamat.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    override fun resultChangeAddress(hasil: Boolean) {
+        if (hasil) {
+            dialogChange.change_alamat.setText(gantiAlamat)
+            edt_alamat_payment_all.setText(gantiAlamat)
+            dialogChange.dismiss()
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onResultDataPayment(
         responseGetDataPayment: ResponseGetDataPayment,
@@ -177,11 +223,10 @@ class PaymentActivityAll : AppCompatActivity(), PaymentAllContract.View {
         MoneyHelper.setRupiah(tv_ongkir_payment_all, ongkir)
         MoneyHelper.setRupiah(tv_total_payment_all, transactionAmount)
         tv_total_qty_payment_all.text = count.toString()
-        if (dataPayment[0].productPayment.product_discont_present != 0) {
+        if (responseGetDataPayment.discount != "" || responseGetDataPayment.discount != "0%") {
             textView11_all.visibility = View.VISIBLE
             tv_discountpersen_payment_all.visibility = View.VISIBLE
-            tv_discountpersen_payment_all.text =
-                dataPayment[0].productPayment.product_discont_present.toString() + "%"
+            tv_discountpersen_payment_all.text = responseGetDataPayment.discount
 
         }
     }

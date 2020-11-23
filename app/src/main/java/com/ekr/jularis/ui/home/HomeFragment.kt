@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
@@ -37,6 +38,7 @@ import com.ekr.jularis.utils.SessionManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.iid.InstanceIdResult
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.dialog_count_product.*
 
 
@@ -48,6 +50,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     private var isLoading: Boolean = false
     private var page: Int = 1
     private lateinit var dialog: Dialog
+    private val REQUEST_CODE = 99
     private var totalPage: Int = 0
     private lateinit var sessionManager: SessionManager
     private lateinit var dialogFCM: Dialog
@@ -64,6 +67,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun onStart() {
         super.onStart()
+        homePresenter.doCheckUpdate(requireActivity(),REQUEST_CODE)
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener { task: Task<InstanceIdResult> ->
                 if (task.isSuccessful && task.isComplete) {
@@ -77,7 +81,6 @@ class HomeFragment : Fragment(), HomeContract.View {
                     }
                 }
             }
-
         homePresenter.getProduct(page, null, null, null)
 
     }
@@ -98,6 +101,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun onResume() {
         super.onResume()
+        homePresenter.doResumeUpdate(requireActivity(),REQUEST_CODE)
         page = 1
         homePresenter.getProduct(page, null, null, null)
     }
@@ -210,7 +214,6 @@ class HomeFragment : Fragment(), HomeContract.View {
         }
     }
 
-
     override fun onResultProduct(responseProduct: ResponseProduct) {
         responseProduct.data?.let { homeAdapter.insertItem(it) }
         totalPage = responseProduct.last_page!!
@@ -297,6 +300,25 @@ class HomeFragment : Fragment(), HomeContract.View {
                 }
             }
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE) {
+            Toasty.info(requireContext(), "Update Dilakukan", Toasty.LENGTH_LONG).show()
+            if (resultCode != AppCompatActivity.RESULT_OK) {
+                Toasty.error(
+                    requireContext(),
+                    "Terjadi Kesalahan, Gagal Update Aplikasi",
+                    Toasty.LENGTH_LONG
+                ).show()
+                Log.e("Error Update", "Perbarui Gagal $resultCode")
+
+            }
+        }
+        if (requestCode == REQUEST_CODE && resultCode == AppCompatActivity.RESULT_CANCELED) {
+            Toasty.warning(requireContext(), "Batal Update", Toasty.LENGTH_SHORT).show()
+            requireActivity().finish()
+        }
     }
 
 }

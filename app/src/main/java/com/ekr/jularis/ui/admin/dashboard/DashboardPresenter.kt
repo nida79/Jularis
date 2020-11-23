@@ -1,10 +1,14 @@
 package com.ekr.jularis.ui.admin.dashboard
 
 import android.app.Activity
+import android.content.IntentSender
 import com.ekr.jularis.data.dashboard.PostDownload
 import com.ekr.jularis.data.response.*
 import com.ekr.jularis.networking.ApiService
 import com.ekr.jularis.utils.DownloadUtils
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -135,8 +139,49 @@ class DashboardPresenter(val view: DashboardContract.View) : DashboardContract.P
     }
 
     override fun downloadReport(activity: Activity, url: String) {
-        DownloadUtils.downloadLaporan(activity,url)
+        DownloadUtils.downloadLaporan(activity, url)
 
+    }
+
+    override fun doCheckUpdate(activity: Activity, requestCode: Int) {
+        val appUpdateManager = AppUpdateManagerFactory.create(activity)
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+            ) {
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.IMMEDIATE,
+                        activity,
+                        requestCode
+                    )
+                } catch (e: IntentSender.SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    override fun doResumeUpdate(activity: Activity, requestCode: Int) {
+        val appUpdateManager = AppUpdateManagerFactory.create(activity)
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
+            ) {
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.IMMEDIATE,
+                        activity,
+                        requestCode
+                    )
+                } catch (e: IntentSender.SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
     }
 
 }

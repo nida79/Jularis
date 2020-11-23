@@ -1,5 +1,6 @@
 package com.ekr.jularis.ui.home
 
+import android.app.Activity
 import com.ekr.jularis.data.cart.postcheckout.Data
 import com.ekr.jularis.data.login.DataLogin
 import com.ekr.jularis.data.profile.DataProfile
@@ -15,6 +16,8 @@ interface HomeContract {
         fun doUpdateFcm(token: String,fcmToken:String)
         fun doCalculatePlus(int: Int)
         fun doCalculateMinus(int: Int)
+        fun doCheckUpdate(activity: Activity, requestCode:Int)
+        fun doResumeUpdate(activity: Activity, requestCode:Int)
     }
 
     interface View {

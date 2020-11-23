@@ -11,5 +11,6 @@ data class DataGetPayment(
     @SerializedName("product") val productPayment: ProductPayment,
     @SerializedName("product_id") val productId: String,
     @SerializedName("quantity") val quantity: Int,
-    @SerializedName("user_id") val userId: Int
+    @SerializedName("user_id") val userId: Int,
+    @SerializedName("discount") val discount: Int
 )
