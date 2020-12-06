@@ -175,8 +175,14 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
             }
             qty == jumlahProduk -> {
                 dialog.pop_up_pls.visibility = View.GONE
+                dialog.pop_up_min.visibility = View.VISIBLE
+            }
+            qty < jumlahProduk->{
+                dialog.pop_up_min.visibility = View.VISIBLE
+                dialog.pop_up_pls.visibility = View.GONE
             }
             else -> {
+                dialog.pop_up_pls.visibility = View.VISIBLE
                 dialog.pop_up_min.visibility = View.VISIBLE
             }
         }

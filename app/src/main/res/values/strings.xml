@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Jularis</string>
+    <string name="app_name">Laris-AF</string>
     <string name="login"> Sign In</string>
     <string name="logo_app">Logo App</string>
     <string name="username">Username</string>
@@ -65,7 +65,7 @@
     <string name="help_and_support">Help and support</string>
     <string name="logout">Logout</string>
     <string name="jumlah_barang">Jumlah Barang</string>
-    <string name="no_rekening_pembayaran_bca_290329032_nupload_bukti_transfer">No Rekening Pembayaran :          BCA - 290329032\nUpload Bukti Transfer :</string>
+    <string name="no_rekening_pembayaran_bca_290329032_nupload_bukti_transfer">No Rekening Pembayaran :  BNI - 034-084-8282 AN ABDUL FATTAH, Upload Bukti Transfer :</string>
     <string name="keluar">Keluar</string>
     <string name="batal">Batal</string>
     <string name="anda_yakin_ingin_membatalkan_transaksi">Anda yakin ingin membatalkan transaksi ?</string>

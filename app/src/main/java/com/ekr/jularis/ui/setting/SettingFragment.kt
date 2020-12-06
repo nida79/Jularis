@@ -184,6 +184,9 @@ class SettingFragment : Fragment(), SettingContract.View {
         settingBinding.settingWadahAktifitas.setOnClickListener {
             startActivity(Intent(requireActivity(), EmployeeActivity::class.java))
         }
+        settingBinding.ppPrivacySetting.setOnClickListener {
+            startActivity(Intent(requireActivity(),PrivacyActivity::class.java))
+        }
     }
 
     override fun loadingLogout(loading: Boolean) {

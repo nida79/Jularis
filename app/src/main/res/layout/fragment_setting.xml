@@ -133,6 +133,7 @@
                 android:layout_below="@id/tv_cp_setting"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/pp_privacy_setting"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

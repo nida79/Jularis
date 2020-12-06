@@ -3,6 +3,7 @@ package com.ekr.jularis.ui.admin.employee.manage
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ekr.jularis.R
@@ -80,6 +81,7 @@ class EmployeeActivityManage : AppCompatActivity(), EmployeeManageContract.View 
                                 sessionManager.prefToken,
                                 employeeData!!.id.toString(), employeeAdd
                             )
+                            Log.e("update", employeeAdd.address + employeeAdd.email +employeeAdd.noTelp )
                             confirm.dismiss()
                         }
                         confirm.btn_sheet_ok.setOnClickListener {

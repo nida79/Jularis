@@ -11,15 +11,16 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_aplikasi"
+        android:icon="@mipmap/ic_larisap"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_aplikasi_round"
+        android:roundIcon="@mipmap/ic_larisap_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.admin.employee.manage.EmployeeActivityManage"/>
+        <activity android:name=".ui.setting.PrivacyActivity"/>
+        <activity android:name=".ui.admin.employee.manage.EmployeeActivityManage" />
         <activity android:name=".ui.admin.employee.EmployeeActivity" />
         <activity android:name=".ui.MainActivity3" />
         <activity android:name=".ui.history.detail.TransactionActivityDetail" />

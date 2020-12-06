@@ -43,12 +43,16 @@ class SettingPresenter (val view: SettingContract.View):SettingContract.Presente
                         }
                         else->{
                             view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                            view.resultLogout(false)
+                            view.loadingLogout(false)
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseGlobal>, t: Throwable) {
                     view.showMessage("Terjadi Kesalahan, Silahkan Coba Kembali")
+                    view.loadingLogout(false)
+                    view.resultLogout(false)
                 }
             })
     }

@@ -192,7 +192,9 @@
                 app:layout_constraintTop_toBottomOf="@id/radioGroup">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:textIsSelectable="true"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dosis_bold"
                     android:text="@string/no_rekening_pembayaran_bca_290329032_nupload_bukti_transfer"

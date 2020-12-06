@@ -239,6 +239,11 @@ class HomeFragment : Fragment(), HomeContract.View {
             }
             qty == setok -> {
                 dialog.pop_up_pls.visibility = View.GONE
+                dialog.pop_up_min.visibility = View.VISIBLE
+            }
+            qty < setok ->{
+                dialog.pop_up_pls.visibility = View.GONE
+                dialog.pop_up_min.visibility = View.VISIBLE
             }
             else -> {
                 dialog.pop_up_min.visibility = View.VISIBLE

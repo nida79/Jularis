@@ -140,11 +140,12 @@
                     android:elevation="@dimen/_5sdp"
                     android:orientation="vertical"
                     android:padding="@dimen/_10sdp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/radioGroup_all">
 
                     <TextView
+                        android:textIsSelectable="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dosis_bold"
